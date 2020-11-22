@@ -1,0 +1,6 @@
+optimizer.py:
+    - refactored code
+    - removed min enrollment constraint
+    - removed max enrollment constraint
+    - added docstrings
+    

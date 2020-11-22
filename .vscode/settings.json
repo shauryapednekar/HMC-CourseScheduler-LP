@@ -3,5 +3,8 @@
         "afri",
         "amst",
         "anth"
-    ]
+    ],
+    "python.pythonPath": "c:\\Users\\Shaurya\\Desktop\\math187 project\\venv\\Scripts\\python.exe",
+    "restructuredtext.linter.disabled": true,
+    "restructuredtext.preview.sphinx.disabled": true
 }
