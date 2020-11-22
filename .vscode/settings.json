@@ -4,7 +4,7 @@
         "amst",
         "anth"
     ],
-    "python.pythonPath": "c:\\Users\\Shaurya\\Desktop\\math187 project\\venv\\Scripts\\python.exe",
+    "python.pythonPath": "C:\\Python38\\python.exe",
     "restructuredtext.linter.disabled": true,
     "restructuredtext.preview.sphinx.disabled": true
 }

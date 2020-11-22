@@ -1,4 +1,3 @@
-
 first_sem_courses = [
     "BIOL 023",
     "CHEM 023A",
