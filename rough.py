@@ -5,6 +5,7 @@ import time
 import re
 import time
 from rough_data import all_prev_courses
+from preferences import myPreferences
 import csv
 
 """
@@ -685,9 +686,8 @@ def getPreferences():
     """
     return {}
 
-preferences = getPreferences()
 
-def costs(next_sem_possible_courses=next_sem_possible_courses, course_to_number=course_to_number, preferences=preferences):
+def costs(next_sem_possible_courses=next_sem_possible_courses, course_to_number=course_to_number, preferences=myPreferences):
     num_of_courses = len(next_sem_possible_courses)
     
     costs = [0]*num_of_courses
