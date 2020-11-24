@@ -4,6 +4,7 @@ first_sem_courses = [
     "CSCI 005",
     "CSCI 005L",
     "MATH 021",
+    "MATH 030", # not really
     "MATH 030G",
     "MATH 035",
     "PE 004",

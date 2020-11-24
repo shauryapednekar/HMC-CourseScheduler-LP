@@ -8,7 +8,7 @@ import re
 # User Inputs Needed
 from user.userInputs.previousCourses import all_prev_courses
 from user.userInputs.preferences import myPreferences as preferences
-from user.userInputs.badCourses import curr_bad_courses
+from user.userInputs.badCourses import bad_courses
 
 
 
@@ -360,18 +360,28 @@ def add_poi_courses():
 
 def remove_bad_courses():
     res = []
-    repeated = []
+    # repeated = []
     
+    # for course in possible_courses:
+    #     for bad_course in bad_courses:
+    #         if bad_course == course:
+    #             repeated.append(course)
+    remove = set()
     for course in possible_courses:
-        for bad_course in curr_bad_courses:
-            if bad_course == course:
-                repeated.append(course)
-    
+        for bad_course in bad_courses:
+            if bad_course in course:
+                remove.add(course)
+            
     for course in possible_courses:
-        if course not in repeated:
-            res.append(course)
+        if course not in remove:
+            res.append(course)     
+        # if course not in bad_courses:
+        #     res.append(course)
     
     return res
+
+possible_courses = remove_bad_courses()
+
 
 ######################
 # 7 - Dictionary of course_name -> var_name and course_name -> var_index
@@ -854,3 +864,5 @@ with open(r"amplData\costs_names.txt", "w") as f:
         i += 1
 
 ######################################
+
+    
