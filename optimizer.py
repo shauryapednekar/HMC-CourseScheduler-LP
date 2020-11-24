@@ -8,6 +8,7 @@ import re
 # User Inputs Needed
 from user.userInputs.previousCourses import all_prev_courses
 from user.userInputs.preferences import myPreferences as preferences
+from user.userInputs.badCourses import curr_bad_courses
 
 
 
@@ -90,6 +91,7 @@ def only_keep_three_credit_classes():
     return possible
 
 possible_courses = only_keep_three_credit_classes()
+
 
 #######################
 # 3 - Remove Previously Taken Courses:
@@ -357,7 +359,19 @@ def add_poi_courses():
 # -TODO:
 
 def remove_bad_courses():
-    pass
+    res = []
+    repeated = []
+    
+    for course in possible_courses:
+        for bad_course in curr_bad_courses:
+            if bad_course == course:
+                repeated.append(course)
+    
+    for course in possible_courses:
+        if course not in repeated:
+            res.append(course)
+    
+    return res
 
 ######################
 # 7 - Dictionary of course_name -> var_name and course_name -> var_index
@@ -464,7 +478,7 @@ time_conflict_matrix = time_conflict_matrix()
 
 
 
-with open(r"amplData\timeSlots.txt", "w") as f:
+with open(r"amplData\set_timeSlots.txt", "w") as f:
     i = 0
     for time in time_conflict_matrix:
         f.write("t" + str(i) + " ")
@@ -478,7 +492,7 @@ with open(r"amplData\time_conflict_matrix.txt", "w") as f:
         i += 1
         for c in time:
             f.write(str(c) + " ")
-        f.write("\n")
+        f.write("\n    ")
 
 # Same as above function except using numpy for speed
 # ("tab below block unless needed"):
@@ -614,7 +628,7 @@ with open(r"amplData\unique_courses_matrix.txt", "w") as f:
         i += 1
         for c in mainCourse:
             f.write(str(c) + " ")
-        f.write("\n")
+        f.write("\n    ")
 
 ####################################
 # 11. Requirements Constraint Matrix:
@@ -776,7 +790,7 @@ with open(r"amplData\requirements_matrix.txt", "w") as f:
         i += 1
         for c in requirement:
             f.write(str(c) + " ")
-        f.write("\n")
+        f.write("\n    ")
 
 ######################################
 # 12. Costs
