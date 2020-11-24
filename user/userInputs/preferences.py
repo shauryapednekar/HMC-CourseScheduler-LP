@@ -1,4 +1,4 @@
-myPreferences = {
+shaurya_preferences = {
     "MATH 104 HM-01": 7,
     "CSCI 151 HM-01": 10,
     "MUS 003 HM-01": 7,
@@ -10,3 +10,5 @@ myPreferences = {
     "RLST 150 AF-01": 7,
     "RLST 113 HM-01": 8,
 }
+
+curr_preferences = shaurya_preferences

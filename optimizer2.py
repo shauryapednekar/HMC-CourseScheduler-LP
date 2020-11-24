@@ -3,13 +3,14 @@
 import json
 import time
 import re
-
+import os
 
 # User Inputs Needed
 from user.userInputs.previousCourses import all_prev_courses
-from user.userInputs.preferences import myPreferences as preferences
+from user.userInputs.preferences import curr_preferences
 from user.userInputs.badCourses import bad_courses
 from user.userInputs.desiredReqs import curr_hsa_conc
+from user.userInputs.desiredReqs import curr_desired_reqs
 
 
 # SKELETAL:
@@ -57,7 +58,7 @@ from user.userInputs.desiredReqs import curr_hsa_conc
 with open(r"rawData/course_data.json", encoding="utf-8") as f:
     raw_data = json.load(f)
 
-def possible_courses():
+def possible_courses_func():
     """Nothing
 
     Returns:
@@ -69,7 +70,7 @@ def possible_courses():
 ###############################################
 # 2 - Only Keep 3 Credit Courses:
 
-def only_keep_three_credit_classes():
+def only_keep_three_credit_classes(raw_data, possible_courses):
     """Removes all half credit/PE courses.
 
     Global Variables Needed:
@@ -90,7 +91,7 @@ def only_keep_three_credit_classes():
 #######################
 # 3 - Remove Previously Taken Courses:
 
-def remove_prev_courses():
+def remove_prev_courses(all_prev_courses, possible_courses):
     """Removes previously taken courses.
 
     Global Variables Needed:
@@ -123,7 +124,7 @@ def remove_prev_courses():
 # 4 - Remove courses that cannot be taken due to prereqs:
 
 
-def subject_codes():
+def subject_codes_func(possible_courses):
     """Finds all possible subject codes (such as "MATH" and "RLST" etc.).
 
     Global Variables Needed:
@@ -276,7 +277,7 @@ def subject_codes():
 with open(r"preReqs/all_prereqs_edited.json", encoding="utf-8") as f:
     prereqs_edited = json.load(f)
 
-def helper_next_sem_possible_courses_due_to_prereqs(lis):
+def helper_next_sem_possible_courses_due_to_prereqs(lis, all_prev_courses):
     """Helper function that checks whether the prereqs for a course have been
     fulfilled
 
@@ -295,7 +296,7 @@ def helper_next_sem_possible_courses_due_to_prereqs(lis):
 
     return True
 
-def next_sem_possible_courses_due_to_prereqs():
+def next_sem_possible_courses_due_to_prereqs(all_prev_courses, possible_courses):
     """Creates list of possible courses according to previously taken courses
     and prereqs.
 
@@ -317,7 +318,7 @@ def next_sem_possible_courses_due_to_prereqs():
             # If prereqs are fulfilled, True will be present in temp
             # Otherwise, it will be only False values
 
-            temp = ([helper_next_sem_possible_courses_due_to_prereqs (prereq)
+            temp = ([helper_next_sem_possible_courses_due_to_prereqs (prereq, all_prev_courses)
                     for prereq in curr_prereqs])
             if True in temp:
                 list_of_possible_courses.append(course)
@@ -340,7 +341,7 @@ def add_poi_courses():
 #####################
 # 6 - Remove Courses Which Should Never Be Included in the Solution:
 
-def remove_bad_courses():
+def remove_bad_courses(possible_courses, bad_courses):
     res = []
     # repeated = []
     
@@ -365,7 +366,7 @@ def remove_bad_courses():
 ######################
 # 7 - Dictionary of course_name -> var_name and course_name -> var_index
 
-def course_code_to_variable_and_index():
+def course_code_to_variable_and_index(possible_courses):
     """Dictionary that maps complate course code to a variable of the format
     "xi" where "i" is the variable number
 
@@ -400,7 +401,7 @@ def course_code_to_variable_and_index():
 ##########################
 # 8 - Time Conflict Constraint
 
-def time_conflict_matrix():
+def time_conflict_matrix_func(course_code_to_variable_name, course_to_index, raw_data, possible_courses):
     """Creates a matrix that where each row represents the classes that are
     occuring during the time corresponding to that row.
 
@@ -434,6 +435,7 @@ def time_conflict_matrix():
             curr_time = int(curr_time)
             discrete_times.append(curr_time)
 
+    days = "MTWRF"
 
     constraint_matrix = []
     for curr_time in discrete_times:
@@ -520,7 +522,7 @@ def time_conflict_matrix():
 ################################
 # 10 - No Two Same Courses Constraint:
 
-def dict_w_same_codes():
+def dict_w_same_codes_func(possible_courses):
     """Groups courses that are the same (but different
     sections/campuses) together
 
@@ -543,7 +545,7 @@ def dict_w_same_codes():
 
     return same_codes
 
-def no_same_courses_matrix():
+def no_same_courses_matrix_func(possible_courses, course_to_index, dict_w_same_codes):
     """Creates constraint matrix that ensures that the solution provided
         doesn"t include two courses that are essentially
        the same but at different campuses or different timings.
@@ -575,21 +577,6 @@ def no_same_courses_matrix():
 
     return constraint_matrix
 
-with open(r"amplData\set_uniqueCourses.txt", "w") as f:
-    i = 0
-    for unique in dict_w_same_codes.keys():
-        f.write("c" + str(i) + " ")
-        i += 1
-
-with open(r"amplData\unique_courses_matrix.txt", "w") as f:
-    i = 0
-    for mainCourse in no_same_courses_matrix:
-        f.write("c" + str(i) + " ")
-        i += 1
-        for c in mainCourse:
-            f.write(str(c) + " ")
-        f.write("\n    ")
-
 ####################################
 # 11. Requirements Constraint Matrix:
 
@@ -604,7 +591,7 @@ hsa_codes = {"DANC", "WRIT", "ORST", "PPA", "DS", "ARBT", "JAPN", "CHNT", "MSL",
             "FIN", "EDUC", "PHIL", "GEOL", "RLST", "FWS", "THEA", "IR", "GERM",
             "ID", "ASAM", "HSA", "KORE", "HUM", "AFRI", "PSYC"}
 
-def requirements_matrix():
+def requirements_matrix_func(possible_courses, all_prev_courses, dict_w_same_codes, course_to_index, hsa_codes, hsa_concentration):
     """Creates matrix that ensures that desired requirements are met.
 
     1. Requirements (currently only designed for CS-Math majors):
@@ -739,7 +726,7 @@ def requirements_matrix():
 ######################################
 # 12. Costs
 
-def costs():
+def costs_func(possible_courses, course_to_index, curr_preferences):
     """Row of costs corresponding to each possible course.
 
     Global Variables Needed:
@@ -756,8 +743,8 @@ def costs():
 
     for course in possible_courses:
 
-        if course in preferences:
-            costs_row[course_to_index[course]] = preferences[course]
+        if course in curr_preferences:
+            costs_row[course_to_index[course]] = curr_preferences[course]
 
         # (TODO: Edit this based on survey results.)
         # Default costs for courses
@@ -781,60 +768,165 @@ def costs():
     return costs_row
 
 ######################################
+
+def createDat(dir_path, filename):
+    res = ""
+
+    with open(dir_path + r"costs_names.txt", 'r') as f:
+        costs_names = f.read()
+        
+    with open(dir_path + r"course_names.txt", 'r') as f:
+        course_names = f.read()
+
+    with open(dir_path + r"requirements_matrix.txt", 'r') as f:
+        requirements_matrix = f.read()
+        
+    with open(dir_path + r"set_timeSlots.txt", 'r') as f:
+        set_timeSlots = f.read()
+        
+    with open(dir_path + r"set_uniqueCourses.txt", 'r') as f:
+        set_uniqueCourses = f.read()
+
+    with open(dir_path + r"time_conflict_matrix.txt", 'r') as f:
+        time_conflict_matrix = f.read()
+
+    with open(dir_path + r"unique_courses_matrix.txt", 'r') as f:
+        unique_courses_matrix = f.read()
+        
+        
+    res += "set courses := " 
+    res += "\n    "
+    res += course_names + "\n;"
+    res += "\n\n"
+
+
+    res += "set requirements := "
+    res += "\n    "
+    res += "r1 r2 r3 r4 r5 r6 r7 r8 r9 r10\n;"
+    res += "\n\n"
+
+    res += "set timeSlots := "
+    res += "\n    "
+    res += set_timeSlots + "\n;"
+    res += "\n\n"
+
+    res += "set uniqueCourses := "
+    res += "\n    "
+    res += set_uniqueCourses + "\n;"
+    res += "\n\n"
+
+    res += "param costs := "
+    res += "\n    "
+    res += costs_names + "\n;"
+    res += "\n\n"
+
+    res += "param time : "
+    res += "\n    "
+    res += course_names + " := \n"
+    res += "\n    "
+    res += time_conflict_matrix + "\n;"
+    res += "\n\n"
+
+    res += "param counts : "
+    res += "\n    "
+    res += course_names + " := \n"
+    res += "\n    "
+    res += requirements_matrix + "\n;"
+    res += "\n\n"
+
+    res += "param necessary := "
+    res += "\n    "
+    res += curr_desired_reqs + "\n;"
+    res += "\n\n"
+
+    res += "param unique : "
+    res += "\n    "
+    res += course_names + " := \n"
+    res += "\n    "
+    res += unique_courses_matrix + "\n;"
+    res += "\n\n"
+
+    with open(r'./amplFiles/' + filename, 'w') as fp:
+        fp.write(res)
+
+#####################################
  
-def main():
-    possible_courses = possible_courses()
+def main(selected=False, test_num=0):
     
-    possible_courses = only_keep_three_credit_classes()
+    if selected:
+        possible_courses = list(curr_preferences.keys())
     
-    possible_courses = remove_prev_courses()
+    else:
+         
+        possible_courses = possible_courses_func()
+        
+        possible_courses = only_keep_three_credit_classes(raw_data, 
+                                                        possible_courses)
+        
+        possible_courses = remove_prev_courses(all_prev_courses,
+                                            possible_courses)
+        
+        subject_codes = subject_codes_func(possible_courses)
+        
+        possible_courses = next_sem_possible_courses_due_to_prereqs(all_prev_courses, possible_courses)
+        
+        possible_courses = remove_bad_courses(possible_courses, bad_courses)
     
-    subject_codes = subject_codes()
-    
-    possible_courses = next_sem_possible_courses_due_to_prereqs()
-    
-    possible_courses = remove_bad_courses()
-    
-    course_to_variable_name, course_to_index = course_code_to_variable_and_index()
+    course_to_variable_name, course_to_index = course_code_to_variable_and_index(possible_courses)
     
     variable_name_to_course = ({value : key for key, value in
                             course_to_variable_name.items()})
     
-    time_conflict_matrix = time_conflict_matrix()
+    time_conflict_matrix = time_conflict_matrix_func(course_to_variable_name,
+                                                course_to_index,
+                                                raw_data,
+                                                possible_courses)
     
-    dict_w_same_codes = dict_w_same_codes()
+    dict_w_same_codes = dict_w_same_codes_func(possible_courses)
     
-    no_same_courses_matrix = no_same_courses_matrix()
+    no_same_courses_matrix = no_same_courses_matrix_func(possible_courses,
+                                                    course_to_index,
+                                                    dict_w_same_codes)
 
     hsa_concentration = curr_hsa_conc
     
-    requirements_matrix = requirements_matrix()
+    requirements_matrix = requirements_matrix_func(possible_courses,
+                                              all_prev_courses,
+                                              dict_w_same_codes,
+                                              course_to_index,
+                                              hsa_codes,
+                                              hsa_concentration)
 
-    costs = costs()
+    costs = costs_func(possible_courses,
+                  course_to_index,
+                  curr_preferences)
 
+    dir_path = r"amplData/" + str(test_num) + "/"
     
-    with open(r"amplData\set_timeSlots.txt", "w") as f:
+    os.makedirs(os.path.dirname(dir_path), exist_ok=True)
+    
+    with open(dir_path + r"set_timeSlots.txt", "w+") as f:
         i = 0
-        for time in time_conflict_matrix:
+        for times in time_conflict_matrix:
             f.write("t" + str(i) + " ")
             i += 1
 
-    with open(r"amplData\time_conflict_matrix.txt", "w") as f:
+    with open(dir_path + r"time_conflict_matrix.txt", "w") as f:
         i = 0
-        for time in time_conflict_matrix:
+        for times in time_conflict_matrix:
             f.write("t" + str(i) + " ")
             i += 1
-            for c in time:
+            for c in times:
                 f.write(str(c) + " ")
             f.write("\n    ")
             
-    with open(r"amplData\set_uniqueCourses.txt", "w") as f:
+    with open(dir_path + r"set_uniqueCourses.txt", "w") as f:
         i = 0
         for unique in dict_w_same_codes.keys():
             f.write("c" + str(i) + " ")
             i += 1
 
-    with open(r"amplData\unique_courses_matrix.txt", "w") as f:
+    with open(dir_path + r"unique_courses_matrix.txt", "w") as f:
         i = 0
         for mainCourse in no_same_courses_matrix:
             f.write("c" + str(i) + " ")
@@ -843,7 +935,7 @@ def main():
                 f.write(str(c) + " ")
             f.write("\n    ")
             
-    with open(r"amplData\requirements_matrix.txt", "w") as f:
+    with open(dir_path + r"requirements_matrix.txt", "w") as f:
         i = 1
         for requirement in requirements_matrix:
             f.write("r" + str(i) + " ")
@@ -852,16 +944,22 @@ def main():
                 f.write(str(c) + " ")
             f.write("\n    ")
     
-    with open(r"amplData\course_names.txt", "w") as f:
+    with open(dir_path + r"course_names.txt", "w") as f:
         i = 0
         for c in possible_courses:
             c = c.replace(" ", "_")
             f.write(c + " ")
 
-    with open(r"amplData\costs_names.txt", "w") as f:
+    with open(dir_path+ r"costs_names.txt", "w") as f:
         i = 0
         for cost in costs:
             c = possible_courses[i]
             c = c.replace(" ", "_")
             f.write(c + " " + str(cost) + " ")
             i += 1
+    
+    time.sleep(3)
+    
+    createDat(dir_path, "test" + str(test_num) + ".dat")
+    
+main(True, 3)
