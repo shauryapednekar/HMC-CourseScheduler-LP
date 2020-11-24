@@ -383,9 +383,11 @@ def course_code_to_variable_and_index():
                 - course_to_variable_name: dict that maps complete course code
                 to a variable of the format "xi" where "i" is the variable
                 number
+                
                 - course_to_index: dict that maps complete_course_code to int i,
                   where i equals corresponding variable name in
                   course_to_variable_name
+                  
     """
 
     course_to_variable_name_dict = {}

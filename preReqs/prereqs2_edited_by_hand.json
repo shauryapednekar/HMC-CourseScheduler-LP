@@ -1,0 +1,1252 @@
+{
+  "ART 111 PO-01": [
+    ["5 or 10, and permission of instructor. Repeatable once."],
+    ["ART 005"],
+    ["ART 010"],
+    ["POI"]
+  ],
+  "ART 139 PO-01": [
+    [
+      "Any lower division ART course or permission from instructor. May be repeated for credit."
+    ],
+    [],
+    ["POI"]
+  ],
+  "ART 179G HM-01": [
+    ["ART 021 PO or equivalent. Letter grade only."],
+    ["ART 021"]
+  ],
+  "ASTR 051 PO-01": [["AP PHYS or PHYS 41 or 70."], ["PHYS 070"], ["PHYS 041"]],
+  "ASTR 123 PO-01": [
+    ["PHYS 101, and ASTR 51 or 62, or permission of the instructor."],
+    ["PHYS 101", "ASTR 051"],
+    ["PHYS 101", "ASTR 062"],
+    ["POI"]
+  ],
+  "ASTR 124 HM-01": [
+    ["Astronomy 62. (Offered alternate years; Spring)"],
+    ["ASTR 062"]
+  ],
+  "BIOL 041C PO-02": [
+    ["BIOL 40; CHEM 1A,B or 51."],
+    ["BIOL 040", "CHEM 001A"],
+    ["BIOL 040", "CHEM 001B"],
+    ["BIOL 040", "CHEM 051"]
+  ],
+  "BIOL 041C PO-03": [
+    ["BIOL 40; CHEM 1A,B or 51."],
+    ["BIOL 040", "CHEM 001A"],
+    ["BIOL 040", "CHEM 001B"],
+    ["BIOL 040", "CHEM 051"]
+  ],
+  "BIOL 041C PO-04": [
+    ["BIOL 40; CHEM 1A,B or 51."],
+    ["BIOL 040", "CHEM 001A"],
+    ["BIOL 040", "CHEM 001B"],
+    ["BIOL 040", "CHEM 051"]
+  ],
+  "BIOL 052 HM-01": [
+    ["(CSCI 5, 5GR, 42) and CHEM 23A."],
+    ["CHEM 023A", "CSCI 005"],
+    ["CHEM 023A", "CSCI 042"],
+    ["CHEM 023A", "CSCI 005GR"]
+  ],
+  "BIOL 104 PO-01": [["BIOL 041E PO ."], ["BIOL 041E"]],
+  "BIOL 108 HM-01": [
+    ["BIOL 52 and (MATH 30B or MATH 30G)."],
+    ["BIOL 052", "MATH 030"],
+    ["BIOL 052", "MATH 030"]
+  ],
+  "BIOL 129 KS-01": [
+    [
+      "BIOL 043L and BIOL 044L; or BIOL 040L and BIOL 044L; or BIOL 042L and BIOL 044L; or both semesters of the AISS course; Recommended courses: BIOL 131L, BIOL 039L, or permission of instructor."
+    ],
+    ["BIOL 043L", "BIOL 044L"],
+    ["BIOL 040L", "BIOL 044L"],
+    ["BIOL 042L", "BIOL 044L"],
+    ["POI"]
+  ],
+  "BIOL 131L KS-01": [
+    [
+      "BIOL 43L/44L, or BIOL 40L/44L or BIOL 42L/44L; CHEM 14L/15L, or CHEM 40L/15L, or CHEM 29L, or Chemisty 042L or both semesters of the AISS course. Students may not also take BIOL132L KS, Comparative Physiology; BIOL140L PO, Animal Physiology; BIOL101 HM, Comparative Physiology; or BIOL103 HM, Comparative Physiology Lab, for credit. Laboratory fee: $50. Offered: Every spring."
+    ],
+    ["BIOL 043L", "BIOL 044L", "CHEM 014L", "CHEM 015L"],
+    ["BIOL 043L", "BIOL 044L", "CHEM 040L", "CHEM 015L"],
+    ["BIOL 043L", "BIOL 044L", "CHEM 029L"],
+    ["BIOL 043L", "BIOL 044L", "CHEM 042L"],
+
+    ["BIOL 040", "BIOL 044L", "CHEM 014L", "CHEM 015L"],
+    ["BIOL 040", "BIOL 044L", "CHEM 040L", "CHEM 015L"],
+    ["BIOL 040", "BIOL 044L", "CHEM 029L"],
+    ["BIOL 040", "BIOL 044L", "CHEM 042L"],
+
+    ["BIOL 042", "BIOL 044L", "CHEM 014L", "CHEM 015L"],
+    ["BIOL 042", "BIOL 044L", "CHEM 040L", "CHEM 015L"],
+    ["BIOL 042", "BIOL 044L", "CHEM 029L"],
+    ["BIOL 042", "BIOL 044L", "CHEM 042L"]
+  ],
+  "BIOL 143 KS-01": [
+    [
+      "): BIOL 043L, or BIOL 044L, or BIOL 042L, or BIOL 040L and BIOL 044L; CHEM 014L and CHEM 015L; or CHEM 040L and CHEM 015L, or CHEM 042L, or CHEM 029L, or both semesters of the AISS course (AISS 001AL, AISS 001BL, AISS 002AL, AISS 002BL), or permission of instructor."
+    ],
+    ["BIOL 043L", "CHEM 014L", "CHEM 015L"],
+    ["BIOL 043L", "CHEM 040L", "CHEM 015L"],
+    ["BIOL 043L", "CHEM 042L"],
+    ["BIOL 043L", "CHEM 029L"],
+
+    ["BIOL 044L", "CHEM 014L", "CHEM 015L"],
+    ["BIOL 044L", "CHEM 040L", "CHEM 015L"],
+    ["BIOL 044L", "CHEM 042L"],
+    ["BIOL 044L", "CHEM 029L"],
+
+    ["BIOL 042L", "CHEM 014L", "CHEM 015L"],
+    ["BIOL 042L", "CHEM 040L", "CHEM 015L"],
+    ["BIOL 042L", "CHEM 042L"],
+    ["BIOL 042L", "CHEM 029L"],
+
+    ["BIOL 040L", "CHEM 014L", "CHEM 015L"],
+    ["BIOL 040L", "CHEM 040L", "CHEM 015L"],
+    ["BIOL 040L", "CHEM 042L"],
+    ["BIOL 040L", "CHEM 029L"],
+
+    ["POI"]
+  ],
+  "BIOL 149 KS-01": [
+    [
+      "BIOL 43L/44L, or Biol 40L/Biol 44L or Biol 42L/Biol 44L; CHEM 14L/15L, or CHEM 29L, or Chem 40L/Chem 15L or Chem 42L, or both semesters of the AISS course. Enrollment limited to 24.Offered every spring."
+    ],
+    ["BIOL 043L", "BIOL 044L", "CHEM 014L", "CHEM 015L"],
+    ["BIOL 043L", "BIOL 044L", "CHEM 040L", "CHEM 015L"],
+    ["BIOL 043L", "BIOL 044L", "CHEM 029L"],
+    ["BIOL 043L", "BIOL 044L", "CHEM 042L"],
+
+    ["BIOL 040L", "BIOL 044L", "CHEM 014L", "CHEM 015L"],
+    ["BIOL 040L", "BIOL 044L", "CHEM 040L", "CHEM 015L"],
+    ["BIOL 040L", "BIOL 044L", "CHEM 029L"],
+    ["BIOL 040L", "BIOL 044L", "CHEM 042L"],
+
+    ["BIOL 042L", "BIOL 044L", "CHEM 014L", "CHEM 015L"],
+    ["BIOL 042L", "BIOL 044L", "CHEM 040L", "CHEM 015L"],
+    ["BIOL 042L", "BIOL 044L", "CHEM 029L"],
+    ["BIOL 042L", "BIOL 044L", "CHEM 042L"]
+  ],
+  "BIOL 154 HM-01": [
+    [
+      "(CSCI 5, 5GR, or 42) and MATH 35. Corequisite: BIOL 52. Concurrent registration in BIOL 54 required."
+    ],
+    ["CSCI 005", "MATH 035"],
+    ["CSCI 005GR", "MATH 035"],
+    ["CSCI 042", "MATH 035"]
+  ],
+  "BIOL 156L KS-01": [
+    [
+      "BIOL 43L, BIOL 40L or BIOL 42L, and CHEM 14L/15L, Chem 40L/Chem 15L, CHEM 029L, or CHEM 042L, or both semesters of the AISS course, or permission of the instructor. Enrollment limited to 18. Laboratory fee: $50.Offered every spring."
+    ],
+    ["BIOL 043L", "CHEM 014L", "CHEM 015L"],
+    ["BIOL 043L", "CHEM 040L", "CHEM 015L"],
+    ["BIOL 043L", "CHEM 029L"],
+    ["BIOL 043L", "CHEM 042L"],
+
+    ["BIOL 040L", "CHEM 014L", "CHEM 015L"],
+    ["BIOL 040L", "CHEM 040L", "CHEM 015L"],
+    ["BIOL 040L", "CHEM 029L"],
+    ["BIOL 040L", "CHEM 042L"],
+
+    ["BIOL 042L", "CHEM 014L", "CHEM 015L"],
+    ["BIOL 042L", "CHEM 040L", "CHEM 015L"],
+    ["BIOL 042L", "CHEM 029L"],
+    ["BIOL 042L", "CHEM 042L"],
+
+    ["POI"]
+  ],
+  "BIOL 157L KS-01": [
+    [
+      "Biol 43L, or Biol 40L, and Chem 14L/15L (or 29L),or Chem 40L/Chem 15L, or Chem 42L, or both semesters of the AISS course, or permission of instructor. One previous upper division BIOL course is strongly recommended. Enrollment limited to 18. Laboratory fee: $50.Offered every semester."
+    ],
+    ["BIOL 043L", "CHEM 014L", "CHEM 015L"],
+    ["BIOL 043L", "CHEM 040L", "CHEM 015L"],
+    ["BIOL 043L", "CHEM 029L"],
+    ["BIOL 043L", "CHEM 042L"],
+
+    ["BIOL 040L", "CHEM 014L", "CHEM 015L"],
+    ["BIOL 040L", "CHEM 040L", "CHEM 015L"],
+    ["BIOL 040L", "CHEM 029L"],
+    ["BIOL 040L", "CHEM 042L"],
+
+    ["BIOL 042L", "CHEM 014L", "CHEM 015L"],
+    ["BIOL 042L", "CHEM 040L", "CHEM 015L"],
+    ["BIOL 042L", "CHEM 029L"],
+    ["BIOL 042L", "CHEM 042L"],
+
+    ["POI"]
+  ],
+  "BIOL 167 KS-01": [
+    [
+      "BIOL 43L/44L, or BIOL 40L/44L, or BIOL 42L/44l; or both semesters of the AISS course. Offered annually."
+    ],
+    ["BIOL 043L", "BIOL 044L"],
+    ["BIOL 040L", "BIOL 044L"],
+    ["BIOL 042L", "BIOL 044L"]
+  ],
+  "BIOL 170L KS-01": [
+    [
+      "): BIOL 043L/044L, or BIOL 040L/044L, or BIOL 042L/044L; CHEM 014L/015L; or CHEM 040L/015L, or CHEM 029L, or CHEM 042L, or both semesters of the AISS course (AISS 001AL, AISS 001BL, AISS 002AL, AISS 002BL) and CHEM 116L. BIOL 143 is strongly suggested. Laboratory fee: $50. Enrollment limited to 18. Offered every semester."
+    ],
+    ["BIOL 043L", "BIOL 044L", "CHEM 014L", "CHEM 015L"],
+    ["BIOL 043L", "BIOL 044L", "CHEM 040L", "CHEM 015L"],
+    ["BIOL 043L", "BIOL 044L", "CHEM 029L"],
+    ["BIOL 043L", "BIOL 044L", "CHEM 042L"],
+
+    ["BIOL 040L", "BIOL 044L", "CHEM 014L", "CHEM 015L"],
+    ["BIOL 040L", "BIOL 044L", "CHEM 040L", "CHEM 015L"],
+    ["BIOL 040L", "BIOL 044L", "CHEM 029L"],
+    ["BIOL 040L", "BIOL 044L", "CHEM 042L"],
+
+    ["BIOL 042L", "BIOL 044L", "CHEM 014L", "CHEM 015L"],
+    ["BIOL 042L", "BIOL 044L", "CHEM 040L", "CHEM 015L"],
+    ["BIOL 042L", "BIOL 044L", "CHEM 029L"],
+    ["BIOL 042L", "BIOL 044L", "CHEM 042L"]
+  ],
+  "BIOL 171 KS-01": [
+    [
+      "BIOL043L/044L, or BIOL040L/044L, or BIOL042L/044L; CHEM014L/015L or CHEM040L/015L, or CHEM029L, or CHEM042L, or both semesters of the AISS course (AISS 001AL, AISS 001BL, AISS 002AL, AISS 002BL)."
+    ],
+    ["BIOL 043L", "BIOL 044L", "CHEM 014L", "CHEM 015L"],
+    ["BIOL 043L", "BIOL 044L", "CHEM 040L", "CHEM 015L"],
+    ["BIOL 043L", "BIOL 044L", "CHEM 029L"],
+    ["BIOL 043L", "BIOL 044L", "CHEM 042L"],
+
+    ["BIOL 040L", "BIOL 044L", "CHEM 014L", "CHEM 015L"],
+    ["BIOL 040L", "BIOL 044L", "CHEM 040L", "CHEM 015L"],
+    ["BIOL 040L", "BIOL 044L", "CHEM 029L"],
+    ["BIOL 040L", "BIOL 044L", "CHEM 042L"],
+
+    ["BIOL 042L", "BIOL 044L", "CHEM 014L", "CHEM 015L"],
+    ["BIOL 042L", "BIOL 044L", "CHEM 040L", "CHEM 015L"],
+    ["BIOL 042L", "BIOL 044L", "CHEM 029L"],
+    ["BIOL 042L", "BIOL 044L", "CHEM 042L"]
+  ],
+  "BIOL 173L KS-01": [
+    [
+      "BIOL 043L, or BIOL 040L, or BIOL 042L; CHEM 014L/015L or CHEM 040L/015L, or CHEM 029L, or CHEM 042L, or both semesters of the AISS course (AISS 001AL, AISS 001BL, AISS 002AL, AISS 002BL). Priority will be given to Molecular BIOL majors. Laboratory fee: $30. Offered every spring."
+    ],
+    ["BIOL 043L", "CHEM 014L", "CHEM 015L"],
+    ["BIOL 043L", "CHEM 040L", "CHEM 015L"],
+    ["BIOL 043L", "CHEM 029L"],
+    ["BIOL 043L", "CHEM 042L"],
+
+    ["BIOL 040L", "CHEM 014L", "CHEM 015L"],
+    ["BIOL 040L", "CHEM 040L", "CHEM 015L"],
+    ["BIOL 040L", "CHEM 029L"],
+    ["BIOL 040L", "CHEM 042L"],
+
+    ["BIOL 042L", "CHEM 014L", "CHEM 015L"],
+    ["BIOL 042L", "CHEM 040L", "CHEM 015L"],
+    ["BIOL 042L", "CHEM 029L"],
+    ["BIOL 042L", "CHEM 042L"]
+  ],
+  "BIOL 175 KS-01": [
+    [
+      "BIOL043L/044L KS or BIOL040L/044L KS or BIOL042L/044L KS or both semesters of AISS."
+    ],
+    ["BIOL 043L", "BIOL 044L"],
+    ["BIOL 040L", "BIOL 044L"],
+    ["BIOL 042L", "BIOL 044L"]
+  ],
+  "BIOL 176 KS-01": [
+    [
+      "BIOL 43L and 44L, or Biol 40L and Biol 44L, or both semesters of the AISS course. Enrollment limited to 24. Offered every spring."
+    ],
+    ["BIOL 043L", "BIOL 044L"],
+    ["BIOL 040L", "BIOL 044L"]
+  ],
+  "BIOL 177 KS-01": [
+    [
+      "BIOL 043L or BIOL 040L, or BIOL 042L, or both semesters of the AISS course (AISS 001AL, AISS 001BL, AISS 002AL, AISS 002BL); CHEM 116L, CHEM 117L, or permission of instructor. Offered every semester."
+    ],
+    ["BIOL 043L", "CHEM 116L"],
+    ["BIOL 043L", "CHEM 117L"],
+
+    ["BIOL 040L", "CHEM 116L"],
+    ["BIOL 040L", "CHEM 117L"],
+
+    ["BIOL 042L", "CHEM 116L"],
+    ["BIOL 042L", "CHEM 117L"],
+
+    ["POI"]
+  ],
+  "BIOL 180 PO-01": [
+    ["BIOL 041C PO or BIOL 041E PO."],
+    ["BIOL 041C"],
+    ["BIOL 041E"]
+  ],
+  "BIOL 181 KS-01": [
+    [
+      "BIOL 43L/44L or BIOL 42L/44L; and CHEM 14L/15L, or CHEM 42L; or both semesters of the AISS course; or BIOL 40L/CHEM 40L and CHEM 15L; or BIOL 43L/143; or permission of instructor."
+    ],
+    ["BIOL 043L", "BIOL 044L", "CHEM 014L", "CHEM 015L"],
+    ["BIOL 043L", "BIOL 044L", "CHEM 040L", "CHEM 015L"],
+    ["BIOL 043L", "BIOL 044L", "CHEM 029L"],
+    ["BIOL 043L", "BIOL 044L", "CHEM 042L"],
+    ["BIOL 043L", "BIOL 143"],
+
+    ["BIOL 040L", "BIOL 044L", "CHEM 015L"],
+
+    ["BIOL 042L", "BIOL 044L", "CHEM 014L", "CHEM 015L"],
+    ["BIOL 042L", "BIOL 044L", "CHEM 040L", "CHEM 015L"],
+    ["BIOL 042L", "BIOL 044L", "CHEM 029L"],
+    ["BIOL 042L", "BIOL 044L", "CHEM 042L"],
+    ["POI"]
+  ],
+  "BIOL 183 KS-01": [
+    [
+      "BIOL043L/044L, or BIOL040L/044L, or BIOL042L/044L; and CHEM014L/015L, or CHEM029L or CHEM042L; or both semesters of the AISS course, or permission of the instructor. Enrollment limited to 24."
+    ],
+    ["BIOL 043L", "BIOL 044L", "CHEM 014L", "CHEM 015L"],
+    ["BIOL 043L", "BIOL 044L", "CHEM 029L"],
+    ["BIOL 043L", "BIOL 044L", "CHEM 042L"],
+    ["BIOL 043L", "BIOL 143"],
+
+    ["BIOL 042L", "BIOL 044L", "CHEM 014L", "CHEM 015L"],
+    ["BIOL 042L", "BIOL 044L", "CHEM 029L"],
+    ["BIOL 042L", "BIOL 044L", "CHEM 042L"],
+
+    ["BIOL 040L", "BIOL 044L", "CHEM 014L", "CHEM 015L"],
+    ["BIOL 040L", "BIOL 044L", "CHEM 029L"],
+    ["BIOL 040L", "BIOL 044L", "CHEM 042L"],
+
+    ["POI"]
+  ],
+  "CHEM 056 HM-01": [
+    ["CHEM 23A, 23B, and 24."],
+    ["CHEM 023A", "CHEM 023B", "CHEM 024"]
+  ],
+  "CHEM 104 HM-01": [["CHEM 56; CHEM 52 recommended."], ["CHEM 056"]],
+  "CHEM 106 PO-01": [
+    ["CHEM 001B PO or CHEM 051 PO."],
+    ["CHEM 001B"],
+    ["CHEM 051"]
+  ],
+  "CHEM 110 HM-01": [
+    ["CHEM 58; CHEM 104 or taken concurrently."],
+    ["CHEM 058", "CHEM 104"]
+  ],
+  "CHEM 112 HM-01": [
+    ["CHEM 109; CHEM 114 or taken concurrently."],
+    ["CHEM 109", "CHEM 114"]
+  ],
+  "CHEM 112 PO-01": [["CHEM110A PO."], ["CHEM 110A"]],
+  "CHEM 114 HM-01": [["CHEM 103; ENGR 79 recommended."], ["CHEM 103"]],
+  "CHEM 121 KS-01": [
+    [
+      "CHEM 015L, or CHEM 040L and CHEM 015L, or CHEM 042L; PHYS 031L (or PHYS 034L), or both semesters of the AISS course (AISS 001AL, AISS 001BL, AISS 002AL, AISS 002BL), and MATH 031. CHEM 121 is not the prerequisite to CHEM 122."
+    ],
+    ["CHEM 015L", "PHYS 031L", "MATH 031"],
+    ["CHEM 015L", "PHYS 034L", "MATH 031"],
+
+    ["CHEM 042L", "PHYS 031L", "MATH 031"],
+    ["CHEM 042L", "PHYS 034L", "MATH 031"]
+  ],
+  "CHEM 127L KS-01": [
+    [
+      "CHEM 015L or CHEM 042L, CHEM 117L, PHYS 034L (or PHYS 031L), or both semesters of the AISS course (AISS 001AL, AISS 001BL, AISS 002AL, AISS 002BL), and MATH 031. CHEM 126L is not the prerequisite for 127L except with permission of instructor. CHEM 121, CHEM 122 recommended as co-requisite. Laboratory fee: $50."
+    ],
+    ["CHEM 015", "CHEM 117", "MATH 031", "PHYS 034L"],
+    ["CHEM 015", "CHEM 117", "MATH 031", "PHYS 031L"],
+    ["CHEM 042", "CHEM 117", "MATH 031", "PHYS 034L"],
+    ["CHEM 042", "CHEM 117", "MATH 031", "PHYS 031L"],
+    ["POI"]
+  ],
+  "CHEM 147 PO-01": [
+    ["CHEM110A PO. Co-requisite: CHEM110B PO."],
+    ["CHEM 110A"]
+  ],
+  "CHEM 150 HM-01": [
+    ["Sophomore/junior standing and instructor approval."],
+    [],
+    ["POI"]
+  ],
+  "CHEM 158B PO-01": [["CHEM158A PO."], ["CHEM 158"]],
+  "CHEM 162 PO-01": [
+    ["CHEM158A and equivalent of CHEM158B lecture."],
+    ["CHEM 158A", "CHEM 158B"]
+  ],
+  "CHEM 162 PO-02": [
+    ["CHEM158A and equivalent of CHEM158B lecture."],
+    ["CHEM 158A", "CHEM 158B"]
+  ],
+  "CHEM 164 PO-01": [
+    [
+      "MATH032 PO or MATH060; one year of physics. Co-requisites: CHEM158A PO or by instructor permission."
+    ],
+    ["MATH 032", "MATH 060"],
+    ["POI"]
+  ],
+  "CHEM 177 KS-01": [
+    [
+      "BIOL 43L or BIOL 40L, or BIOL 42L, or both semesters of the AISS course, CHEM 116L, 117L, or permission of instructor. Enrollment limited to 24."
+    ],
+    ["BIOL 043L", "CHEM 116L", "CHEM 117L"],
+    ["BIOL 042L", "CHEM 116L", "CHEM 117L"],
+    ["BIOL 040L", "CHEM 116L", "CHEM 117L"],
+    ["POI"]
+  ],
+  "CHIN 013 PO-01": [
+    [
+      "two years of college-level language study or equivalent and CHIN 051B PO."
+    ],
+    ["CHIN 051B"]
+  ],
+  "CHST 130 CH-01": [["Any Chicana/o-Latina/o Studies course."], []],
+  "CHST 191 CH-04": [["CHST 190 CH."], ["CHST 190"]],
+  "CHST 191 CH-08": [["CHST 190 CH."], ["CHST 190"]],
+  "CHST 191 CH-12": [["CHST 190 CH."], ["CHST 190"]],
+  "CHST 191 CH-16": [["CHST 190 CH."], ["CHST 190"]],
+  "CHST 191 CH-20": [["CHST 190 CH."], ["CHST 190"]],
+  "CHST 191 CH-24": [["CHST 190 CH."], ["CHST 190"]],
+  "CHST 191 CH-28": [["CHST 190 CH."], ["CHST 190"]],
+  "CHST 191 CH-32": [["CHST 190 CH."], ["CHST 190"]],
+  "CHST 191 CH-36": [["CHST 190 CH."], ["CHST 190"]],
+  "CHST 192 CH-04": [["CHST190 CH."], ["CHST 190"]],
+  "CHST 192 CH-08": [["CHST190 CH."], ["CHST 190"]],
+  "CHST 192 CH-12": [["CHST190 CH."], ["CHST 190"]],
+  "CHST 192 CH-16": [["CHST190 CH."], ["CHST 190"]],
+  "CHST 192 CH-20": [["CHST190 CH."], ["CHST 190"]],
+  "CHST 192 CH-24": [["CHST190 CH."], ["CHST 190"]],
+  "CHST 192 CH-28": [["CHST190 CH."], ["CHST 190"]],
+  "CHST 192 CH-32": [["CHST190 CH."], ["CHST 190"]],
+  "CHST 192 CH-36": [["CHST190 CH."], ["CHST 190"]],
+  "CSCI 036 CM-01": [
+    [
+      "an introductory course in programming, such as CSCI005 HM, CSCI040 CM, or CSCI051 CM."
+    ],
+    ["CSCI 005"],
+    ["CSCI 040"],
+    ["CSCI 051"],
+    ["CSCI 005GR"],
+    ["CSCI 042"]
+  ],
+  "CSCI 036 CM-02": [
+    [
+      "an introductory course in programming, such as CSCI005 HM, CSCI040 CM, or CSCI051 CM."
+    ],
+    ["CSCI 005"],
+    ["CSCI 040"],
+    ["CSCI 051"],
+    ["CSCI 005GR"],
+    ["CSCI 042"]
+  ],
+  "CSCI 054 PO-01": [
+    [
+      "any CSCI051x PO course or CSCI AP Exam-A with a score of 5. The course is equivalent to CSCI 052 PO plus CSCI 055 PO. This course and any of the following courses can not both be taken for credit: CSCI 052 PO, CSCI 055 PO, and CSCI 060 HM."
+    ],
+    ["CSCI 051"]
+  ],
+  "CSCI 060 HM-01": [["CSCI 5 or 5GR."], ["CSCI 005"], ["CSCI 005GR"]],
+  "CSCI 062 PO-01": [
+    [
+      "either one of the following: CSCI051G PO, or CSCI051J PO or CSCI051P PO; and either CSCI052 PO or CSCI054 PO."
+    ],
+    ["CSCI 051", "CSCI 052"],
+    ["CSCI 051", "CSCI 054"]
+  ],
+  "CSCI 070 HM-01": [
+    [
+      "CSCI 60 or CSCI 42, and at least one mathematics course at the level of calculus or higher; MATH 55 recommended."
+    ],
+    ["CSCI 060"],
+    ["CSCI 042"]
+  ],
+  "CSCI 081 HM-01": [
+    ["CSCI 60 or 42, MATH 55."],
+    ["MATH 055", "CSCI 060"],
+    ["MATH 055", "CSCI 042"]
+  ],
+  "CSCI 101 PO-01": [
+    [
+      "CSCI 054 PO; Co-requisites: CSCI 062 PO. Previously offered as CSCI 081 PO. Course is equivalent to CSCI 081 HM. Only one of the following courses: CSCI101 PO, CSCI081 PO, and CSCI 081 HM, can be taken for credit."
+    ],
+    ["CSCI 054"]
+  ],
+  "CSCI 105 PO-01": [
+    ["CSCI 062 PO; or CSCI 060 HM and CSCI 070 HM"],
+    ["CSCI 062"],
+    ["CSCI 060", "CSCI 070"]
+  ],
+  "CSCI 105 PO-02": [
+    ["CSCI 062 PO; or CSCI 060 HM and CSCI 070 HM"],
+    ["CSCI 062"],
+    ["CSCI 060", "CSCI 070"]
+  ],
+  "CSCI 140 HM-01": [
+    [
+      "(CSCI 70 and CSCI 81) or ((CSCI 60 or CSCI 42) and MATH 131)). (Crosslisted as MATH168 HM)"
+    ],
+    ["MATH 131", "CSCI 060"],
+    ["MATH 131", "CSCI 042"],
+    ["CSCI 070", "CSCI 081"]
+  ],
+  "CSCI 140 HM-02": [
+    [
+      "(CSCI 70 and CSCI 81) or ((CSCI 60 or CSCI 42) and MATH 131)). (Crosslisted as MATH168 HM)"
+    ],
+    ["MATH 131", "CSCI 060"],
+    ["MATH 131", "CSCI 042"],
+    ["CSCI 070", "CSCI 081"]
+  ],
+  "CSCI 144 HM-01": [
+    ["MATH 65 and CSCI 60 or 42."],
+    ["MATH 065", "CSCI 060"],
+    [["MATH 065", "CSCI 042"]]
+  ],
+  "CSCI 151 HM-01": [["CSCI 70 and MATH 35."], ["MATH 035", "CSCI 070"]],
+  "CSCI 152 HM-01": [
+    ["CSCI 60 or 42 and MATH 65."],
+    ["MATH 065", "CSCI 060"],
+    ["MATH 065", "CSCI 042"]
+  ],
+  "CSCI 152 HM-02": [
+    ["CSCI 60 or 42 and MATH 65."],
+    ["MATH 065", "CSCI 060"],
+    ["MATH 065", "CSCI 042"]
+  ],
+  "CSCI 181G PO-01": [
+    ["CSCI140 PO or instructor's permission."],
+    ["CSCI 140"],
+    ["POI"]
+  ],
+  "CSCI 188 PO-01": [
+    [
+      "CSCI051A PO, or CSCI051G PO, or CSCI051J PO, or CSCI051P PO. P/NC grading only."
+    ],
+    ["CSCI 051"]
+  ],
+  "CSCI 190 PO-01": [
+    [
+      "Senior standing and two CSCI core courses (including CSCI 101 PO, CSCI 105 PO, and CSCI 140 PO), plus one CSCI upper-division course (either core or elective) and CSCI188 PO. May be repeated for credit."
+    ]
+  ],
+  "CSCI 192 PO-04": [["CSCI190 PO. Letter grade only."], ["CSCI 190"]],
+  "CSCI 192 PO-08": [["CSCI190 PO. Letter grade only."], ["CSCI 190"]],
+  "CSCI 192 PO-12": [["CSCI190 PO. Letter grade only."], ["CSCI 190"]],
+  "CSCI 192 PO-16": [["CSCI190 PO. Letter grade only."], ["CSCI 190"]],
+  "CSCI 192 PO-20": [["CSCI190 PO. Letter grade only."], ["CSCI 190"]],
+  "DS 180 CM-01": [
+    ["CSCI036 CM, Statistics, and at least two other Data Science courses."],
+    ["CSCI 036"]
+  ],
+  "EA 030E PO-01": [
+    [
+      "EA 010 PO or by permission of the instructor. Co-requisite: EA 021 CM. Letter grade only. Previously offered as EA 031 PO."
+    ],
+    ["EA 010"],
+    ["POI"]
+  ],
+  "EA 185 PO-01": [["EA 010 PO or equivalent."], ["EA 010"]],
+  "ECON 057 PO-01": [["MATH 30 or equivalent."], ["MATH 030"]],
+  "ECON 057B PO-01": [["MATH 30 or equivalent."], ["MATH 030"]],
+  "ECON 097 CM-01": [["GOVT020 CM and ECON050 CM."], ["GOVT 020", "ECON 050"]],
+  "ECON 101 CM-01": [["ECON 50 and some calculus."], ["ECON 050"]],
+  "ECON 101 CM-02": [["ECON 50 and some calculus."], ["ECON 050"]],
+  "ECON 101 CM-03": [["ECON 50 and some calculus."], ["ECON 050"]],
+  "ECON 101 CM-04": [["ECON 50 and some calculus."], ["ECON 050"]],
+  "ECON 101 CM-05": [["ECON 50 and some calculus."], ["ECON 050"]],
+  "ECON 101 CM-06": [["ECON 50 and some calculus."], ["ECON 050"]],
+  "ECON 101 CM-07": [["ECON 50 and some calculus."], ["ECON 050"]],
+  "ECON 101 PO-01": [
+    [
+      "ECON051 PO; ECON052 PO; and one of MATH029 PO, MATH030 PO, MATH031 PO, MATH032 PO, MATH060 PO or MATH067 PO."
+    ],
+    ["ECON 051", "ECON 052", "MATH 029"],
+    ["ECON 051", "ECON 052", "MATH 030"],
+    ["ECON 051", "ECON 052", "MATH 031"],
+    ["ECON 051", "ECON 052", "MATH 032"],
+    ["ECON 051", "ECON 052", "MATH 060"],
+    ["ECON 051", "ECON 052", "MATH 067"]
+  ],
+  "ECON 101 SC-01": [["ECON 52, MATH 30."], ["MATH 030", "ECON 052"]],
+  "ECON 102 PO-01": [
+    [
+      "ECON051 PO; ECON052 PO; and one of MATH029 PO, MATH030 PO, MATH031 PO, MATH032 PO, MATH060 PO or MATH067 PO."
+    ],
+    ["ECON 051", "ECON 052", "MATH 029"],
+    ["ECON 051", "ECON 052", "MATH 030"],
+    ["ECON 051", "ECON 052", "MATH 031"],
+    ["ECON 051", "ECON 052", "MATH 032"],
+    ["ECON 051", "ECON 052", "MATH 060"],
+    ["ECON 051", "ECON 052", "MATH 067"]
+  ],
+  "ECON 104 PZ-01": [
+    ["Econ 51 & 52; MATH 30 or equivalent."],
+    ["ECON 051", "ECON 052", "MATH 030"]
+  ],
+  "ECON 107 PO-01": [
+    ["ECON 051 PO or ECON 101 PO; ECON 052 PO or ECON 102 PO; ECON 057 PO."],
+
+    ["ECON 051", "ECON 052", "ECON 057"],
+    ["ECON 051", "ECON 102", "ECON 057"],
+
+    ["ECON 101", "ECON 052", "ECON 057"],
+    ["ECON 101", "ECON 052", "ECON 057"]
+  ],
+  "ECON 120 CM-01": [["MATH030 and ECON050."], ["MATH 030", "ECON 050"]],
+  "ECON 120 CM-02": [["MATH030 and ECON050."], ["MATH 030", "ECON 050"]],
+  "ECON 120 CM-03": [["MATH030 and ECON050."], ["MATH 030", "ECON 050"]],
+  "ECON 120 CM-04": [["MATH030 and ECON050."], ["MATH 030", "ECON 050"]],
+  "ECON 120 SC-01": [["ECON 51 and 52."], ["ECON 051", "ECON 052"]],
+  "ECON 122 PO-01": [
+    ["51; 52 or 102."],
+    ["ECON 051", "ECON 052"],
+    ["ECON 051", "ECON 102"]
+  ],
+  "ECON 123 PO-01": [
+    ["ECON 051 PO and ECON 052 PO."],
+    ["ECON 051", "ECON 052"]
+  ],
+  "ECON 125 CM-01": [
+    [
+      "ECON101 CM, or ECON102 CM and some form of statistics: ECON120 CM, GOVT055 CM, PSYC109 CM."
+    ],
+    ["ECON 102"],
+    ["ECON 102"]
+  ],
+  "ECON 125 CM-02": [
+    [
+      "ECON101 CM, or ECON102 CM and some form of statistics: ECON120 CM, GOVT055 CM, PSYC109 CM."
+    ],
+    ["ECON 102"],
+    ["ECON 102"]
+  ],
+  "ECON 125 CM-03": [
+    [
+      "ECON101 CM, or ECON102 CM and some form of statistics: ECON120 CM, GOVT055 CM, PSYC109 CM."
+    ],
+    ["ECON 102"],
+    ["ECON 102"]
+  ],
+  "ECON 125 CM-04": [
+    [
+      "ECON101 CM, or ECON102 CM and some form of statistics: ECON120 CM, GOVT055 CM, PSYC109 CM."
+    ],
+    ["ECON 102"],
+    ["ECON 102"]
+  ],
+  "ECON 125 SC-01": [["ECON 101 and 120."], ["ECON 101", "ECON 120"]],
+  "ECON 128 PO-01": [["52 or 102."], ["ECON 052", "ECON 102"]],
+  "ECON 131 PO-01": [["ECON051 PO and ECON052 PO."], ["ECON 051", "ECON 052"]],
+  "ECON 134 CM-01": [["ECON101 and 120."], ["ECON 101", "ECON 120"]],
+  "ECON 134 CM-02": [["ECON101 and 120."], ["ECON 101", "ECON 120"]],
+  "ECON 134 CM-03": [["ECON101 and 120."], ["ECON 101", "ECON 120"]],
+  "ECON 134 CM-04": [["ECON101 and 120."], ["ECON 101", "ECON 120"]],
+  "ECON 134 CM-05": [["ECON101 and 120."], ["ECON 101", "ECON 120"]],
+  "ECON 135 PO-01": [["ECON052 PO."], ["ECON 052"]],
+  "ECON 138 CM-01": [
+    ["ECON 101, 102, and 120."],
+    ["ECON 101", "ECON 102", "ECON 120"]
+  ],
+  "ECON 154 CM-01": [
+    ["ECON 86 and 150, or permission of instructor."],
+    ["ECON 086", "ECON 150"],
+    ["POI"]
+  ],
+  "ECON 154 PO-01": [["57 and 102."], ["ECON 57", "ECON 102"]],
+  "ECON 162 PO-01": [["57 and 102."], ["ECON 57", "ECON 102"]],
+  "ECON 165 PO-01": [
+    ["ECON101 PO and ECON102 PO; and ECON107 PO or ECON167 PO."],
+    ["ECON 101", "ECON 102", "ECON 107"],
+    ["ECON 101", "ECON 102", "ECON 167"]
+  ],
+  "ECON 166 PO-01": [
+    ["ECON057 PO, ECON156 PO or ECON157 PO."],
+    ["ECON 057"],
+    ["ECON 156"],
+    ["ECON 157"]
+  ],
+  "ECON 171 CM-01": [
+    ["ECON 101 and 120 (or equivalent statistics)."],
+    ["ECON 101", "ECON 120"]
+  ],
+  "ECON 175 CM-01": [["ECON 101 and 120."], ["ECON 101", "ECON 120"]],
+  "ECON 184 PZ-01": [["Econ 52"], ["ECON 052"]],
+  "ECON 190 PO-01": [
+    [
+      "ECON 101 PO, ECON 102 PO and either ECON 107 PO or ECON 167 PO must be completed in advance of participating in the Senior Seminar."
+    ],
+    ["ECON 101", "ECON 102", "ECON 107"],
+    ["ECON 101", "ECON 102", "ECON 167"]
+  ],
+  "ECON 190 PO-02": [
+    [
+      "ECON 101 PO, ECON 102 PO and either ECON 107 PO or ECON 167 PO must be completed in advance of participating in the Senior Seminar."
+    ],
+
+    ["ECON 101", "ECON 102", "ECON 107"],
+    ["ECON 101", "ECON 102", "ECON 167"]
+  ],
+  "ECON 190 PO-03": [
+    [
+      "ECON 101 PO, ECON 102 PO and either ECON 107 PO or ECON 167 PO must be completed in advance of participating in the Senior Seminar."
+    ],
+
+    ["ECON 101", "ECON 102", "ECON 107"],
+    ["ECON 101", "ECON 102", "ECON 167"]
+  ],
+  "ECON 190 PO-04": [
+    [
+      "ECON 101 PO, ECON 102 PO and either ECON 107 PO or ECON 167 PO must be completed in advance of participating in the Senior Seminar."
+    ],
+
+    ["ECON 101", "ECON 102", "ECON 107"],
+    ["ECON 101", "ECON 102", "ECON 167"]
+  ],
+  "ECON 197W SC-01": [["ECON 51 and 52. B. Widner."], ["ECON 051", "ECON 052"]],
+  "ENGL 195 PO-04": [
+    ["ENGL067 PO and ENGL170 PO. ENGL170 PO may be taken concurrently."],
+    ["ENGL 067", "ENGL 170"]
+  ],
+  "ENGR 072 HM-01": [["ENGR 79 and HMC mathematics core."], ["ENGR 079"]],
+  "ENGR 072 HM-02": [["ENGR 79 and HMC mathematics core."], ["ENGR 079"]],
+  "ENGR 082 HM-01": [["CHEM 23A and 23B."], ["CHEM 023A", "CHEM 023B"]],
+  "ENGR 084 HM-01": [["ENGR 79 and PHYS 51."], ["ENGR 079", "PHYS 051"]],
+  "ENGR 086 HM-01": [
+    [
+      "CHEM 23A, 23B, and 24; MATH 30B/30G and 40; and PHYS 22 and 24.(Fall and Spring)"
+    ],
+    ["CHEM 023A", "CHEM 023B", "MATH 030B", "MATH 040", "PHYS 022", "PHYS 024"],
+    ["CHEM 023A", "CHEM 023B", "MATH 030G", "MATH 040", "PHYS 022", "PHYS 024"],
+    ["CHEM 023A", "CHEM 023B", "MATH 030", "MATH 040", "PHYS 022", "PHYS 024"]
+  ],
+  "ENGR 113 HM-01": [
+    ["ENGR 4, 80 and 112 or permission of Clinic director."],
+    ["ENGR 004", "ENGR 080", "ENGR 112"],
+    ["POI"]
+  ],
+  "ENGR 151 HM-01": [
+    ["ENGR 79 and ENGR 84 or permission of instructor."],
+    ["ENGR 079", "ENGR 084"],
+    ["POI"]
+  ],
+  "ENGR 161 HM-01": [["ENGR 101 and programming proficiency."], ["ENGR 101"]],
+  "ENGR 164 HM-01": [
+    ["BIOL 52, ENGR 79, and junior standing."],
+    ["BIOL 052", "ENGR 079"]
+  ],
+  "ENGR 178 HM-01": [
+    [
+      "ENGR 80 for ENGR majors or the combination of ENGR 79 and permission of instructor for non-majors with the appropriate background. Corequisites: TRA or NAR Level 1 certification, Level 2 certification strongly recommended."
+    ],
+    ["ENGR 080"],
+    ["POI"]
+  ],
+  "ENGR 190AS HM-01": [["ENGR 86."], ["ENGR 086"]],
+  "ENGR 206 HM-01": [["ENGR 101 and 102."], ["ENGR 101", "ECON 102"]],
+  "FREN 002 PO-01": [["FREN001 PO."], ["FREN 001"]],
+  "FREN 013 PO-01": [
+    ["two years of college-level language study or equivalent and FREN044 PO."],
+    ["FREN 044"]
+  ],
+  "FREN 033 SC-01": [
+    ["FREN002, FREN022, or FREN Placement Test."],
+    ["FREN 002", "FREN 022"]
+  ],
+  "FREN 103 PO-01": [
+    ["FREN 044 PO. This course has been revised for fall 2018."],
+    ["FREN 044"]
+  ],
+  "GEOL 121 PO-01": [
+    [
+      "GEOL015 PO, or one of the courses from the GEOL020 series. Previously offered as GEOL175 PO."
+    ],
+    ["GEOL 015"],
+    ["GEOL 020"]
+  ],
+  "GEOL 131 PO-01": [
+    ["MATH 030 PO and one introductory geology course."],
+    ["MATH 030"]
+  ],
+  "GEOL 189C PO-01": [
+    [
+      "either GEOL015 PO or any version of a GEOL020 PO course or an introductory level chemistry course. The course is offered as an intermediate level elective. Letter grade only."
+    ],
+    ["GEOL 015"],
+    ["GEOL 020"]
+  ],
+  "GEOL 189D PO-01": [
+    [
+      "GEOL015 PO, or any version of a GEOL020 course, or permission of instructor."
+    ],
+    ["GEOL 015"],
+    ["GEOL 020"],
+    ["POI"]
+  ],
+  "GERM 002 PO-01": [["GERM001 PO or Scripps equivalent."], ["GERM 001"]],
+  "GERM 013 PO-01": [
+    ["two years of college-level language study or equivalent and GERM044 PO."],
+    ["GERM 044"]
+  ],
+  "GOVT 097 CM-01": [["ECON050 and GOVT020."], ["GOVT 020", "ECON 050"]],
+  "GOVT 166 CM-01": [
+    ["GOVT 20 and ECON 50. Also listed as ECON 104."],
+    ["GOVT 020", "ECON 050"]
+  ],
+  "GREK 033 SC-01": [
+    ["GREK002, GREK022 or permission of the instructor."],
+    ["GREK 002", "GREK 022"],
+    ["POI"]
+  ],
+  "GREK 104 PO-01": [
+    [
+      "GREK001 PO and GREK002 PO, or GREK022 PO, or permission of instructor. P/NC only. Half-credit. May be repeated for credit. Previously offered as CLAS104 PO."
+    ],
+    ["GREK 001", "GREK 002"],
+    ["GREK 022"],
+    ["POI"]
+  ],
+  "GWS 172 PO-01": [["GWS 026 PO."], ["GWS 026"]],
+  "GWS 182 PO-01": [
+    ["One other course in queer, feminist or media theory. Letter grade only."],
+    []
+  ],
+  "GWS 186 PO-01": [
+    ["GWS 026 PO or FGSS036 SC and one upper-division course in GWS."],
+    ["FGSS 036"],
+    ["GWS 026"]
+  ],
+  "HIST 191 PO-04": [
+    [
+      "190 and completion of at least three courses in the field in which students intend to write their theses."
+    ],
+    ["HIST 190"]
+  ],
+  "HIST 192 PO-04": [["HIST190 PO."], ["HIST 190"]],
+  "HIST 193 PO-04": [["HIST190 PO."], ["HIST 190"]],
+  "IR 118 PO-01": [
+    ["ECON 051 PO. Previously offered as ECON113 PO."],
+    ["ECON 051"]
+  ],
+  "IR 190 PO-01": [
+    [
+      "prior completion of four of the five core courses in International Relations and one of the two advanced electives."
+    ],
+    []
+  ],
+  "LGCS 112 PO-01": [
+    [
+      "LGCS010 PO or permission of instructor. Course is equivalent to LGCS112 PZ."
+    ],
+    ["LGCS 010"],
+    ["POI"]
+  ],
+  "LGCS 118 PO-01": [["LGCS010 PO or equivalent."], ["LGCS 010"]],
+  "LGCS 130 PO-01": [["LGCS011 PO."], ["LGCS 011"]],
+  "LGCS 184 PO-01": [
+    [
+      "LGCS 108 PO. May be repeated for credit. Previously offered as LGCS185P PO."
+    ],
+    ["LGCS 108"]
+  ],
+  "LGCS 185 PO-01": [
+    [
+      "LGCS 011 PO. May be repeated for credit. Previously offered as LGCS185C PO."
+    ],
+    ["LGCS 011"]
+  ],
+  "MATH 032S PO-01": [
+    [
+      "MATH 031 PO or evidence of having completed an equivalent calculus II course."
+    ],
+    ["MATH 031"]
+  ],
+  "MATH 058 PO-01": [
+    [
+      "MATH 030 PO or MATH 031 PO or MATH 032 PO or MATH 060 PO or satisfactory score on placement examination. Not recommended for students who have taken AP statistics."
+    ],
+    ["MATH 030"],
+    ["MATH 031"],
+    ["MATH 032"],
+    ["MATH 060"]
+  ],
+  "MATH 067 PO-01": [
+    ["MATH060 PO. Previously offered as MATH107 PO."],
+    ["MATH 060"]
+  ],
+  "MATH 070 HM-01": [["MATH 65."], ["MATH 065"]],
+  "MATH 080 HM-01": [["MATH 65."], ["MATH 065"]],
+  "MATH 102 PO-01": [
+    [
+      "MATH032 PO or MATH067 PO; and MATH060 PO or MATH032S PO and permission of instructor."
+    ],
+    ["MATH 032", "MATH 060", "MATH 032"],
+    ["MATH 032", "MATH 032"],
+
+    ["MATH 067", "MATH 060"],
+    ["MATH 067", "MATH 032"],
+
+    ["POI"]
+  ],
+  "MATH 104 HM-01": [
+    ["(MATH 40 and MATH 55) or (MATH 73 and MATH 55)."],
+    ["MATH 040", "MATH 055"],
+    ["MATH 073", "MATH 055"]
+  ],
+  "MATH 112 PO-01": [
+    ["32 or 107; and 60."],
+    ["MATH 032", "MATH 060"],
+    ["MATH 107", "MATH 060"]
+  ],
+  "MATH 115 HM-01": [
+    ["MATH 65 or (MATH 73 and MATH 82)."],
+    ["MATH 065"],
+    ["MATH 073", "MATH 082"]
+  ],
+  "MATH 131 HM-01": [
+    ["MATH 55 or MATH 101 at Pomona or Scripps."],
+    ["MATH 055", "MATH 101"]
+  ],
+  "MATH 131 HM-02": [
+    ["MATH 55 or MATH 101 at Pomona or Scripps."],
+    ["MATH 055"],
+    ["MATH 101"]
+  ],
+  "MATH 150 PO-01": [
+    [
+      "MATH 030 PO and one of the following MATH 058 PO, MATH 152 PO, ECON 057 PO, PSYC 158 PO or AP Statistics."
+    ],
+    ["MATH 030", "MATH 058"],
+    ["MATH 030", "MATH 152"],
+    ["MATH 030", "PSYC 158"],
+    ["MATH 030", "ECON 057"]
+  ],
+  "MATH 151 CM-01": [
+    ["MATH032 and either MATH060 CM or CSCI048 CM."],
+    ["MATH 032", "MATH 060"],
+    ["MATH 032", "CSCI 048"]
+  ],
+  "MATH 151 PO-01": [
+    ["32 or 107; and 60."],
+    ["MATH 032", "MATH 060"],
+    ["MATH 107", "MATH 060"]
+  ],
+  "MATH 155 HM-01": [["MATH 35."], ["MATH 035"]],
+  "MATH 157 HM-01": [["MATH 19 or MATH 60."], ["MATH 019"], ["MATH 060"]],
+  "MATH 158 PO-01": [
+    [
+      "MATH 030 PO, MATH 031 PO or MATH 032 PO and one of: MATH 058 PO, MATH 152 PO, ECON 057 PO, PSYC 158 PO or AP Statistics. Recommended: MATH 060 PO."
+    ],
+    ["MATH 030", "MATH 058"],
+    ["MATH 030", "MATH 152"],
+    ["MATH 030", "MATH 060"],
+    ["MATH 030", "PSYC 158"],
+    ["MATH 030", "ECON 057"],
+
+    ["MATH 031", "MATH 058"],
+    ["MATH 031", "MATH 152"],
+    ["MATH 031", "MATH 060"],
+    ["MATH 031", "PSYC 158"],
+    ["MATH 031", "ECON 057"],
+
+    ["MATH 032", "MATH 058"],
+    ["MATH 032", "MATH 152"],
+    ["MATH 032", "MATH 060"],
+    ["MATH 032", "PSYC 158"],
+    ["MATH 032", "ECON 057"]
+  ],
+  "MATH 164 HM-01": [
+    [
+      "(MATH 65 or (MATH 73 and MATH 82)) and CSCI 60. (Crosslisted as CSCI144 HM)"
+    ],
+    ["MATH 065", "CSCI 060"],
+    ["MATH 073", "MATH 082", "CSCI 060"]
+  ],
+  "MATH 168 HM-01": [
+    [
+      "(CSCI 70 and CSCI 81) or ((CSCI 60 or CSCI 42) and MATH 131)). (Crosslisted as CSCI140 HM)"
+    ],
+    ["CSCI 070", "CSCI 081"],
+    ["CSCI 060", "MATH 131"],
+    ["CSCI 042", "MATH 131"]
+  ],
+  "MATH 168 HM-02": [
+    [
+      "(CSCI 70 and CSCI 81) or ((CSCI 60 or CSCI 42) and MATH 131)). (Crosslisted as CSCI140 HM)"
+    ],
+    ["CSCI 070", "CSCI 081"],
+    ["CSCI 060", "MATH 131"],
+    ["CSCI 042", "MATH 131"]
+  ],
+  "MATH 171 HM-01": [
+    [
+      "(MATH 40 or MATH 73) and MATH 55. Jointly; Fall semester at HMC and CMC, Spring semester at HMC and Pomona."
+    ],
+
+    ["MATH 040", "MATH 055"],
+    ["MATH 073", "MATH 055"]
+  ],
+
+  "MATH 180 CM-01": [["MATH 60 and MATH 111."], ["MATH 060", "MATH 111"]],
+
+  "MATH 181 PO-01": [
+    ["101 or 136; 102."],
+
+    ["MATH 101", "MATH 102"],
+    ["MATH 136", "MATH 102"]
+  ],
+
+  "MATH 196 HM-01": [["Permission of department or instructor."], [], ["POI"]],
+
+  "MCBI 118A HM-01": [
+    ["(MATH 65 or (MATH 73 and MATH 82)) and BIOL 52."],
+    ["BIOL 052", "MATH 065"],
+    ["BIOL 062", "MATH 073", "MATH 082"]
+  ],
+  "MCBI 118B HM-01": [
+    ["CSCI 5, 5GR, or 42, and BIOL 52."],
+    ["BIOL 052", "CSCI 005", "CSCI 005GR", "CSCI 042"]
+  ],
+  "MS 132 SC-01": [
+    ["MS 049, 050, or MS 051."],
+    ["MS 049"],
+    ["MS 050"],
+    ["MS 051"]
+  ],
+  "MS 148G PO-01": [
+    ["MS 049 PO, MS 050 PO, or MS 051 PO."],
+    ["MS 049"],
+    ["MS 050"],
+    ["MS 051"]
+  ],
+  "MS 149T PO-01": [
+    [
+      "MS 049 PO, MS 050 PO, or MS 051 PO, and one upper level theory class (MS 147 PO - MS 149 PO). May be repeated once for credit."
+    ],
+    ["MS 049", "MS 147"],
+    ["MS 050", "MS 147"],
+    ["MS 051", "MS 147"],
+    ["MS 049", "MS 149"],
+    ["MS 050", "MS 149"],
+    ["MS 051", "MS 149"]
+  ],
+  "MS 175 PO-01": [
+    ["MS 049 PO, or MS 050 PO, or MS 051 PO or equivalent. Letter grade only."],
+    ["MS 049"],
+    ["MS 050"],
+    ["MS 051"]
+  ],
+  "MUS 082 PO-01": [["MUS 081 PO."], ["MUS 081"]],
+  "MUS 121 PO-01": [
+    ["MUS 051 PO and MUS 080 PO or permission of instructor."],
+    ["MUS 051", "MUS 080"],
+    ["POI"]
+  ],
+  "MUS 147 PO-01": [["MUS 080 PO and LGCS010 PO."], ["LGCS 010", "MUS 080"]],
+  "MUS 189 SC-01": [
+    [
+      "Music 170, 171, 177 or equivalent music study, and approval of performance concentration status by full music faculty and teacher of performance area by the end of sophomore year. Instructor permission required. Half course."
+    ],
+    ["MUS 170"],
+    ["MUS 171"],
+    ["MUS 177"],
+    ["POI"]
+  ],
+  "NEUR 123 PO-01": [["NEUR101 PO."], ["NEUR 101"]],
+  "NEUR 168 PO-01": [["NEUR 101 PO."], ["NEUR 101"]],
+  "PE 007 PO-01": [
+    ["Intermediate swimming skills. P/NC only. May be repeated for credit."],
+    []
+  ],
+  "PHYS 034L KS-01": [
+    [
+      "For PHYS033L: Calculus (MATH030) or prior high-school calculus experience with concurrent enrollment in MATH030. For PHYS034L: MATH031 or concurrent enrollment in MATH031. PHYS033L is a prerequisite for PHYS034L. Laboratory fee $50 per semester."
+    ],
+    ["MATH 031", "PHYS 033L"]
+  ],
+  "PHYS 034L KS-02": [
+    [
+      "For PHYS033L: Calculus (MATH030) or prior high-school calculus experience with concurrent enrollment in MATH030. For PHYS034L: MATH031 or concurrent enrollment in MATH031. PHYS033L is a prerequisite for PHYS034L. Laboratory fee $50 per semester."
+    ],
+    ["MATH 031", "PHYS 033L"]
+  ],
+  "PHYS 042 PO-01": [
+    [
+      "completion of/or concurrent enrollment in MATH 30 for 41; MATH 31 and PHYS 41 for 42."
+    ],
+    ["MATH 031", "PHYS 041"]
+  ],
+  "PHYS 042 PO-02": [
+    [
+      "completion of/or concurrent enrollment in MATH 30 for 41; MATH 31 and PHYS 41 for 42."
+    ],
+    ["MATH 031", "PHYS 041"]
+  ],
+  "PHYS 042L PO-01": [["MATH 031 and PHYS 041."], ["MATH 031", "PHYS 041"]],
+  "PHYS 042L PO-02": [["MATH 031 and PHYS 041."], ["MATH 031", "PHYS 041"]],
+  "PHYS 042L PO-03": [["MATH 031 and PHYS 041."], ["MATH 031", "PHYS 041"]],
+  "PHYS 042L PO-04": [["MATH 031 and PHYS 041."], ["MATH 031", "PHYS 041"]],
+  "PHYS 050 HM-01": [["PHYS 24. Corequistes: PHYS 51."], ["PHYS 024"]],
+  "PHYS 052 HM-01": [["PHYS 51 and MATH 65."], ["MATH 065", "PHYS 051"]],
+  "PHYS 052 HM-02": [["PHYS 51 and MATH 65."], ["MATH 065", "PHYS 051"]],
+  "PHYS 052 HM-03": [["PHYS 51 and MATH 65."], ["MATH 065", "PHYS 051"]],
+  "PHYS 100 KS-01": [
+    [
+      "PHYS033L, PHYS034L, or both semesters of the AISS course (AISS001AL, AISS001BL, AISS002AL, AISS002BL) or PHYS030L, PHYS031L; and MATH030, MATH031."
+    ],
+    [
+      ["PHYS 033L", "PHYS 034L", "MATH 030", "MATH 031"],
+      ["PHYS 030L", "PHYS 031L", "MATH 030", "MATH 031"]
+    ]
+  ],
+  "PHYS 102 KS-01": [["PHYS035, MATH032."], ["MATH 032", "PHYS 035"]],
+  "PHYS 105 KS-01": [
+    [
+      "entry-level programming, differential equations, scientific computing or equivalent courses, or permission of instructor."
+    ],
+    [],
+    ["POI"]
+  ],
+  "PHYS 106L KS-01": [
+    ["PHYS 33L and 34L or permission of instructor."],
+    ["PHYS 033L", "PHYS 034L"],
+    ["POI"]
+  ],
+  "PHYS 114 KS-01": [
+    [
+      "Differential Equations and/or Linear Algebra, PHYS035 PHYS100 or equivalent, or by permission of instructor. (Prior knowledge of some basic elements or linear algebra - matrices eigenvectors, eigenvalues - is assumed.)"
+    ],
+    ["PHYS 035", "PHYS 100"],
+    ["POI"]
+  ],
+  "PHYS 125 PO-01": [
+    [
+      "PHYS 41 and 42, or 70; MATH 32 or 107; and completion of/or concurrent enrollment in MATH 60."
+    ],
+    ["PHYS 070", "MATH 032"],
+    ["PHYS 070", "MATH 107"],
+
+    ["PHYS 041", "PHYS 042", "MATH 032"]
+  ],
+  "PHYS 128 PO-01": [
+    ["PHYS041 PO and PHYS042 PO, or PHYS070 PO."],
+    ["PHYS 041", "PHYS 042"],
+    ["PHYS 070"]
+  ],
+  "PHYS 134 HM-01": [["PHYS 51 and PHYS 54."], ["PHYS 051", "PHYS 054"]],
+  "PHYS 142 PO-01": [
+    [
+      "41 and 42, or 70; MATH 32 or 107; and completion of/concurrent enrollment in MATH 60."
+    ],
+    ["PHYS 070", "MATH 032"],
+    ["PHYS 070", "MATH 107"],
+
+    ["PHYS 041", "PHYS 042", "MATH 032"]
+  ],
+  "PHYS 175 PO-01": [["101 and MATH 60."], ["PHYS 101", "MATH 060"]],
+  "PHYS 178 KS-01": [
+    [
+      "BIOL043L, or BIOL040L, or BIOL042L; CHEM014L and CHEM015L or CHEM040L and CHEM015L, or CHEM029L or CHEM042L; and PHYS030L, PHYS031L or PHYS033L, PHYS034L, or both semesters of the AISS course (AISS001AL, AISS001BL, AISS02AL, AISS002BL), or permission of instructor."
+    ],
+    ["BIOL 043L", "CHEM 014L", "CHEM 015L", "PHYS 030L", "PHYS 031L"],
+    ["BIOL 043L", "CHEM 040L", "CHEM 015L", "PHYS 030L", "PHYS 031L"],
+    ["BIOL 043L", "CHEM 029L", "CHEM 042L", "PHYS 030L", "PHYS 031L"],
+
+    ["BIOL 043L", "CHEM 014L", "CHEM 015L", "PHYS 033L", "PHYS 034L"],
+    ["BIOL 043L", "CHEM 040L", "CHEM 015L", "PHYS 033L", "PHYS 034L"],
+    ["BIOL 043L", "CHEM 029L", "CHEM 042L", "PHYS 033L", "PHYS 034L"],
+
+    ["BIOL 042L", "CHEM 014L", "CHEM 015L", "PHYS 030L", "PHYS 031L"],
+    ["BIOL 042L", "CHEM 040L", "CHEM 015L", "PHYS 030L", "PHYS 031L"],
+    ["BIOL 042L", "CHEM 029L", "CHEM 042L", "PHYS 030L", "PHYS 031L"],
+
+    ["BIOL 042L", "CHEM 014L", "CHEM 015L", "PHYS 033L", "PHYS 034L"],
+    ["BIOL 042L", "CHEM 040L", "CHEM 015L", "PHYS 033L", "PHYS 034L"],
+    ["BIOL 042L", "CHEM 029L", "CHEM 042L", "PHYS 033L", "PHYS 034L"],
+
+    ["BIOL 040L", "CHEM 014L", "CHEM 015L", "PHYS 030L", "PHYS 031L"],
+    ["BIOL 040L", "CHEM 040L", "CHEM 015L", "PHYS 030L", "PHYS 031L"],
+    ["BIOL 040L", "CHEM 029L", "CHEM 042L", "PHYS 030L", "PHYS 031L"],
+
+    ["BIOL 040L", "CHEM 014L", "CHEM 015L", "PHYS 033L", "PHYS 034L"],
+    ["BIOL 040L", "CHEM 040L", "CHEM 015L", "PHYS 033L", "PHYS 034L"],
+    ["BIOL 040L", "CHEM 029L", "CHEM 042L", "PHYS 033L", "PHYS 034L"],
+
+    ["POI"]
+  ],
+  "POLI 136 PO-01": [
+    [
+      "EA 010 PO or POLI003 PO or PPA 001 PO or STS 001 PO. Previously offered as POLI039 PO."
+    ],
+    ["EA 010"],
+    ["STS 001"],
+    ["PPA 001"],
+    ["POLI 003"]
+  ],
+  "POLI 190B PO-01": [
+    ["POLI 005 PO or POLI 008 PO or equivalent."],
+    ["POLI 005"],
+    ["POLI 008"]
+  ],
+  "POST 199 PZ-01": [
+    ["a senior seminar in Political Studies and field groupapproval. Staff."],
+    []
+  ],
+  "PPA 191 PO-04": [
+    ["PPA190 PO and PPA 195 PO. Letter grade only."],
+    ["PPA 190", "PPA 195"]
+  ],
+  "PSYC 092 PZ-01": [["PSYC 10 and PSYC 91."], ["PSYC 010", "PSYC 091"]],
+  "PSYC 110 CM-01": [
+    [
+      "One course in psychology numbered 99 or lower, PSYC 109, Introduction to Statistics for Psychologists, or equivalent. Note: This course must be taken prior to the senior year."
+    ],
+    ["PSYC 109"]
+  ],
+  "PSYC 110 CM-02": [
+    [
+      "One course in psychology numbered 99 or lower, PSYC 109, Introduction to Statistics for Psychologists, or equivalent. Note: This course must be taken prior to the senior year."
+    ],
+    ["PSYC 109"]
+  ],
+  "PSYC 153 AA-01": [["PSYC051 PO or an ASAM course."], ["PSYC 051"]],
+  "PSYC 155 PZ-01": [
+    [
+      "Psyc 10 and an Introductory course InPSYC biology, or instructor\u2019s permission."
+    ],
+    ["PSYC 010"],
+    ["POI"]
+  ],
+  "PSYC 168L SC-01": [
+    [
+      "PSYC 52, 103, 168 (or concurrent enrollment in PSYC 168). Satisfies the laboratory course requirement for the psychology major."
+    ],
+    ["PSYC 052", "PHYC 052", "PSYC 168"]
+  ],
+  "PSYC 180C PO-01": [["PSYC051 PO."], ["PSYC 051"]],
+  "PSYC 189L PO-01": [["PSYC051 PO."], ["PSYC 051"]],
+  "PSYC 189M PO-01": [["PSYC051 PO."], ["PSYC 051"]],
+  "SOC 150 CH-01": [
+    ["Any course in Chaicanx-Latinx Studies or Sociology."],
+    []
+  ],
+  "SPAN 013 PO-01": [
+    ["two years of college-level language study or equivalent and SPAN044 PO."],
+    ["SPAN 044"]
+  ],
+  "SPAN 013 PO-02": [
+    ["two years of college-level language study or equivalent and SPAN044 PO."],
+    ["SPAN 044"]
+  ],
+  "SPAN 103 PO-01": [["SPAN044 PO or equivalent."], ["SPAN 044"]],
+  "SPAN 108 PO-01": [["SPAN044 PO."], ["SPAN 044"]],
+  "SPAN 135 PO-01": [["SPAN 101 PO."], ["SPAN 101"]],
+  "THEA 012 PO-01": [
+    ["THEA 001A PO or THEA 001G PO."],
+    ["THEA 001A"],
+    ["THEA 001G"]
+  ],
+  "THEA 130 PO-01": [
+    [
+      "THEA001 PO and THEA 002 PO, or permission from instructor. Letter grade only."
+    ],
+    ["THEA 001", "THEA 002"],
+    ["POI"]
+  ]
+}

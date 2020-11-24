@@ -32,6 +32,7 @@
             
   <div class="section" id="module-optimizer">
 <span id="welcome-to-hmc-coursescheduler-s-documentation"></span><h1>Welcome to HMC-CourseScheduler’s documentation!<a class="headerlink" href="#module-optimizer" title="Permalink to this headline">¶</a></h1>
+<p>Main Course Scheduling Script</p>
 <dl class="function">
 <dt id="optimizer.only_keep_three_credit_classes">
 <code class="sig-prename descclassname">optimizer.</code><code class="sig-name descname">only_keep_three_credit_classes</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#optimizer.only_keep_three_credit_classes" title="Permalink to this definition">¶</a></dt>
@@ -56,13 +57,15 @@ possible_courses (list, optional): Defaults to possible_courses.</p>
 <code class="sig-prename descclassname">optimizer.</code><code class="sig-name descname">remove_prev_courses</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#optimizer.remove_prev_courses" title="Permalink to this definition">¶</a></dt>
 <dd><p>Removes previously taken courses.</p>
 <dl class="simple">
-<dt>Global Variables Needed:</dt><dd><p>all_prev_courses (dict, optional): user’s previously taken courses. Defaults to all_prev_courses.
+<dt>Global Variables Needed:</dt><dd><p>all_prev_courses (dict, optional): user”s previously taken courses.
+Defaults to all_prev_courses.
 possible_courses (list, optional): Defaults to possible_courses.</p>
 </dd>
 </dl>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p>removes previously taken courses (all sections) from list of possible courses</p>
+<dd class="field-odd"><p>removes previously taken courses (all sections) from list of
+possible courses</p>
 </dd>
 <dt class="field-even">Return type</dt>
 <dd class="field-even"><p>list</p>
@@ -73,7 +76,8 @@ possible_courses (list, optional): Defaults to possible_courses.</p>
 <dl class="function">
 <dt id="optimizer.helper_next_sem_possible_courses_due_to_prereqs">
 <code class="sig-prename descclassname">optimizer.</code><code class="sig-name descname">helper_next_sem_possible_courses_due_to_prereqs</code><span class="sig-paren">(</span><em class="sig-param">lis</em><span class="sig-paren">)</span><a class="headerlink" href="#optimizer.helper_next_sem_possible_courses_due_to_prereqs" title="Permalink to this definition">¶</a></dt>
-<dd><p>Helper function that checks whether the prereqs for a course have been fulfilled</p>
+<dd><p>Helper function that checks whether the prereqs for a course have been
+fulfilled</p>
 <dl class="simple">
 <dt>Global Variables Needed:</dt><dd><p>all_prev_courses (set, optional): Defaults to all_prev_courses.</p>
 </dd>
@@ -94,24 +98,40 @@ possible_courses (list, optional): Defaults to possible_courses.</p>
 <dl class="function">
 <dt id="optimizer.next_sem_possible_courses_due_to_prereqs">
 <code class="sig-prename descclassname">optimizer.</code><code class="sig-name descname">next_sem_possible_courses_due_to_prereqs</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#optimizer.next_sem_possible_courses_due_to_prereqs" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns list of possible courses according to previously taken courses and prerequisites
-(includes previously taken courses too)</p>
+<dd><p>Creates list of possible courses according to previously taken courses
+and prereqs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>list of possible courses according to previously taken courses
+and prereqs</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>list</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="function">
 <dt id="optimizer.course_code_to_variable_and_index">
 <code class="sig-prename descclassname">optimizer.</code><code class="sig-name descname">course_code_to_variable_and_index</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#optimizer.course_code_to_variable_and_index" title="Permalink to this definition">¶</a></dt>
-<dd><p>Dictionary that maps complate course code to a variable of the format “xi” where “i” is the variable number</p>
+<dd><p>Dictionary that maps complate course code to a variable of the format
+“xi” where “i” is the variable number</p>
 <dl class="simple">
 <dt>Global Variables Needed:</dt><dd><p>possible_courses (list, optional): Defaults to possible_courses.</p>
 </dd>
 </dl>
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
-<dd class="field-odd"><p><dl class="simple">
+<dd class="field-odd"><p><dl>
 <dt>tuple of two dictionaries:</dt><dd><ul class="simple">
-<li><p>course_to_variable_name: dict that maps complete course code to a variable of the format “xi” where “i” is the variable number</p></li>
-<li><p>course_to_index: dict that maps complete_course_code to int i, where i equals corresponding variable name in course_to_variable_name</p></li>
+<li><p>course_to_variable_name: dict that maps complete course code</p></li>
+</ul>
+<p>to a variable of the format “xi” where “i” is the variable
+number</p>
+<ul class="simple">
+<li><p>course_to_index: dict that maps complete_course_code to int i,
+where i equals corresponding variable name in
+course_to_variable_name</p></li>
 </ul>
 </dd>
 </dl>
