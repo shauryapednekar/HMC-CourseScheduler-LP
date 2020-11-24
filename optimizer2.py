@@ -11,6 +11,7 @@ from user.userInputs.preferences import curr_preferences
 from user.userInputs.badCourses import bad_courses
 from user.userInputs.desiredReqs import curr_hsa_conc
 from user.userInputs.desiredReqs import curr_desired_reqs
+from user.userInputs.alternates import curr_alternates
 
 
 # SKELETAL:
@@ -776,6 +777,28 @@ def costs_func(possible_courses, course_to_index, curr_preferences):
 
     return costs_row
 
+
+######################################
+
+def alternates_matrix_func(curr_alternates, possible_courses, course_to_index):
+    n=len(possible_courses)
+    
+    matrix = []
+    
+    for item in curr_alternates:
+        curr_row = [0]*n
+        
+        alt_courses = item[0]
+        alt_limit = item[1]
+        
+        for course in possible_courses:
+            if course in alt_courses:
+                curr_row[course_to_index[course]] = 1
+        
+        matrix.append(curr_row)
+    
+    return matrix
+            
 ######################################
 
 def createDat(dir_path, filename):
@@ -802,7 +825,19 @@ def createDat(dir_path, filename):
     with open(dir_path + r"unique_courses_matrix.txt", 'r') as f:
         unique_courses_matrix = f.read()
         
+    with open(dir_path + r"set_alternates.txt", 'r') as f:
+        set_alternates = f.read()
+    
+    with open(dir_path + r"alternates_matrix.txt", 'r') as f:
+        alternates_matrix = f.read()
         
+    with open(dir_path + r"alternates_lower_limits.txt", 'r') as f:
+        alternates_lower_limits = f.read()
+        
+    with open(dir_path + r"alternates_upper_limits.txt", 'r') as f:
+        alternates_upper_limits = f.read()
+        
+                
     res += "set courses := " 
     res += "\n    "
     res += course_names + "\n;"
@@ -822,6 +857,11 @@ def createDat(dir_path, filename):
     res += "set uniqueCourses := "
     res += "\n    "
     res += set_uniqueCourses + "\n;"
+    res += "\n\n"
+    
+    res += "set alternates := "
+    res += "\n    "
+    res += set_alternates + "\n;"
     res += "\n\n"
 
     res += "param costs := "
@@ -854,6 +894,24 @@ def createDat(dir_path, filename):
     res += "\n    "
     res += unique_courses_matrix + "\n;"
     res += "\n\n"
+    
+    res += "param alternatesLowerLimits := "
+    res += "\n    "
+    res += alternates_lower_limits + "\n;"
+    res += "\n\n"
+    
+    res += "param alternatesUpperLimits := "
+    res += "\n    "
+    res += alternates_upper_limits + "\n;"
+    res += "\n\n"
+
+    res += "param alternatesMatrix : "
+    res += "\n    "
+    res += course_names + " := \n"
+    res += "\n    "
+    res += alternates_matrix + "\n;"
+    res += "\n\n"
+
 
     with open(r'./amplFiles/' + filename, 'w') as fp:
         fp.write(res)
@@ -910,6 +968,10 @@ def main(selected=False, test_num=0):
                   course_to_index,
                   curr_preferences)
 
+    alternates_matrix = alternates_matrix_func(curr_alternates,
+                                               possible_courses,
+                                               course_to_index)
+    
     dir_path = r"amplData/" + str(test_num) + "/"
     
     os.makedirs(os.path.dirname(dir_path), exist_ok=True)
@@ -967,8 +1029,41 @@ def main(selected=False, test_num=0):
             f.write(c + " " + str(cost) + " ")
             i += 1
     
+    with open(dir_path + r"set_alternates.txt", "w") as f:
+        i = 0
+        for alternate in alternates_matrix:
+            f.write("a" + str(i) + " ")
+            i += 1
+            
+        f.write("\n")
+        
+    with open(dir_path + r"alternates_lower_limits.txt", "w") as f:
+        i = 0
+        for alternate in curr_alternates:
+            f.write("a" + str(i) + " " + str(alternate[1][0]) + " ")
+            i += 1
+            
+        f.write("\n")
+    
+    with open(dir_path + r"alternates_upper_limits.txt", "w") as f:
+        i = 0
+        for alternate in curr_alternates:
+            f.write("a" + str(i) + " " + str(alternate[1][1]) + " ")
+            i += 1
+            
+        f.write("\n")
+    
+    with open(dir_path + r"alternates_matrix.txt", "w") as f:
+        i = 0
+        for alternate in alternates_matrix:
+            f.write("a" + str(i) + " ")
+            i += 1
+            for c in alternate:
+                f.write(str(c) + " ")
+            f.write("\n    ")
+    
     time.sleep(3)
     
     createDat(dir_path, "test" + str(test_num) + ".dat")
     
-main(True, 3)
+main(selected=False, test_num=6)
