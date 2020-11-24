@@ -438,25 +438,34 @@ def time_conflict_matrix_func(course_code_to_variable_name, course_to_index, raw
     days = "MTWRF"
 
     constraint_matrix = []
-    for curr_time in discrete_times:
-        curr_row = [0]*len(possible_courses)
-        for curr_course in possible_courses:
-            course = raw_data["data"]["courses"][curr_course]
-            start_time = course["courseSchedule"][0]["scheduleStartTime"]
-            end_time = course["courseSchedule"][0]["scheduleEndTime"]
+    for curr_time in discrete_times:     
+        
+        for day in days:
+            
+            curr_row = [0]*len(possible_courses)
+        
+            for curr_course in possible_courses:
+                
+                course = raw_data["data"]["courses"][curr_course]
+                for item in course["courseSchedule"]:
+                    
+                    if day in item["scheduleDays"]:
+                
+                        start_time = item["scheduleStartTime"]
+                        end_time = item["scheduleEndTime"]
 
-            # Removing the colon from "hh:mm" and then converting it to an int
-            start_time = int(start_time[0:2] + start_time[3:])
-            end_time = int(end_time[0:2] + end_time[3:])
+                        # Removing the colon from "hh:mm" and then converting it to an int
+                        start_time = int(start_time[0:2] + start_time[3:])
+                        end_time = int(end_time[0:2] + end_time[3:])
 
-            # Not strictly greater than or less than because
-            # courses can take place back to back.
-            after_start_time = curr_time > start_time
-            before_end_time = curr_time < end_time
-            if after_start_time and before_end_time:
-                curr_row[course_to_index[curr_course]] = 1
-
-        constraint_matrix.append(curr_row)
+                        # Not strictly greater than or less than because
+                        # courses can take place back to back.
+                        after_start_time = curr_time > start_time
+                        before_end_time = curr_time < end_time
+                        if after_start_time and before_end_time:
+                            curr_row[course_to_index[curr_course]] = 1
+                
+            constraint_matrix.append(curr_row)
 
     return constraint_matrix
 
