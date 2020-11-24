@@ -9,7 +9,7 @@ import re
 from user.userInputs.previousCourses import all_prev_courses
 from user.userInputs.preferences import myPreferences as preferences
 from user.userInputs.badCourses import bad_courses
-
+from user.userInputs.desiredReqs import curr_hsa_conc
 
 
 # SKELETAL:
@@ -51,7 +51,6 @@ from user.userInputs.badCourses import bad_courses
 
     #     11. Complete electives constraint matrix.
 
-
 ##################################################
 # 1 - Getting all courses that are going to be offered:
 
@@ -66,8 +65,6 @@ def possible_courses():
     """
 
     return list(raw_data["data"]["courses"].keys())
-
-possible_courses = possible_courses()
 
 ###############################################
 # 2 - Only Keep 3 Credit Courses:
@@ -89,9 +86,6 @@ def only_keep_three_credit_classes():
             possible.append(course)
 
     return possible
-
-possible_courses = only_keep_three_credit_classes()
-
 
 #######################
 # 3 - Remove Previously Taken Courses:
@@ -125,8 +119,6 @@ def remove_prev_courses():
 
     return output
 
-possible_courses = remove_prev_courses()
-
 ######################
 # 4 - Remove courses that cannot be taken due to prereqs:
 
@@ -152,8 +144,6 @@ def subject_codes():
                 codes.add(curr_code)
 
     return codes
-
-subject_codes = subject_codes()
 
 # Prereqs Function that only needs to be run once ("untab" the following block):
     # def prereqs():
@@ -286,7 +276,6 @@ subject_codes = subject_codes()
 with open(r"preReqs/all_prereqs_edited.json", encoding="utf-8") as f:
     prereqs_edited = json.load(f)
 
-
 def helper_next_sem_possible_courses_due_to_prereqs(lis):
     """Helper function that checks whether the prereqs for a course have been
     fulfilled
@@ -305,7 +294,6 @@ def helper_next_sem_possible_courses_due_to_prereqs(lis):
             return False
 
     return True
-
 
 def next_sem_possible_courses_due_to_prereqs():
     """Creates list of possible courses according to previously taken courses
@@ -340,23 +328,17 @@ def next_sem_possible_courses_due_to_prereqs():
 
     return possible_courses
 
-
-possible_courses = next_sem_possible_courses_due_to_prereqs()
-
 ######################
 # 5 - Add Courses for Which Permission of Instructor is Obtained
 # (Regardless of Prereqs):
 
 # -TODO:
 
-
 def add_poi_courses():
     pass
 
 #####################
 # 6 - Remove Courses Which Should Never Be Included in the Solution:
-
-# -TODO:
 
 def remove_bad_courses():
     res = []
@@ -379,9 +361,6 @@ def remove_bad_courses():
         #     res.append(course)
     
     return res
-
-possible_courses = remove_bad_courses()
-
 
 ######################
 # 7 - Dictionary of course_name -> var_name and course_name -> var_index
@@ -417,11 +396,6 @@ def course_code_to_variable_and_index():
         j += 1
 
     return course_to_variable_name_dict, course_to_index_dict
-
-course_to_variable_name, course_to_index = course_code_to_variable_and_index()
-
-variable_name_to_course = ({value : key for key, value in
-                            course_to_variable_name.items()})
 
 ##########################
 # 8 - Time Conflict Constraint
@@ -483,26 +457,6 @@ def time_conflict_matrix():
         constraint_matrix.append(curr_row)
 
     return constraint_matrix
-
-time_conflict_matrix = time_conflict_matrix()
-
-
-
-with open(r"amplData\set_timeSlots.txt", "w") as f:
-    i = 0
-    for time in time_conflict_matrix:
-        f.write("t" + str(i) + " ")
-        i += 1
-
-
-with open(r"amplData\time_conflict_matrix.txt", "w") as f:
-    i = 0
-    for time in time_conflict_matrix:
-        f.write("t" + str(i) + " ")
-        i += 1
-        for c in time:
-            f.write(str(c) + " ")
-        f.write("\n    ")
 
 # Same as above function except using numpy for speed
 # ("tab below block unless needed"):
@@ -589,8 +543,6 @@ def dict_w_same_codes():
 
     return same_codes
 
-dict_w_same_codes = dict_w_same_codes()
-
 def no_same_courses_matrix():
     """Creates constraint matrix that ensures that the solution provided
         doesn"t include two courses that are essentially
@@ -623,8 +575,6 @@ def no_same_courses_matrix():
 
     return constraint_matrix
 
-no_same_courses_matrix = no_same_courses_matrix()
-
 with open(r"amplData\set_uniqueCourses.txt", "w") as f:
     i = 0
     for unique in dict_w_same_codes.keys():
@@ -643,7 +593,6 @@ with open(r"amplData\unique_courses_matrix.txt", "w") as f:
 ####################################
 # 11. Requirements Constraint Matrix:
 
-
 hsa_codes = {"DANC", "WRIT", "ORST", "PPA", "DS", "ARBT", "JAPN", "CHNT", "MSL",
             "CASA", "ASIA", "ART", "GWS", "GREK", "GLAS", "LATN", "SPEC",
             "GOVT", "RUST", "HMSC", "SPCH", "CHST", "CREA", "PORT", "LEAD",
@@ -654,10 +603,6 @@ hsa_codes = {"DANC", "WRIT", "ORST", "PPA", "DS", "ARBT", "JAPN", "CHNT", "MSL",
             "CHIN", "SOC", "MOBI", "FLAN", "ECON", "MCSI", "EA", "ANTH",
             "FIN", "EDUC", "PHIL", "GEOL", "RLST", "FWS", "THEA", "IR", "GERM",
             "ID", "ASAM", "HSA", "KORE", "HUM", "AFRI", "PSYC"}
-
-# - TODO: Get this from user input file instead of hardcoding it.
-hsa_concentration = "ECON"
-
 
 def requirements_matrix():
     """Creates matrix that ensures that desired requirements are met.
@@ -791,17 +736,6 @@ def requirements_matrix():
 
     return constraint_matrix
 
-requirements_matrix = requirements_matrix()
-
-with open(r"amplData\requirements_matrix.txt", "w") as f:
-    i = 1
-    for requirement in requirements_matrix:
-        f.write("r" + str(i) + " ")
-        i += 1
-        for c in requirement:
-            f.write(str(c) + " ")
-        f.write("\n    ")
-
 ######################################
 # 12. Costs
 
@@ -846,25 +780,88 @@ def costs():
 
     return costs_row
 
-costs = costs()
-
-#####################################
-with open(r"amplData\course_names.txt", "w") as f:
-    i = 0
-    for c in possible_courses:
-        c = c.replace(" ", "_")
-        f.write(c + " ")
-
-with open(r"amplData\costs_names.txt", "w") as f:
-    i = 0
-    for cost in costs:
-        c = possible_courses[i]
-        c = c.replace(" ", "_")
-        f.write(c + " " + str(cost) + " ")
-        i += 1
-
 ######################################
+ 
+def main():
+    possible_courses = possible_courses()
+    
+    possible_courses = only_keep_three_credit_classes()
+    
+    possible_courses = remove_prev_courses()
+    
+    subject_codes = subject_codes()
+    
+    possible_courses = next_sem_possible_courses_due_to_prereqs()
+    
+    possible_courses = remove_bad_courses()
+    
+    course_to_variable_name, course_to_index = course_code_to_variable_and_index()
+    
+    variable_name_to_course = ({value : key for key, value in
+                            course_to_variable_name.items()})
+    
+    time_conflict_matrix = time_conflict_matrix()
+    
+    dict_w_same_codes = dict_w_same_codes()
+    
+    no_same_courses_matrix = no_same_courses_matrix()
+
+    hsa_concentration = curr_hsa_conc
+    
+    requirements_matrix = requirements_matrix()
+
+    costs = costs()
 
     
+    with open(r"amplData\set_timeSlots.txt", "w") as f:
+        i = 0
+        for time in time_conflict_matrix:
+            f.write("t" + str(i) + " ")
+            i += 1
+
+    with open(r"amplData\time_conflict_matrix.txt", "w") as f:
+        i = 0
+        for time in time_conflict_matrix:
+            f.write("t" + str(i) + " ")
+            i += 1
+            for c in time:
+                f.write(str(c) + " ")
+            f.write("\n    ")
+            
+    with open(r"amplData\set_uniqueCourses.txt", "w") as f:
+        i = 0
+        for unique in dict_w_same_codes.keys():
+            f.write("c" + str(i) + " ")
+            i += 1
+
+    with open(r"amplData\unique_courses_matrix.txt", "w") as f:
+        i = 0
+        for mainCourse in no_same_courses_matrix:
+            f.write("c" + str(i) + " ")
+            i += 1
+            for c in mainCourse:
+                f.write(str(c) + " ")
+            f.write("\n    ")
+            
+    with open(r"amplData\requirements_matrix.txt", "w") as f:
+        i = 1
+        for requirement in requirements_matrix:
+            f.write("r" + str(i) + " ")
+            i += 1
+            for c in requirement:
+                f.write(str(c) + " ")
+            f.write("\n    ")
     
-        
+    with open(r"amplData\course_names.txt", "w") as f:
+        i = 0
+        for c in possible_courses:
+            c = c.replace(" ", "_")
+            f.write(c + " ")
+
+    with open(r"amplData\costs_names.txt", "w") as f:
+        i = 0
+        for cost in costs:
+            c = possible_courses[i]
+            c = c.replace(" ", "_")
+            f.write(c + " " + str(cost) + " ")
+            i += 1

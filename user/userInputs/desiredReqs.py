@@ -11,7 +11,9 @@
     9. HSA Mudd Humms
     10. HSA General
 """
-    
+
+shaurya_hsa_conc = "ECON"
 shaurya_desired_reqs = "r1 0 r2 0 r3 0 r4 0 r5 1 r6 1 r7 1 r8 0 r9 1 r10 1"
 
 curr_desired_reqs = shaurya_desired_reqs
+curr_hsa_conc = shaurya_desired_reqs
