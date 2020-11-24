@@ -4,7 +4,7 @@ import re
 ##################################################
 # 1 - Getting all courses that are going to be offered:
 
-with open(r"rawData/course_data.json", encoding="utf-8") as f:
+with open(r"../rawData/course_data.json", encoding="utf-8") as f:
     rawData = json.load(f)
 
 def possible_courses():
@@ -20,7 +20,7 @@ possible_courses = possible_courses()
 
 ###############################################
 
-with open(r"preReqs/prereqs_edited_by_hand.json", encoding="utf-8") as f:
+with open(r"prereqs1_edited_by_hand.json", encoding="utf-8") as f:
     prereqs_edited = json.load(f)
     
 

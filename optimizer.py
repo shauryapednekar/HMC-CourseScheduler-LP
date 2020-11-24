@@ -41,12 +41,6 @@ from user.userInputs.preferences import myPreferences as preferences
 
     #     --- Constraints ---
 
-    #     7. Complete min enrollment constraint matrix:
-    #         Ax >= 4 ;   A is just one row with all 1s
-
-    #     8. Complete max enrollment constraint matrix:
-    #         Ax <= 6;    A is just one row with all 1s
-
     #     9. Complete time conflict constraint matrix.
     #         Ax <= 1;     each row of A represents a discrete point in time
 
@@ -287,7 +281,7 @@ subject_codes = subject_codes()
     # with open(r"preReqs/prereqs.json", "w") as fp:
     #     json.dump(prereqs(), fp, indent=4)
 
-with open(r"preReqs/prereqs_edited_by_hand.json", encoding="utf-8") as f:
+with open(r"preReqs/all_prereqs_edited.json", encoding="utf-8") as f:
     prereqs_edited = json.load(f)
 
 
@@ -613,7 +607,7 @@ with open(r"amplData\set_uniqueCourses.txt", "w") as f:
         f.write("c" + str(i) + " ")
         i += 1
 
-with open(r"amplData\no_same_courses_matrix.txt", "w") as f:
+with open(r"amplData\unique_courses_matrix.txt", "w") as f:
     i = 0
     for mainCourse in no_same_courses_matrix:
         f.write("c" + str(i) + " ")
@@ -837,11 +831,6 @@ with open(r"amplData\course_names.txt", "w") as f:
         c = c.replace(" ", "_")
         f.write(c + " ")
 
-with open(r"amplData\courses.txt", "w") as f:
-    i = 0
-    for c in possible_courses:
-        f.write(str(course_to_variable_name[c]) + " ")
-
 with open(r"amplData\costs_names.txt", "w") as f:
     i = 0
     for cost in costs:
@@ -850,9 +839,4 @@ with open(r"amplData\costs_names.txt", "w") as f:
         f.write(c + " " + str(cost) + " ")
         i += 1
 
-with open(r"amplData\costs.txt", "w") as f:
-    i = 0
-    for cost in costs:
-        f.write("x" + str(i) + " " + str(cost) + " ")
-        i += 1
 ######################################
