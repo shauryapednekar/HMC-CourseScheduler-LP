@@ -34,7 +34,7 @@ from user.userInputs.preferences import myPreferences as preferences
     #             + "all_prev_courses" + "prereq_courses" (all unique)
 
     #     --- By this time, we will have:
-    #         - "rawData" [dict]
+    #         - "raw_data" [dict]
     #         - "possible_courses" [list]
     #         - "course_to_variable_name" [dict]
     #         - "course_to_index" [dict]
@@ -61,7 +61,7 @@ from user.userInputs.preferences import myPreferences as preferences
 # 1 - Getting all courses that are going to be offered:
 
 with open(r"rawData/course_data.json", encoding="utf-8") as f:
-    rawData = json.load(f)
+    raw_data = json.load(f)
 
 def possible_courses():
     """Nothing
@@ -70,7 +70,7 @@ def possible_courses():
         list: all courses (complete course code) being offered
     """
 
-    return list(rawData["data"]["courses"].keys())
+    return list(raw_data["data"]["courses"].keys())
 
 possible_courses = possible_courses()
 
@@ -81,16 +81,16 @@ def only_keep_three_credit_classes():
     """Removes all half credit/PE courses.
 
     Global Variables Needed:
-        rawData (dict, optional): Defaults to rawData.
+        raw_data (dict, optional): Defaults to raw_data.
         possible_courses (list, optional): Defaults to possible_courses.
 
     Returns:
         list: possible three credit courses
     """
-    possible=[]
+    possible = []
 
     for course in possible_courses:
-        if rawData["data"]["courses"][course]["courseCredits"] == "3.0":
+        if raw_data["data"]["courses"][course]["courseCredits"] == "3.0":
             possible.append(course)
 
     return possible
@@ -165,7 +165,7 @@ subject_codes = subject_codes()
 
     #     Global Variables Needed:
     #         possible_courses (list, optional): Defaults to possible_courses.
-    #         rawData (dict, optional): Defaults to rawData.
+    #         raw_data (dict, optional): Defaults to raw_data.
     #         subject_codes (set, optional): Defaults to subject_codes.
 
     #     Returns:
@@ -178,7 +178,7 @@ subject_codes = subject_codes()
     #     course_to_prereqs = {}
 
     #     for course in possible_courses:
-    #         description = (rawData["data"]["courses"][course]
+    #         description = (raw_data["data"]["courses"][course]
     # ["courseDescription"])
     #         if not description:
     #             prereqs = ""
@@ -333,8 +333,7 @@ def next_sem_possible_courses_due_to_prereqs():
             # If prereqs are fulfilled, True will be present in temp
             # Otherwise, it will be only False values
 
-            temp = ([helper_next_sem_possible_courses_due_to_prereqs
-                     (prereq)
+            temp = ([helper_next_sem_possible_courses_due_to_prereqs (prereq)
                     for prereq in curr_prereqs])
             if True in temp:
                 list_of_possible_courses.append(course)
@@ -383,11 +382,11 @@ def course_code_to_variable_and_index():
                 - course_to_variable_name: dict that maps complete course code
                 to a variable of the format "xi" where "i" is the variable
                 number
-                
+
                 - course_to_index: dict that maps complete_course_code to int i,
                   where i equals corresponding variable name in
                   course_to_variable_name
-                  
+
     """
 
     course_to_variable_name_dict = {}
@@ -403,7 +402,7 @@ def course_code_to_variable_and_index():
 
 course_to_variable_name, course_to_index = course_code_to_variable_and_index()
 
-variable_name_to_course = ({value:key for key, value in
+variable_name_to_course = ({value : key for key, value in
                             course_to_variable_name.items()})
 
 ##########################
@@ -417,7 +416,7 @@ def time_conflict_matrix():
         course_to_variable_name (dict, optional):
         Defaults to course_to_variable_name.
         course_to_index (dict, optional): Defaults to course_to_index.
-        rawData (dict, optional): Defaults to rawData.
+        raw_data (dict, optional): Defaults to raw_data.
         possible_courses (list, optional): Defaults to possible_courses.
 
     Returns:
@@ -448,7 +447,7 @@ def time_conflict_matrix():
     for curr_time in discrete_times:
         curr_row = [0]*len(possible_courses)
         for curr_course in possible_courses:
-            course = rawData["data"]["courses"][curr_course]
+            course = raw_data["data"]["courses"][curr_course]
             start_time = course["courseSchedule"][0]["scheduleStartTime"]
             end_time = course["courseSchedule"][0]["scheduleEndTime"]
 
@@ -472,17 +471,17 @@ time_conflict_matrix = time_conflict_matrix()
 
 
 with open(r"amplData\timeSlots.txt", "w") as f:
-    i=0
+    i = 0
     for time in time_conflict_matrix:
         f.write("t" + str(i) + " ")
-        i+=1
+        i += 1
 
 
 with open(r"amplData\time_conflict_matrix.txt", "w") as f:
-    i=0
+    i = 0
     for time in time_conflict_matrix:
         f.write("t" + str(i) + " ")
-        i+=1
+        i += 1
         for c in time:
             f.write(str(c) + " ")
         f.write("\n")
@@ -497,7 +496,7 @@ with open(r"amplData\time_conflict_matrix.txt", "w") as f:
     #         course_to_variable_name (dict, optional):
     #         Defaults to course_to_variable_name.
     #         course_to_index (dict, optional): Defaults to course_to_index.
-    #         rawData (dict, optional): Defaults to rawData.
+    #         raw_data (dict, optional): Defaults to raw_data.
     #         possible_courses (list, optional): Defaults to possible_courses.
 
     #     Returns:
@@ -529,7 +528,7 @@ with open(r"amplData\time_conflict_matrix.txt", "w") as f:
 
     #     for curr_time in discrete_times:
     #         for curr_course in possible_courses:
-    #             course = rawData["data"]["courses"][curr_course]
+    #             course = raw_data["data"]["courses"][curr_course]
     #             start_time = course["courseSchedule"][0]["scheduleStartTime"]
     #             end_time = course["courseSchedule"][0]["scheduleEndTime"]
 
@@ -609,16 +608,16 @@ def no_same_courses_matrix():
 no_same_courses_matrix = no_same_courses_matrix()
 
 with open(r"amplData\set_uniqueCourses.txt", "w") as f:
-    i=0
+    i = 0
     for unique in dict_w_same_codes.keys():
         f.write("c" + str(i) + " ")
-        i+=1
+        i += 1
 
 with open(r"amplData\no_same_courses_matrix.txt", "w") as f:
-    i=0
+    i = 0
     for mainCourse in no_same_courses_matrix:
         f.write("c" + str(i) + " ")
-        i+=1
+        i += 1
         for c in mainCourse:
             f.write(str(c) + " ")
         f.write("\n")
@@ -627,16 +626,16 @@ with open(r"amplData\no_same_courses_matrix.txt", "w") as f:
 # 11. Requirements Constraint Matrix:
 
 
-hsaCodes = {"DANC", "WRIT", "ORST", "PPA", "DS", "ARBT", "JAPN", "CHNT", "MSL",
+hsa_codes = {"DANC", "WRIT", "ORST", "PPA", "DS", "ARBT", "JAPN", "CHNT", "MSL",
             "CASA", "ASIA", "ART", "GWS", "GREK", "GLAS", "LATN", "SPEC",
             "GOVT", "RUST", "HMSC", "SPCH", "CHST", "CREA", "PORT", "LEAD",
             "ARCN", "SPAN", "ITAL", "MLLC", "MES", "MS", "PPE", "RLIT", "LGST",
             "POST", "LAST", "FREN", "RUSS", "STS", "GEOG", "GRMT", "ARBC",
             "FHS", "AMST", "POLI", "ARHI", "MUS", "MENA", "LGCS", "CLAS",
             "KRNT", "LIT", "JPNT", "ENGL", "MCBI", "CGS", "FS", "HIST", "CHLT",
-            "CHIN", "SOC", "MOBI", "FLAN",  "ECON", "MCSI", "EA", "ANTH",
+            "CHIN", "SOC", "MOBI", "FLAN", "ECON", "MCSI", "EA", "ANTH",
             "FIN", "EDUC", "PHIL", "GEOL", "RLST", "FWS", "THEA", "IR", "GERM",
-            "ID", "ASAM", "HSA", "KORE", "HUM", "AFRI", "PSYC", }
+            "ID", "ASAM", "HSA", "KORE", "HUM", "AFRI", "PSYC"}
 
 # - TODO: Get this from user input file instead of hardcoding it.
 hsa_concentration = "ECON"
@@ -666,7 +665,7 @@ def requirements_matrix():
         dict_w_same_codes ([type], optional): Defaults to dict_w_same_codes.
         course_to_index ([type], optional): Defaults to course_to_index.
         possible_courses ([type], optional): Defaults to possible_courses.
-        hsaCodes ([type], optional): Defaults to hsaCodes.
+        hsa_codes ([type], optional): Defaults to hsa_codes.
         hsaConcentration ([type], optional): Defaults to hsaConcentration.
         all_prev_courses ([type], optional): Defaults to all_prev_courses.
 
@@ -711,23 +710,23 @@ def requirements_matrix():
             curr_code = curr_code.group(0)
 
         # First Row: Four Kernel Courses in Computer Science and Mathematics
-        if ((course[0:8]=="MATH 055") or
-            (course[0:8]=="CSCI 060") or
-            (course[0:8]=="CSCI081") or
-            (course[0:8]=="CSCI 140")):
+        if ((course[0:8] == "MATH 055") or
+            (course[0:8] == "CSCI 060") or
+            (course[0:8] == "CSCI081") or
+            (course[0:8] == "CSCI 140")):
 
             first_row[course_to_index[course]] = 1
 
         # Second Row: Two Computer Science Courses
-        elif (course[0:8]=="CSCI 070") or (course[0:8]=="CSCI 131"):
+        elif (course[0:8] == "CSCI 070") or (course[0:8] == "CSCI 131"):
             second_row[course_to_index[course]] = 1
 
         # Third Row: Two Mathematics Courses
-        elif (course[0:8]== "MATH 131") or (course[0:8]=="MATH 171"):
+        elif (course[0:8]== "MATH 131") or (course[0:8] == "MATH 171"):
             third_row[course_to_index[course]] = 1
 
         # Fourth Row: Clinic
-        elif (course[0:8]== "CSMT 183") or (course[0:8]=="CSMT 184"):
+        elif (course[0:8]== "CSMT 183") or (course[0:8] == "CSMT 184"):
             fourth_row[course_to_index[course]] = 1
 
         # Fifth Row: Math courses above 100
@@ -737,11 +736,11 @@ def requirements_matrix():
 
         # Sixth Row: CS courses above 100
         # (TODO: need to remove "strange" courses):
-        elif course[0:6]=="CSCI 1":
+        elif course[0:6] == "CSCI 1":
             sixth_row[course_to_index[course]] = 1
 
         # HSA Requirements:
-        if curr_code in hsaCodes:
+        if curr_code in hsa_codes:
 
             # Seventh Row: HSA Breadth Requirement
             if curr_code != hsa_concentration:
@@ -777,10 +776,10 @@ def requirements_matrix():
 requirements_matrix = requirements_matrix()
 
 with open(r"amplData\requirements_matrix.txt", "w") as f:
-    i=1
+    i = 1
     for requirement in requirements_matrix:
         f.write("r" + str(i) + " ")
-        i+=1
+        i += 1
         for c in requirement:
             f.write(str(c) + " ")
         f.write("\n")
@@ -812,15 +811,15 @@ def costs():
         # Default costs for courses
         else:
             # CS Courses = Cost of 5
-            if course[0:4]=="CSCI":
+            if course[0:4] == "CSCI":
                 costs_row[course_to_index[course]] = 5
 
             # Math Courses = Cost of 4
-            elif course[0:4]=="MATH":
+            elif course[0:4] == "MATH":
                 costs_row[course_to_index[course]] = 4
 
             # Philosophy Courses = Cost of 3
-            elif course[0:4]=="PHIL":
+            elif course[0:4] == "PHIL":
                 costs_row[course_to_index[course]] = 3
 
             # All other courses = Cost of 2
@@ -833,27 +832,27 @@ costs = costs()
 
 #####################################
 with open(r"amplData\course_names.txt", "w") as f:
-    i=0
+    i = 0
     for c in possible_courses:
         c = c.replace(" ", "_")
         f.write(c + " ")
 
 with open(r"amplData\courses.txt", "w") as f:
-    i=0
+    i = 0
     for c in possible_courses:
         f.write(str(course_to_variable_name[c]) + " ")
 
 with open(r"amplData\costs_names.txt", "w") as f:
-    i=0
+    i = 0
     for cost in costs:
         c = possible_courses[i]
         c = c.replace(" ", "_")
         f.write(c + " " + str(cost) + " ")
-        i+=1
+        i += 1
 
 with open(r"amplData\costs.txt", "w") as f:
-    i=0
+    i = 0
     for cost in costs:
         f.write("x" + str(i) + " " + str(cost) + " ")
-        i+=1
+        i += 1
 ######################################
