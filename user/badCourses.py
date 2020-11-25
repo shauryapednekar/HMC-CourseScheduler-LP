@@ -1,3 +1,5 @@
+# Courses that shouldnt appear in the solution
+
 shaurya_bad_courses = set()
 shaurya_bad_courses = {
     "CSCI_181V_PO-01",
