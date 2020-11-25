@@ -1319,7 +1319,7 @@
   "CSCI 144 HM-01": [
     ["MATH 65 and CSCI 60 or 42."],
     ["MATH 065", "CSCI 060"],
-    [["MATH 065", "CSCI 042"]]
+    ["MATH 065", "CSCI 042"]
   ],
   "CSCI 151 HM-01": [["CSCI 70 and MATH 35."], ["MATH 035", "CSCI 070"]],
   "CSCI 152 HM-01": [
@@ -1897,10 +1897,9 @@
     [
       "PHYS033L, PHYS034L, or both semesters of the AISS course (AISS001AL, AISS001BL, AISS002AL, AISS002BL) or PHYS030L, PHYS031L; and MATH030, MATH031."
     ],
-    [
-      ["PHYS 033L", "PHYS 034L", "MATH 030", "MATH 031"],
-      ["PHYS 030L", "PHYS 031L", "MATH 030", "MATH 031"]
-    ]
+
+    ["PHYS 033L", "PHYS 034L", "MATH 030", "MATH 031"],
+    ["PHYS 030L", "PHYS 031L", "MATH 030", "MATH 031"]
   ],
   "PHYS 102 KS-01": [["PHYS035, MATH032."], ["MATH 032", "PHYS 035"]],
   "PHYS 105 KS-01": [

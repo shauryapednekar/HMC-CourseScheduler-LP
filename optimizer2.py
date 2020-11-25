@@ -305,27 +305,30 @@ def next_sem_possible_courses_due_to_prereqs(all_prev_courses, possible_courses)
 
     list_of_possible_courses = []
 
-    for course in list_of_possible_courses:
-
+    for course in possible_courses:
+    
         # If the course has prereqs
         if course in prereqs_edited:
-            curr_prereqs = prereqs_edited[course][1:]
-            if ["POI"] in curr_prereqs:
-                curr_prereqs.remove(["POI"])
+            
+                curr_prereqs = prereqs_edited[course][1:]
+                if ["POI"] in curr_prereqs:
+                    curr_prereqs.remove(["POI"])
 
-            # If prereqs are fulfilled, True will be present in temp
-            # Otherwise, it will be only False values
+                # If prereqs are fulfilled, True will be present in temp
+                # Otherwise, it will be only False values
 
-            temp = ([helper_next_sem_possible_courses_due_to_prereqs (prereq, all_prev_courses)
-                    for prereq in curr_prereqs])
-            if True in temp:
-                list_of_possible_courses.append(course)
+                temp = ([helper_next_sem_possible_courses_due_to_prereqs (prereq, all_prev_courses)
+                        for prereq in curr_prereqs])
+                
+                if True in temp:
+                    list_of_possible_courses.append(course)
+                
 
         # If the course does not have prereqs
         else:
             list_of_possible_courses.append(course)
 
-    return possible_courses
+    return list_of_possible_courses
 
 ######################
 # 5 - Add Courses for Which Permission of Instructor is Obtained
