@@ -4,6 +4,7 @@ import json
 import time
 import re
 import os
+import numpy as np
 
 # User Inputs Needed
 from user.previousCourses import all_prev_courses
@@ -12,6 +13,7 @@ from user.badCourses import bad_courses
 from user.desiredReqs import curr_hsa_conc
 from user.desiredReqs import curr_desired_reqs
 from user.alternates import curr_alternates
+from user.desiredReqs import curr_major
 
 
 # All Functions
@@ -166,4 +168,4 @@ def main(selected=False, test_num=0, major="CS-Math"):
     
     createDat(dir_path, "test" + str(test_num) + ".dat")
     
-main(selected=False, test_num=7)
+main(selected=False, test_num=8)

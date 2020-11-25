@@ -4,7 +4,7 @@
         "amst",
         "anth"
     ],
-    "python.pythonPath": "C:\\Python38\\python.exe",
+    "python.pythonPath": "venv\\Scripts\\python.exe",
     "restructuredtext.linter.disabled": true,
     "restructuredtext.preview.sphinx.disabled": true
 }

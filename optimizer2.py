@@ -4,9 +4,11 @@ import json
 import time
 import re
 import os
+import numpy as np
 
 # # User Input Needed
 from user.desiredReqs import curr_desired_reqs
+from user.desiredReqs import curr_major
 
 
 # SKELETAL:
@@ -596,6 +598,230 @@ hsa_codes = {"DANC", "WRIT", "ORST", "PPA", "DS", "ARBT", "JAPN", "CHNT", "MSL",
             "FIN", "EDUC", "PHIL", "GEOL", "RLST", "FWS", "THEA", "IR", "GERM",
             "ID", "ASAM", "HSA", "KORE", "HUM", "AFRI", "PSYC"}
 
+# Majors:
+
+# CS-MATH Major
+def cs_math_major_reqs_matrix_func(possible_courses,
+                           all_prev_courses, 
+                           dict_w_same_codes, 
+                           course_to_index):
+    
+    num_rows = 6 # 6 requirements for the CS-math major
+    
+    constraint_matrix = np.zeros(shape=(num_rows, len(possible_courses)), dtype=int)   
+
+    for course in possible_courses:
+        curr_code = re.search(r"[^\s]+", course)
+        if curr_code:
+            curr_code = curr_code.group(0)
+
+        # First Row: Four Kernel Courses in Computer Science and Mathematics
+        if ((course[0:8] == "MATH 055") or
+            (course[0:8] == "CSCI 060") or
+            (course[0:8] == "CSCI 081") or
+            (course[0:8] == "CSCI 140")):
+
+            contraint_matrix[0][course_to_index[course]] = 1
+        
+        # Second Row: Two Computer Science Courses
+        elif (course[0:8] == "CSCI 070") or (course[0:8] == "CSCI 131"):
+            constraint_matrix[1][course_to_index[course]] = 1
+
+        
+        # Third Row: Two Mathematics Courses
+        elif (course[0:8]== "MATH 131") or (course[0:8] == "MATH 171"):
+            constraint_matrix[2][course_to_index[course]] = 1
+
+        # Fourth Row: Clinic
+        elif (course[0:8]== "CSMT 183") or (course[0:8] == "CSMT 184"):
+            constraint_matrix[3][course_to_index[course]] = 1
+
+        # Fifth Row: Math courses above 100
+        # (TODO: need to remove "strange" courses)
+        elif course[0:6]== "MATH 1":
+            constraint_matrix[4][course_to_index[course]] = 1
+
+        # Sixth Row: CS courses above 100
+        # (TODO: need to remove "strange" courses):
+        elif course[0:6] == "CSCI 1":
+            constraint_matrix[5][course_to_index[course]] = 1
+
+    
+    return list(constraint_matrix)
+
+
+# CS Major
+def cs_major_reqs_matrix_func(possible_courses,
+                           all_prev_courses, 
+                           dict_w_same_codes, 
+                           course_to_index):
+    
+    num_rows = 4 # 4 requirements for the CS major
+    
+    constraint_matrix = np.zeros(shape=(num_rows, len(possible_courses)), dtype=int)   
+
+    for course in possible_courses:
+        curr_code = re.search(r"[^\s]+", course)
+        if curr_code:
+            curr_code = curr_code.group(0)
+ 
+        cs_foundation_requirement_courses = {
+            "CSCI 060",
+            "CSCI 042",
+            "MATH 055",
+            "CSCI 070",
+            "CSCI 081",
+        }
+     
+        cs_kernel_requirement_courses = {
+            "CSCI 105",
+            "CSCI 121",
+            "CSCI 131",
+            "CSCI 140"
+        }
+   
+        cs_not_elective_requirement_courses = {
+            "CSCI 195",
+            "CSCI 192",
+            "CSCI 191",
+            "CSCI 190",
+            "CSCI 189",
+            "CSCI 188",
+            "CSCI 184",
+            "CSCI 183"
+        }
+        
+        # First Row: CS Foundation Requirement
+        if course[0:8] in cs_foundation_requirement_courses:
+            contraint_matrix[0][course_to_index[course]] = 1
+        
+        # Second Row: CS Kernel Requirement
+        elif course[0:8] in cs_kernel_requirement_courses:
+            constraint_matrix[1][course_to_index[course]] = 1
+
+        # Third Row: CS Elective Requirement
+        # CS courses above 100
+        elif (course[0:6] == "CSCI 1") and (course[0:8] not in cs_not_elective_requirement_courses):
+            constraint_matrix[2][course_to_index[course]] = 1
+            
+        # Fourth Row: Clinic
+        elif (course[0:8]== "CSMT 183") or (course[0:8] == "CSMT 184"):
+            constraint_matrix[3][course_to_index[course]] = 1
+
+    return list(constraint_matrix)
+
+# ENGR Major
+def engr_major_reqs_matrix_func(possible_courses,
+                           all_prev_courses, 
+                           dict_w_same_codes, 
+                           course_to_index):
+    
+    num_rows = 5 # 5 requirements for the Engr major
+    
+    constraint_matrix = np.zeros(shape=(num_rows, len(possible_courses)), dtype=int)   
+
+    for course in possible_courses:
+        curr_code = re.search(r"[^\s]+", course)
+        if curr_code:
+            curr_code = curr_code.group(0)
+        
+        
+        engr_design_requirement_courses = {
+            "ENGR 004",
+            "ENGR 080"
+        }
+        
+        engr_systems_requirement_courses = {
+            "ENGR 079",
+            "ENGR 101",
+            "ENGR 102"
+        }
+        
+        engr_science_requirement_courses = {
+            "ENGR 082",
+            "ENGR 083",
+            "ENGR 084",
+            "ENGR 085",
+            "ENGR 086"
+        }
+        
+        engr_clinic_courses = {
+            "ENGR 111",
+            "ENGR 112",
+            "ENGR 113"
+        }
+        
+        # First Row: Engineering Design Requirement (w/o clinic)
+        if course[0:8] in engr_design_requirement_courses:
+            contraint_matrix[0][course_to_index[course]] = 1
+        
+        # Second Row: Engineering Systems Requirement
+        elif course[0:8] in engr_systems_requirement_courses:
+            constraint_matrix[1][course_to_index[course]] = 1
+        
+        # Third Row: Engr Science Requirement (e72 not added since its a half sem course)
+        elif course[0:8] in engr_science_requirement_courses:
+            constraint_matrix[2][course_to_index[course]] = 1
+            
+        # Fourth Row: Clinic
+        elif course[0:8] in engr_science_requirement_courses:
+            constraint_matrix[3][course_to_index[course]] = 1        
+        
+        # Fifth Row: Electives
+        elif course[0:4] == "ENGR":
+            constraint_matrix[4][course_to_index[course]] = 1
+
+    return list(constraint_matrix)
+
+# HSA:
+def hsa_reqs_matrix(possible_courses, all_prev_courses, dict_w_same_codes, course_to_index, hsa_codes, hsa_concentration):
+    
+    # Needed for HSA breadth requirement
+    prev_course_codes = set()
+    for course in all_prev_courses:
+        curr_code = re.search(r"[^\s]+", course)
+        if curr_code:
+            curr_code = curr_code.group(0)
+            if curr_code not in prev_course_codes:
+                prev_course_codes.add(curr_code)
+
+
+    num_of_courses = len(possible_courses)
+    
+    hsa_constraint_matrix = np.zeros(shape=(4, num_of_courses), dtype=int)
+
+    for course in possible_courses:
+        curr_code = re.search(r"[^\s]+", course)
+        
+        if curr_code:
+            curr_code = curr_code.group(0)
+
+        # HSA Requirements (this stays the same for all majors):
+        if curr_code in hsa_codes:
+
+            # Seventh Row: HSA Breadth Requirement
+            if curr_code != hsa_concentration:
+                if curr_code not in prev_course_codes:
+                    hsa_constraint_matrix[0][course_to_index[course]] = 1
+
+            # Eight Row: HSA Concentration Requirement
+            else:
+                hsa_constraint_matrix[1][course_to_index[course]] = 1
+
+            # Ninth Row: HSA Mudd Hum Requirement
+            t = course.split(" ")
+            if t[2][0:2] == "HM":
+                hsa_constraint_matrix[2][course_to_index[course]] = 1
+
+            # Tenth Row: HSA General Requirement
+            hsa_constraint_matrix[3][course_to_index[course]] = 1
+
+    return list(hsa_constraint_matrix)
+
+    
+
+# All Reqs:
+
 def requirements_matrix_func(possible_courses, all_prev_courses, dict_w_same_codes, course_to_index, hsa_codes, hsa_concentration):
     """Creates matrix that ensures that desired requirements are met.
 
@@ -628,105 +854,18 @@ def requirements_matrix_func(possible_courses, all_prev_courses, dict_w_same_cod
         List of lists: 2-D Matrix where each row represents a
         specific requirement and each column represents a specific course
     """
-
-    # Needed for HSA breadth requirement
-    prev_course_codes = set()
-    for course in all_prev_courses:
-        curr_code = re.search(r"[^\s]+", course)
-        if curr_code:
-            curr_code = curr_code.group(0)
-            if curr_code not in prev_course_codes:
-                prev_course_codes.add(curr_code)
-
-
-    num_of_courses = len(possible_courses)
-
-    # constraint_matrix will be very specific to CS-Math majors,
-    # I need to think about how I"ll manage to do it in general.
-    constraint_matrix = []
-
-
-    # First Row: Four Kernel Courses in Computer Science and Mathematics
-    # - TODO: This can be optimized for space.
-    first_row = [0]*num_of_courses
-    second_row = [0]*num_of_courses
-    third_row = [0]*num_of_courses
-    fourth_row = [0]*num_of_courses
-    fifth_row = [0]*num_of_courses
-    sixth_row = [0]*num_of_courses
-    seventh_row = [0]*num_of_courses
-    eigth_row = [0]*num_of_courses
-    ninth_row = [0]*num_of_courses
-    tenth_row = [0]*num_of_courses
-
-    for course in possible_courses:
-        curr_code = re.search(r"[^\s]+", course)
-        if curr_code:
-            curr_code = curr_code.group(0)
-
-        # First Row: Four Kernel Courses in Computer Science and Mathematics
-        if ((course[0:8] == "MATH 055") or
-            (course[0:8] == "CSCI 060") or
-            (course[0:8] == "CSCI081") or
-            (course[0:8] == "CSCI 140")):
-
-            first_row[course_to_index[course]] = 1
-
-        # Second Row: Two Computer Science Courses
-        elif (course[0:8] == "CSCI 070") or (course[0:8] == "CSCI 131"):
-            second_row[course_to_index[course]] = 1
-
-        # Third Row: Two Mathematics Courses
-        elif (course[0:8]== "MATH 131") or (course[0:8] == "MATH 171"):
-            third_row[course_to_index[course]] = 1
-
-        # Fourth Row: Clinic
-        elif (course[0:8]== "CSMT 183") or (course[0:8] == "CSMT 184"):
-            fourth_row[course_to_index[course]] = 1
-
-        # Fifth Row: Math courses above 100
-        # (TODO: need to remove "strange" courses)
-        elif course[0:6]== "MATH 1":
-            fifth_row[course_to_index[course]] = 1
-
-        # Sixth Row: CS courses above 100
-        # (TODO: need to remove "strange" courses):
-        elif course[0:6] == "CSCI 1":
-            sixth_row[course_to_index[course]] = 1
-
-        # HSA Requirements:
-        if curr_code in hsa_codes:
-
-            # Seventh Row: HSA Breadth Requirement
-            if curr_code != hsa_concentration:
-                if curr_code not in prev_course_codes:
-                    seventh_row[course_to_index[course]] = 1
-
-            # Eight Row: HSA Concentration Requirement
-            else:
-                eigth_row[course_to_index[course]] = 1
-
-            # Ninth Row: HSA Mudd Hum Requirement
-            t = course.split(" ")
-            if t[2][0:2] == "HM":
-                ninth_row[course_to_index[course]] = 1
-
-            # Tenth Row: HSA General Requirement
-            tenth_row[course_to_index[course]] = 1
-
-
-    constraint_matrix.append(first_row)
-    constraint_matrix.append(second_row)
-    constraint_matrix.append(third_row)
-    constraint_matrix.append(fourth_row)
-    constraint_matrix.append(fifth_row)
-    constraint_matrix.append(sixth_row)
-    constraint_matrix.append(seventh_row)
-    constraint_matrix.append(eigth_row)
-    constraint_matrix.append(ninth_row)
-    constraint_matrix.append(tenth_row)
-
-    return constraint_matrix
+    major_matrix = []
+    
+    if curr_major == "CS-MATH":
+        major_matrix = cs_math_major_reqs_matrix_func(possible_courses, all_prev_courses, dict_w_same_codes, course_to_index)
+    
+    if curr_major == "CS":
+        major_matrix = cs_major_reqs_matrix_func(possible_courses, all_prev_courses, dict_w_same_codes, course_to_index)
+        
+        
+    hsa_matrix = hsa_reqs_matrix(possible_courses, all_prev_courses, dict_w_same_codes, course_to_index, hsa_codes, hsa_concentration)
+    
+    return major_matrix + hsa_matrix
 
 ######################################
 # 12. Costs
