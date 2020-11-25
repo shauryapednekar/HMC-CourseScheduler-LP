@@ -1,0 +1,6 @@
+model 'C:\Users\Shaurya\Desktop\math187_project\amplFiles\model.mod'; 
+data C:\Users\Shaurya\Desktop\math187_project\amplFiles\test13.dat;
+option solver './cplex';
+solve;
+option omit_zero_rows 1;
+display x;

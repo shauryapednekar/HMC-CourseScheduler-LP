@@ -818,8 +818,6 @@ def hsa_reqs_matrix(possible_courses, all_prev_courses, dict_w_same_codes, cours
 
     return list(hsa_constraint_matrix)
 
-    
-
 # All Reqs:
 
 def requirements_matrix_func(possible_courses, all_prev_courses, dict_w_same_codes, course_to_index, hsa_codes, hsa_concentration):
@@ -861,7 +859,9 @@ def requirements_matrix_func(possible_courses, all_prev_courses, dict_w_same_cod
     
     if curr_major == "CS":
         major_matrix = cs_major_reqs_matrix_func(possible_courses, all_prev_courses, dict_w_same_codes, course_to_index)
-        
+    
+    if curr_major == "ENGR":
+        major_matrix = engr_major_reqs_matrix_func(possible_courses, all_prev_courses, dict_w_same_codes, course_to_index)
         
     hsa_matrix = hsa_reqs_matrix(possible_courses, all_prev_courses, dict_w_same_codes, course_to_index, hsa_codes, hsa_concentration)
     
@@ -1049,5 +1049,29 @@ def createDat(dir_path, filename):
 
     with open(r'./amplFiles/' + filename, 'w') as fp:
         fp.write(res)
+
+#####################################
+
+def create_ampl_command(dat_filename):
+    
+    data_file = '\\' + dat_filename + ".dat"
+    
+    ampl_mod_command = r"model 'C:\Users\Shaurya\Desktop\math187_project\amplFiles\model.mod'; "
+
+    ampl_dat_command = r"data C:\Users\Shaurya\Desktop\math187_project\amplFiles" + data_file + r";"
+
+    ampl_solve_command = r"solve;"
+
+    ampl_option_command = r"option omit_zero_rows 1;"
+
+    ampl_solver_command = r"option solver './cplex';"
+
+    ampl_display_command = r"display x;"
+
+    ampl_all_commands = ampl_mod_command + "\n" + ampl_dat_command + "\n" + ampl_solver_command + "\n" + ampl_solve_command + "\n" + ampl_option_command + "\n" + ampl_display_command
+
+    with open('exec.run', 'w') as f:
+        f.write(ampl_all_commands)
+    
 
 #####################################

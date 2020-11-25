@@ -19,8 +19,9 @@ from user.desiredReqs import curr_major
 # All Functions
 from optimizer2 import * 
 
+dat_filename = "test13"
 
-def main(selected=False, test_num=0, major="CS-Math"):
+def main(selected=False, dat_filename="test0", major="CS-Math"):
     
     if selected:
         possible_courses = list(curr_preferences.keys())
@@ -74,7 +75,7 @@ def main(selected=False, test_num=0, major="CS-Math"):
                                                possible_courses,
                                                course_to_index)
     
-    dir_path = r"amplData/" + str(test_num) + "/"
+    dir_path = r"amplData/" + dat_filename + "/"
     
     os.makedirs(os.path.dirname(dir_path), exist_ok=True)
     
@@ -166,6 +167,8 @@ def main(selected=False, test_num=0, major="CS-Math"):
     
     time.sleep(3)
     
-    createDat(dir_path, "test" + str(test_num) + ".dat")
+    createDat(dir_path, dat_filename + ".dat")
     
-main(selected=False, test_num=8)
+    create_ampl_command(dat_filename)
+    
+main(selected=True, dat_filename=dat_filename, major="CS-MATH")

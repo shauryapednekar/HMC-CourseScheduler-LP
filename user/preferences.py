@@ -1,6 +1,6 @@
-    """
-    Your preference for courses.
-    """
+"""
+Your preference for courses.
+"""
 
 default = set()
 
