@@ -50,6 +50,9 @@ majors = {"CS-MATH",
     major_reqs = "r1 0 r2 0 r3 0 r4 0 r5 0 " 
     hsa_reqs = "r6 0 r7 0 r8 0 r9 0"
     
+    
+    
+    
     1. Engineering Design Requirement (w/o clinic)
     2. Engineering Systems Requirement
     3. Engr Science Requirement (e72 not added since its a half sem course)
@@ -81,17 +84,17 @@ shaurya = {
 
 
 # Shreya
-default = {
+shreya = {
     "major": "ENGR",
     "hsa_conc": "ECON",
-    "major_reqs": "",
-    "hsa_reqs": "",
+    "major_reqs": "r1 0 r2 1 r3 0 r4 1 r5 2 ", 
+    "hsa_reqs" : "r6 1 r7 1 r8 1 r9 0",
 }
 
 
 
 # TODO: Adjust Before Running!
-curr_user = shaurya
+curr_user = shreya
 
 curr_major = curr_user["major"]
 curr_desired_reqs = curr_user["major_reqs"] + curr_user["hsa_reqs"]

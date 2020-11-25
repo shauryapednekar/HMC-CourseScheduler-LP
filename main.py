@@ -19,7 +19,7 @@ from user.desiredReqs import curr_major
 # All Functions
 from optimizer2 import * 
 
-dat_filename = "test13"
+dat_filename = "test14"
 
 def main(selected=False, dat_filename="test0", major="CS-Math"):
     
@@ -41,6 +41,10 @@ def main(selected=False, dat_filename="test0", major="CS-Math"):
         possible_courses = next_sem_possible_courses_due_to_prereqs(all_prev_courses, possible_courses)
         
         possible_courses = remove_bad_courses(possible_courses, bad_courses)
+    
+    for key in curr_preferences:
+        if key not in possible_courses:
+            possible_courses.append(key)
     
     course_to_variable_name, course_to_index = course_code_to_variable_and_index(possible_courses)
     
@@ -171,4 +175,4 @@ def main(selected=False, dat_filename="test0", major="CS-Math"):
     
     create_ampl_command(dat_filename)
     
-main(selected=True, dat_filename=dat_filename, major="CS-MATH")
+main(selected=False, dat_filename=dat_filename, major="ENGR")

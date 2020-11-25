@@ -764,7 +764,7 @@ def engr_major_reqs_matrix_func(possible_courses,
             constraint_matrix[2][course_to_index[course]] = 1
             
         # Fourth Row: Clinic
-        elif course[0:8] in engr_science_requirement_courses:
+        elif course[0:8] in engr_clinic_courses:
             constraint_matrix[3][course_to_index[course]] = 1        
         
         # Fifth Row: Electives
@@ -895,19 +895,23 @@ def costs_func(possible_courses, course_to_index, curr_preferences):
         else:
             # CS Courses = Cost of 5
             if course[0:4] == "CSCI":
-                costs_row[course_to_index[course]] = 5
+                costs_row[course_to_index[course]] = 0
 
+            # ENGR Courses = Cost of 4
+            elif course[0:4] == "ENGR":
+                costs_row[course_to_index[course]] = 7
+            
             # Math Courses = Cost of 4
             elif course[0:4] == "MATH":
-                costs_row[course_to_index[course]] = 4
+                costs_row[course_to_index[course]] = 0
 
             # Philosophy Courses = Cost of 3
             elif course[0:4] == "PHIL":
-                costs_row[course_to_index[course]] = 3
+                costs_row[course_to_index[course]] = 0
 
             # All other courses = Cost of 2
             else:
-                costs_row[course_to_index[course]] = 2
+                costs_row[course_to_index[course]] = 3
 
     return costs_row
 
@@ -980,7 +984,7 @@ def createDat(dir_path, filename):
 
     res += "set requirements := "
     res += "\n    "
-    res += "r1 r2 r3 r4 r5 r6 r7 r8 r9 r10\n;"
+    res += "r1 r2 r3 r4 r5 r6 r7 r8 r9\n;"
     res += "\n\n"
 
     res += "set timeSlots := "

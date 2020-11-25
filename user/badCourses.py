@@ -14,10 +14,18 @@ shaurya_bad_courses = {
     "CSCI_0"
     }
 
+shreya_bad_courses = {
+    "PHYS",
+    "MATH",
+    "BIOl",
+    "CSCI",
+    "CHEM"
+}
+
 
 ################################
 # -TODO: Set to current user
-bad_courses = shaurya_bad_courses
+bad_courses = shreya_bad_courses
 ################################
 
 def helper():
