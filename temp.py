@@ -31,90 +31,51 @@ def possible_courses_func():
 
     return list(raw_data["data"]["courses"].keys())
 
-def helper_next_sem_possible_courses_due_to_prereqs(lis, all_prev_courses):
-    """Helper function that checks whether the prereqs for a course have been
-    fulfilled
+
+def costs_func(raw_data, possible_courses, course_to_index, curr_preferences, keywords={}, profs = {}):
+    """Row of costs corresponding to each possible course.
 
     Global Variables Needed:
-        all_prev_courses (set, optional): Defaults to all_prev_courses.
-
-    Args:
-        lis (list): list of prereqs
-
-    Returns:
-        bool: True if prereqs have been fulfilled and false otherwise
-    """
-    # print("lis: ", lis)
-    # print("all_prev_courses:", all_prev_courses)
-    
-    for elem in lis:
-        if elem not in all_prev_courses:
-            return False
-
-    return True
-
-
-with open(r"preReqs/all_prereqs_edited.json", encoding="utf-8") as f:
-    prereqs_edited = json.load(f)
-    
-    
-def next_sem_possible_courses_due_to_prereqs(all_prev_courses, possible_courses):
-    """Creates list of possible courses according to previously taken courses
-    and prereqs.
+        possible_courses (list, optional): Defaults to possible_courses.
+        course_to_index (dict, optional): Defaults to course_to_index.
+        preferences (dict, optional): Defaults to myPreferences.
 
     Returns:
-        list: list of possible courses according to previously taken courses
-        and prereqs
+        List: Row of costs corresponding to each possible course.
     """
+    num_of_courses = len(possible_courses)
 
-    list_of_possible_courses = []
+    costs_row = [0]*num_of_courses
 
     for course in possible_courses:
-    
-        # If the course has prereqs
-        if course in prereqs_edited:
-            
-                curr_prereqs = prereqs_edited[course][1:]
-                if ["POI"] in curr_prereqs:
-                    curr_prereqs.remove(["POI"])
 
-                # If prereqs are fulfilled, True will be present in temp
-                # Otherwise, it will be only False values
+        if course in curr_preferences:
+            costs_row[course_to_index[course]] = curr_preferences[course]
 
-                temp = ([helper_next_sem_possible_courses_due_to_prereqs (prereq, all_prev_courses)
-                        for prereq in curr_prereqs])
-                
-                print(temp)
-                if True in temp:
-                    list_of_possible_courses.append(course)
-                
-                curr_prereqs = prereqs_edited[course][1:]
-                if ["POI"] in curr_prereqs:
-                    curr_prereqs.remove(["POI"])
-
-                # If prereqs are fulfilled, True will be present in temp
-                # Otherwise, it will be only False values
-
-                temp = ([helper_next_sem_possible_courses_due_to_prereqs (prereq, all_prev_courses)
-                        for prereq in curr_prereqs])
-                if True in temp:
-                    list_of_possible_courses.append(course)
-
-        # If the course does not have prereqs
+        # (TODO: Edit this based on survey results.)
+        # Default costs for courses
         else:
-            list_of_possible_courses.append(course)
+            # CS Courses = Cost of 5
+            if course[0:4] == "CSCI":
+                costs_row[course_to_index[course]] = 0
 
-    return list_of_possible_courses
+            # ENGR Courses = Cost of 4
+            elif course[0:4] == "ENGR":
+                costs_row[course_to_index[course]] = 7
+            
+            # Math Courses = Cost of 4
+            elif course[0:4] == "MATH":
+                costs_row[course_to_index[course]] = 0
 
-possible_courses = possible_courses_func()
+            # Philosophy Courses = Cost of 3
+            elif course[0:4] == "PHIL":
+                costs_row[course_to_index[course]] = 0
 
-new_possible_courses = next_sem_possible_courses_due_to_prereqs(all_prev_courses, possible_courses)
+            # All other courses = Cost of 2
+            else:
+                costs_row[course_to_index[course]] = 3
 
-if "ECON 150 CM-01" in new_possible_courses:
-    print("fail")
-else:
-    print("success!!!")
-
+    return costs_row
 
 
 

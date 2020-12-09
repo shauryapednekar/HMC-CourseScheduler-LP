@@ -66,6 +66,7 @@ majors = {"CS-MATH",
     
     
 """
+
 # Default
 default = {
     "major": "",
@@ -88,14 +89,20 @@ shreya = {
     "major": "ENGR",
     "hsa_conc": "ECON",
     "major_reqs": "r1 0 r2 1 r3 0 r4 1 r5 2 ", 
-    "hsa_reqs" : "r6 1 r7 1 r8 1 r9 0",
+    "hsa_reqs" : "r6 1 r7 0 r8 1 r9 2",
+}
+
+num_requirements = {
+    "CS-MATH": "r1 r2 r3 r4 r5 r6 r7 r8 r9 r10",
+    "CS": "r1 r2 r3 r4 r5 r6 r7 r8",
+    "ENRG":  "r1 r2 r3 r4 r5 r6 r7 r8 r9"
 }
 
 
-
 # TODO: Adjust Before Running!
-curr_user = shreya
+curr_user = shaurya
 
 curr_major = curr_user["major"]
 curr_desired_reqs = curr_user["major_reqs"] + curr_user["hsa_reqs"]
 curr_hsa_conc = curr_user["hsa_conc"]
+curr_num_reqs = num_requirements[curr_major]

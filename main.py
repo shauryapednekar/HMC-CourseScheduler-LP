@@ -14,12 +14,12 @@ from user.desiredReqs import curr_hsa_conc
 from user.desiredReqs import curr_desired_reqs
 from user.alternates import curr_alternates
 from user.desiredReqs import curr_major
-
+from user.desiredReqs import curr_num_reqs
 
 # All Functions
 from optimizer2 import * 
 
-dat_filename = "test15"
+dat_filename = "test18"
 
 def main(selected=False, dat_filename="test0", major="CS-Math"):
     
@@ -171,8 +171,8 @@ def main(selected=False, dat_filename="test0", major="CS-Math"):
     
     time.sleep(3)
     
-    createDat(dir_path, dat_filename + ".dat")
+    createDat(dir_path, dat_filename + ".dat", curr_num_reqs)
     
     create_ampl_command(dat_filename)
     
-main(selected=False, dat_filename=dat_filename, major="ENGR")
+main(selected=False, dat_filename=dat_filename, major=curr_major)

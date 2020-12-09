@@ -9,6 +9,7 @@ import numpy as np
 # # User Input Needed
 from user.desiredReqs import curr_desired_reqs
 from user.desiredReqs import curr_major
+from user.desiredReqs import curr_num_reqs
 
 
 # SKELETAL:
@@ -942,7 +943,7 @@ def alternates_matrix_func(curr_alternates, possible_courses, course_to_index):
             
 ######################################
 
-def createDat(dir_path, filename):
+def createDat(dir_path, filename, curr_num_reqs):
     res = ""
 
     with open(dir_path + r"costs_names.txt", 'r') as f:
@@ -987,7 +988,7 @@ def createDat(dir_path, filename):
 
     res += "set requirements := "
     res += "\n    "
-    res += "r1 r2 r3 r4 r5 r6 r7 r8 r9\n;"
+    res += curr_num_reqs + "\n;"
     res += "\n\n"
 
     res += "set timeSlots := "

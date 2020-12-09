@@ -27,4 +27,4 @@ shreya_alternates = [
     [{"ENGR 102 HM-01", "ENGR 111 HM-01"}, [2,2]]
 ]
 
-curr_alternates = shreya_alternates
+curr_alternates = shaurya_alternates

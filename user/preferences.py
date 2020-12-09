@@ -32,4 +32,4 @@ shreya = {
 }
 
 # -TODO: Set to current user
-curr_preferences = shreya
+curr_preferences = shaurya

@@ -128,7 +128,7 @@ shreya = {
 
 
 lis = []
-curr_user = shreya
+curr_user = shaurya
 
 for key in curr_user:
     lis.append(curr_user[key])
