@@ -6,20 +6,32 @@ import re
 import os
 import numpy as np
 
-# User Inputs Needed
-from user.previousCourses import all_prev_courses
-from user.preferences import curr_preferences
-from user.badCourses import bad_courses
-from user.desiredReqs import curr_hsa_conc
-from user.desiredReqs import curr_desired_reqs
-from user.alternates import curr_alternates
-from user.desiredReqs import curr_major
-from user.desiredReqs import curr_num_reqs
+# # User Inputs Needed
+# from user.previousCourses import curr_previous_courses
+# from user.preferences import curr_preferences
+# from user.badCourses import curr_bad_courses
+# from user.desiredReqs import curr_hsa_conc
+# from user.desiredReqs import curr_desired_reqs
+# from user.alternates import curr_alternates
+# from user.desiredReqs import curr_major
+# from user.desiredReqs import curr_num_reqs
+
+
+# New User Inputs Needed
+from user.curr_user import (curr_previous_courses, 
+                            curr_preferences,
+                            curr_bad_courses,
+                            curr_hsa_conc,
+                            curr_desired_reqs,
+                            curr_alternates,
+                            curr_major,
+                            curr_num_reqs,
+                            curr_dat_filename)
 
 # All Functions
 from optimizer2 import * 
 
-dat_filename = "test18"
+dat_filename = curr_dat_filename
 
 def main(selected=False, dat_filename="test0", major="CS-Math"):
     
@@ -33,14 +45,14 @@ def main(selected=False, dat_filename="test0", major="CS-Math"):
         possible_courses = only_keep_three_credit_classes(raw_data, 
                                                         possible_courses)
         
-        possible_courses = remove_prev_courses(all_prev_courses,
+        possible_courses = remove_prev_courses(curr_previous_courses,
                                             possible_courses)
         
         subject_codes = subject_codes_func(possible_courses)
         
-        possible_courses = next_sem_possible_courses_due_to_prereqs(all_prev_courses, possible_courses)
+        possible_courses = next_sem_possible_courses_due_to_prereqs(curr_previous_courses, possible_courses)
         
-        possible_courses = remove_bad_courses(possible_courses, bad_courses)
+        possible_courses = remove_bad_courses(possible_courses, curr_bad_courses)
     
     for key in curr_preferences:
         if key not in possible_courses:
@@ -65,7 +77,7 @@ def main(selected=False, dat_filename="test0", major="CS-Math"):
     hsa_concentration = curr_hsa_conc
     
     requirements_matrix = requirements_matrix_func(possible_courses,
-                                              all_prev_courses,
+                                              curr_previous_courses,
                                               dict_w_same_codes,
                                               course_to_index,
                                               hsa_codes,

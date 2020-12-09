@@ -4,8 +4,8 @@ majors = {"CS-MATH",
           "ENGR",
           }
 
-"""
-    CS-MATH:
+""" CS-MATH:
+    
     
     # The space at the end of major_reqs is important!
     major_reqs = "r1 0 r2 0 r3 0 r4 0 r5 0 r6 0 " 
@@ -25,8 +25,7 @@ majors = {"CS-MATH",
 """
 
 
-"""
-    CS
+""" CS:
     
     # The space at the end of major_reqs is important!
     major_reqs = "r1 0 r2 0 r3 0 r4 0 " 
@@ -43,8 +42,7 @@ majors = {"CS-MATH",
     8. HSA General
 """
 
-"""
-    ENGR
+""" ENGR:
     
     # The space at the end of major_reqs is important!
     major_reqs = "r1 0 r2 0 r3 0 r4 0 r5 0 " 
@@ -62,30 +60,32 @@ majors = {"CS-MATH",
     6. HSA Breadth
     7. HSA Concentration
     8. HSA Mudd Humms
-    9. HSA General
-    
-    
+    9. HSA General       
 """
 
-# Default
-default = {
+# Default Format
+name_desired_reqs_details = {
     "major": "",
     "hsa_conc": "",
     "major_reqs": "",
     "hsa_reqs": "",
 }
 
+#TODO: Add new desired_reqs_details here (based on the format above):
+
+
+# Previous User Data
+
 # Shaurya
-shaurya = {
+shaurya_desired_reqs_details = {
     "major": "CS-MATH",
     "hsa_conc": "ECON",
     "major_reqs": "r1 0 r2 0 r3 0 r4 0 r5 1 r6 1 ",
     "hsa_reqs": "r7 1 r8 0 r9 1 r10 1"
     }
 
-
 # Shreya
-shreya = {
+shreya_desired_reqs_details = {
     "major": "ENGR",
     "hsa_conc": "ECON",
     "major_reqs": "r1 0 r2 1 r3 0 r4 1 r5 2 ", 
@@ -95,14 +95,6 @@ shreya = {
 num_requirements = {
     "CS-MATH": "r1 r2 r3 r4 r5 r6 r7 r8 r9 r10",
     "CS": "r1 r2 r3 r4 r5 r6 r7 r8",
-    "ENRG":  "r1 r2 r3 r4 r5 r6 r7 r8 r9"
+    "ENGR":  "r1 r2 r3 r4 r5 r6 r7 r8 r9"
 }
 
-
-# TODO: Adjust Before Running!
-curr_user = shaurya
-
-curr_major = curr_user["major"]
-curr_desired_reqs = curr_user["major_reqs"] + curr_user["hsa_reqs"]
-curr_hsa_conc = curr_user["hsa_conc"]
-curr_num_reqs = num_requirements[curr_major]

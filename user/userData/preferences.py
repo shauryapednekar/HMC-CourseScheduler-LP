@@ -4,7 +4,11 @@ Your preference for courses.
 
 default = set()
 
-shaurya = {
+#TODO: Add new preferences here (as a dictionary):
+
+# Previous User Data:
+
+shaurya_preferences = {
     "MATH 104 HM-01": 7,
     "CSCI 151 HM-01": 10,
     "MUS 003 HM-01": 7,
@@ -17,7 +21,7 @@ shaurya = {
     "RLST 113 HM-01": 8,
 }
 
-shreya = {
+shreya_preferences = {
     "ENGR 102 HM-01": 10,
     "ENGR 111 HM-01": 10,
     "ENGR 151 HM-01": 8,
@@ -30,6 +34,3 @@ shreya = {
     "HIST 152 HM-01": 4,
     
 }
-
-# -TODO: Set to current user
-curr_preferences = shaurya

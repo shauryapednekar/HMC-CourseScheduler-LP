@@ -6,10 +6,15 @@ import re
 import os
 import numpy as np
 
+# # # User Input Needed
+# from user.desiredReqs import curr_desired_reqs
+# from user.desiredReqs import curr_major
+# from user.desiredReqs import curr_num_reqs
+
 # # User Input Needed
-from user.desiredReqs import curr_desired_reqs
-from user.desiredReqs import curr_major
-from user.desiredReqs import curr_num_reqs
+from user.curr_user import *
+# from user.desiredReqs import curr_major
+# from user.desiredReqs import curr_num_reqs
 
 
 # SKELETAL:
@@ -32,7 +37,7 @@ from user.desiredReqs import curr_num_reqs
     #     6. Make a dictionary of of course name to variable name
     #        (and its index in "all_courses" string).
     #         - "all_courses" contains "possible_courses"
-    #             + "all_prev_courses" + "prereq_courses" (all unique)
+    #             + "curr_previous_courses" + "prereq_courses" (all unique)
 
     #     --- By this time, we will have:
     #         - "raw_data" [dict]
@@ -90,12 +95,12 @@ def only_keep_three_credit_classes(raw_data, possible_courses):
 #######################
 # 3 - Remove Previously Taken Courses:
 
-def remove_prev_courses(all_prev_courses, possible_courses):
+def remove_prev_courses(curr_previous_courses, possible_courses):
     """Removes previously taken courses.
 
     Global Variables Needed:
-        all_prev_courses (dict, optional): user"s previously taken courses.
-        Defaults to all_prev_courses.
+        curr_previous_courses (dict, optional): user"s previously taken courses.
+        Defaults to curr_previous_courses.
         possible_courses (list, optional): Defaults to possible_courses.
 
     Returns:
@@ -106,7 +111,7 @@ def remove_prev_courses(all_prev_courses, possible_courses):
     repeated = set()
 
     for course in possible_courses:
-        for prev_course in all_prev_courses:
+        for prev_course in curr_previous_courses:
             # To find all sections of the prev_course
             if prev_course in course:
                 repeated.add(course)
@@ -276,12 +281,12 @@ def subject_codes_func(possible_courses):
 with open(r"preReqs/all_prereqs_edited.json", encoding="utf-8") as f:
     prereqs_edited = json.load(f)
 
-def helper_next_sem_possible_courses_due_to_prereqs(lis, all_prev_courses):
+def helper_next_sem_possible_courses_due_to_prereqs(lis, curr_previous_courses):
     """Helper function that checks whether the prereqs for a course have been
     fulfilled
 
     Global Variables Needed:
-        all_prev_courses (set, optional): Defaults to all_prev_courses.
+        curr_previous_courses (set, optional): Defaults to curr_previous_courses.
 
     Args:
         lis (list): list of prereqs
@@ -290,12 +295,12 @@ def helper_next_sem_possible_courses_due_to_prereqs(lis, all_prev_courses):
         bool: True if prereqs have been fulfilled and false otherwise
     """
     for elem in lis:
-        if elem not in all_prev_courses:
+        if elem not in curr_previous_courses:
             return False
 
     return True
 
-def next_sem_possible_courses_due_to_prereqs(all_prev_courses, possible_courses):
+def next_sem_possible_courses_due_to_prereqs(curr_previous_courses, possible_courses):
     """Creates list of possible courses according to previously taken courses
     and prereqs.
 
@@ -318,7 +323,7 @@ def next_sem_possible_courses_due_to_prereqs(all_prev_courses, possible_courses)
                 # If prereqs are fulfilled, True will be present in temp
                 # Otherwise, it will be only False values
 
-                temp = ([helper_next_sem_possible_courses_due_to_prereqs (prereq, all_prev_courses)
+                temp = ([helper_next_sem_possible_courses_due_to_prereqs (prereq, curr_previous_courses)
                         for prereq in curr_prereqs])
                 
                 if True in temp:
@@ -343,24 +348,24 @@ def add_poi_courses():
 #####################
 # 6 - Remove Courses Which Should Never Be Included in the Solution:
 
-def remove_bad_courses(possible_courses, bad_courses):
+def remove_bad_courses(possible_courses, curr_bad_courses):
     res = []
     # repeated = []
     
     # for course in possible_courses:
-    #     for bad_course in bad_courses:
+    #     for bad_course in curr_bad_courses:
     #         if bad_course == course:
     #             repeated.append(course)
     remove = set()
     for course in possible_courses:
-        for bad_course in bad_courses:
+        for bad_course in curr_bad_courses:
             if bad_course in course:
                 remove.add(course)
             
     for course in possible_courses:
         if course not in remove:
             res.append(course)     
-        # if course not in bad_courses:
+        # if course not in curr_bad_courses:
         #     res.append(course)
     
     return res
@@ -606,7 +611,7 @@ hsa_codes = {"DANC", "WRIT", "ORST", "PPA", "DS", "ARBT", "JAPN", "CHNT", "MSL",
 
 # CS-MATH Major
 def cs_math_major_reqs_matrix_func(possible_courses,
-                           all_prev_courses, 
+                           curr_previous_courses, 
                            dict_w_same_codes, 
                            course_to_index):
     
@@ -656,7 +661,7 @@ def cs_math_major_reqs_matrix_func(possible_courses,
 
 # CS Major
 def cs_major_reqs_matrix_func(possible_courses,
-                           all_prev_courses, 
+                           curr_previous_courses, 
                            dict_w_same_codes, 
                            course_to_index):
     
@@ -716,7 +721,7 @@ def cs_major_reqs_matrix_func(possible_courses,
 
 # ENGR Major
 def engr_major_reqs_matrix_func(possible_courses,
-                           all_prev_courses, 
+                           curr_previous_courses, 
                            dict_w_same_codes, 
                            course_to_index):
     
@@ -778,11 +783,11 @@ def engr_major_reqs_matrix_func(possible_courses,
     return list(constraint_matrix)
 
 # HSA:
-def hsa_reqs_matrix(possible_courses, all_prev_courses, dict_w_same_codes, course_to_index, hsa_codes, hsa_concentration):
+def hsa_reqs_matrix(possible_courses, curr_previous_courses, dict_w_same_codes, course_to_index, hsa_codes, hsa_concentration):
     
     # Needed for HSA breadth requirement
     prev_course_codes = set()
-    for course in all_prev_courses:
+    for course in curr_previous_courses:
         curr_code = re.search(r"[^\s]+", course)
         if curr_code:
             curr_code = curr_code.group(0)
@@ -824,7 +829,7 @@ def hsa_reqs_matrix(possible_courses, all_prev_courses, dict_w_same_codes, cours
 
 # All Reqs:
 
-def requirements_matrix_func(possible_courses, all_prev_courses, dict_w_same_codes, course_to_index, hsa_codes, hsa_concentration):
+def requirements_matrix_func(possible_courses, curr_previous_courses, dict_w_same_codes, course_to_index, hsa_codes, hsa_concentration):
     """Creates matrix that ensures that desired requirements are met.
 
     1. Requirements (currently only designed for CS-Math majors):
@@ -850,7 +855,7 @@ def requirements_matrix_func(possible_courses, all_prev_courses, dict_w_same_cod
         possible_courses ([type], optional): Defaults to possible_courses.
         hsa_codes ([type], optional): Defaults to hsa_codes.
         hsaConcentration ([type], optional): Defaults to hsaConcentration.
-        all_prev_courses ([type], optional): Defaults to all_prev_courses.
+        curr_previous_courses ([type], optional): Defaults to curr_previous_courses.
 
     Returns:
         List of lists: 2-D Matrix where each row represents a
@@ -859,15 +864,15 @@ def requirements_matrix_func(possible_courses, all_prev_courses, dict_w_same_cod
     major_matrix = []
     
     if curr_major == "CS-MATH":
-        major_matrix = cs_math_major_reqs_matrix_func(possible_courses, all_prev_courses, dict_w_same_codes, course_to_index)
+        major_matrix = cs_math_major_reqs_matrix_func(possible_courses, curr_previous_courses, dict_w_same_codes, course_to_index)
     
     if curr_major == "CS":
-        major_matrix = cs_major_reqs_matrix_func(possible_courses, all_prev_courses, dict_w_same_codes, course_to_index)
+        major_matrix = cs_major_reqs_matrix_func(possible_courses, curr_previous_courses, dict_w_same_codes, course_to_index)
     
     if curr_major == "ENGR":
-        major_matrix = engr_major_reqs_matrix_func(possible_courses, all_prev_courses, dict_w_same_codes, course_to_index)
+        major_matrix = engr_major_reqs_matrix_func(possible_courses, curr_previous_courses, dict_w_same_codes, course_to_index)
         
-    hsa_matrix = hsa_reqs_matrix(possible_courses, all_prev_courses, dict_w_same_codes, course_to_index, hsa_codes, hsa_concentration)
+    hsa_matrix = hsa_reqs_matrix(possible_courses, curr_previous_courses, dict_w_same_codes, course_to_index, hsa_codes, hsa_concentration)
     
     return major_matrix + hsa_matrix
 

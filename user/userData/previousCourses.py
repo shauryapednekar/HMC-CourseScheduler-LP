@@ -1,5 +1,6 @@
 
-shaurya = {
+#TODO: Add previous_courses data here (with the variable stored as name_previous_courses):
+shaurya_previous_courses = {
     "first_sem_courses": {
         "BIOL 023",
         "CHEM 023A",
@@ -65,7 +66,7 @@ shaurya = {
     }
 }
 
-shreya = {
+shreya_previous_courses = {
     
     "first_sem_courses": {
         "BIOL 023",
@@ -123,19 +124,5 @@ shreya = {
         "ECON 129",
         "ENGR 191"
     }
-    
 }
 
-
-lis = []
-curr_user = shaurya
-
-for key in curr_user:
-    lis.append(curr_user[key])
-    
-    
-all_prev_courses = set().union(*lis)
-
-
-# first_sem_courses+second_sem_courses + \
-#     third_sem_courses+fourth_sem_courses+fifth_sem_courses
