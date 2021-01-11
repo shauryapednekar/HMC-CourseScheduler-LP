@@ -19,6 +19,9 @@ shaurya_preferences = {
     "MATH 155 HM-01": 7,
     "RLST 150 AF-01": 7,
     "RLST 113 HM-01": 8,
+    "MATH 103 PO-01": 6,
+    "MCBI 118A HM-01": 7,
+    "MCBI 118B HM-01": 8,
 }
 
 shreya_preferences = {

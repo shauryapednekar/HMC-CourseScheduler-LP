@@ -12,7 +12,11 @@ import numpy as np
 # from user.desiredReqs import curr_num_reqs
 
 # # User Input Needed
-from user.curr_user import *
+# from user.curr_user import *
+
+# Excel:
+from excel.excel_to_var_2 import *
+
 # from user.desiredReqs import curr_major
 # from user.desiredReqs import curr_num_reqs
 

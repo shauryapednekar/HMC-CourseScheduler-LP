@@ -18,7 +18,18 @@ import numpy as np
 
 
 # New User Inputs Needed
-from user.curr_user import (curr_previous_courses, 
+#  from user.curr_user import (curr_previous_courses, 
+#                             curr_preferences,
+#                             curr_bad_courses,
+#                             curr_hsa_conc,
+#                             curr_desired_reqs,
+#                             curr_alternates,
+#                             curr_major,
+#                             curr_num_reqs,
+#                             curr_dat_filename)
+
+# Excel
+from excel.excel_to_var_2 import (curr_previous_courses, 
                             curr_preferences,
                             curr_bad_courses,
                             curr_hsa_conc,
@@ -33,7 +44,7 @@ from optimizer2 import *
 
 dat_filename = curr_dat_filename
 
-def main(selected=False, dat_filename="test0", major="CS-Math"):
+def main(selected=True, dat_filename="test0", major="CS-Math"):
     
     if selected:
         possible_courses = list(curr_preferences.keys())
@@ -187,4 +198,4 @@ def main(selected=False, dat_filename="test0", major="CS-Math"):
     
     create_ampl_command(dat_filename)
     
-main(selected=False, dat_filename=dat_filename, major=curr_major)
+main(selected=True, dat_filename=dat_filename, major=curr_major)

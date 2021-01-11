@@ -25,7 +25,7 @@ var x {j in courses} integer >= 0, <=1;
 maximize Happiness: sum {j in courses} costs[j]*x[j];
 
 subject to Alts {i in alternates}:
-    alternatesUpperLimits[i] <= sum {j in courses} (alternatesMatrix[i,j]) * x[j] <= alternatesUpperLimits[i];
+    alternatesLowerLimits[i] <= sum {j in courses} (alternatesMatrix[i,j]) * x[j] <= alternatesUpperLimits[i];
 
 subject to Reqs {i in requirements}:
     sum {j in courses} (counts[i,j]) * x[j] >= necessary[i];
