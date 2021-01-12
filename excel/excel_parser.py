@@ -1,15 +1,12 @@
 import pandas as pd
 
-
-"""
-TODO: Change column names to always match excel sheet
-"""
-
-curr_dat_filename = "test_alex_1" #TODO: .dat output file name
-
+#TODO: .dat output file name
+curr_dat_filename = "data" # do not end with .dat
 
 #TODO: Excel Sheet Name
-df = pd.read_excel('Course Preferences - Alex.xlsx', sheet_name='CS Major Blank')
+excel_file_name ='Preferences.xlsx' 
+excel_sheet_name = 'CS Major Blank'
+df = pd.read_excel(excel_file_name, sheet_name= excel_sheet_name)
 
 # print(df)
 
