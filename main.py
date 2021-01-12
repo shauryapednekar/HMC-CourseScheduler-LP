@@ -29,7 +29,7 @@ import numpy as np
 #                             curr_dat_filename)
 
 # Excel
-from excel.excel_to_var_2 import (curr_previous_courses, 
+from excel.excel_parser import (curr_previous_courses, 
                             curr_preferences,
                             curr_bad_courses,
                             curr_hsa_conc,
@@ -40,7 +40,7 @@ from excel.excel_to_var_2 import (curr_previous_courses,
                             curr_dat_filename)
 
 # All Functions
-from optimizer2 import * 
+from funcs import * 
 
 dat_filename = curr_dat_filename
 
