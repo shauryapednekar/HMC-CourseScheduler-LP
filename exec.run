@@ -1,5 +1,5 @@
 model 'C:\Users\Shaurya\Desktop\math187_project\amplFiles\model.mod'; 
-data C:\Users\Shaurya\Desktop\math187_project\amplFiles\test_alex_1.dat;
+data C:\Users\Shaurya\Desktop\math187_project\amplFiles\data.dat;
 option solver './cplex';
 solve;
 option omit_zero_rows 1;

@@ -33,8 +33,9 @@ subject to Reqs {i in requirements}:
 subject to TimeConflicts {i in timeSlots}:
     sum {j in courses} (time[i,j] * x[j]) <= 1;
     
+# Can be changed according to min and max number of courses desired:     
 subject to EnrollmentBounds:
-    4 <= sum {i in courses} x[i] <= 6;
+    4 <= sum {i in courses} x[i] <= 6; 
     
 subject to Uniqueness {i in uniqueCourses}:
     sum {j in courses} (unique[i,j]) * x[j] <= 1;

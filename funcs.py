@@ -6,20 +6,8 @@ import re
 import os
 import numpy as np
 
-# # # User Input Needed
-# from user.desiredReqs import curr_desired_reqs
-# from user.desiredReqs import curr_major
-# from user.desiredReqs import curr_num_reqs
-
-# # User Input Needed
-# from user.curr_user import *
-
 # Excel:
 from excel.excel_parser import *
-
-# from user.desiredReqs import curr_major
-# from user.desiredReqs import curr_num_reqs
-
 
 # SKELETAL:
 
@@ -29,8 +17,8 @@ from excel.excel_parser import *
 
     #     3. Remove courses that I cannot take due to prereqs.
 
-    #     4. (TODO - easy) Possibly add next sem courses that I
-    #         have already permed into that arent already in courses.
+    #     4. Possibly add next sem courses that I
+    #        have already permed into that arent already in courses.
 
     #     5. (TODO - easy) Possibly remove next sem courses that
     #         I absolutely do not want to take/won"t get in to.
@@ -51,14 +39,14 @@ from excel.excel_parser import *
 
     #     --- Constraints ---
 
-    #     9. Complete time conflict constraint matrix.
+    #     9.  Time conflict constraint matrix.
     #         Ax <= 1;     each row of A represents a discrete point in time
 
-    #     10. Complete no two same courses constraint matrix:
+    #     10. No two same courses constraint matrix:
     #         Ax <= 1;     each row of A has a 1 for variables
     #         that are the same course (but different sections)
 
-    #     11. Complete electives constraint matrix.
+    #     11. Electives constraint matrix.
 
 ##################################################
 # 1 - Getting all courses that are going to be offered:
@@ -67,10 +55,9 @@ with open(r"rawData/course_data.json", encoding="utf-8") as f:
     raw_data = json.load(f)
 
 def possible_courses_func():
-    """Nothing
-
+    """
     Returns:
-        list: all courses (complete course code) being offered
+        list: all courses (with their complete course code) being offered
     """
 
     return list(raw_data["data"]["courses"].keys())
@@ -154,134 +141,6 @@ def subject_codes_func(possible_courses):
 
     return codes
 
-# Prereqs Function that only needs to be run once ("untab" the following block):
-    # def prereqs():
-    #     """Collects prereqs for each course
-
-    #     Global Variables Needed:
-    #         possible_courses (list, optional): Defaults to possible_courses.
-    #         raw_data (dict, optional): Defaults to raw_data.
-    #         subject_codes (set, optional): Defaults to subject_codes.
-
-    #     Returns:
-    #         dict: Dictionary where the keys are the courses that contain
-    #               prerequisites and its values are a list of the
-    # prerequisites.
-    #     """
-
-    #     # Contains only the courses that have prereqs
-    #     course_to_prereqs = {}
-
-    #     for course in possible_courses:
-    #         description = (raw_data["data"]["courses"][course]
-    # ["courseDescription"])
-    #         if not description:
-    #             prereqs = ""
-    #         elif "Prerequisite: " not in description:
-    #             prereqs = ""
-
-    #         # Only finding prereqs for courses that have "Prerequisite:" in
-    #           their description
-    #         else:
-    #             prereqs = description.partition("Prerequisite: ")[2]
-
-
-    #             replacement_dict = {
-    #                 "Arabic": "ARBC",
-    #                 "Mathematics": "MATH",
-    #                 "Math": "MATH",
-    #                 "Korean": "KORE",
-    #                 "Writing 1": "WRIT 001",
-    #                 "Anthropology": "ANTH",
-    #                 "Art": "ART",
-    #                 "Physics": "PHYS",
-    #                 "Biology": "BIOL",
-    #                 "Chemistry": "CHEM",
-    #                 "Computer Science": "CSCI",
-    #                 "Economics": "ECON",
-    #                 "Engineering": "ENGR",
-    #                 "French": "FREN",
-    #                 "Government": "GOVT",
-    #                 "Psychology": "PSYC",
-    #                 "Spanish": "SPAN"
-    #             }
-    #             # Replaces subject names to corresponding subject codes
-    #             for key in replacement_dict:
-    #                 prereqs = prereqs.replace(key, replacement_dict[key])
-
-    #             lis = []
-    #             # Finds all prereqs of the form {subject code}{x*} where x*
-    #               is one or more numbers
-    #             for course_code in subject_codes:
-    #                 curr_code = course_code + "\s?[0-9]*"
-
-    #                 if re.findall(curr_code, prereqs):
-    #                     lis += re.findall(curr_code, prereqs)
-
-    #             newLis = []
-    #             # Normalizes prereqs format (eg. "CSCI5" --> "CSCI 005")
-    #             for l in lis:
-    #                 check = True
-    #                 for course_code in subject_codes:
-                          # eg. "CSCI 005"
-    #                     if re.match(course_code + "\s[0-9]{3}", l):
-    #                         pass
-
-    #                     # eg. "CSCI005" --> "CSCI 005"
-    #                     elif re.match(course_code + "[0-9]{3}", l):
-    #                         n = len(course_code)
-    #                         l = l[0:n] + " " + l[n:]
-    #                         check = False
-    #                         newLis.append(l)
-
-    #                     # eg. "CSCI05" --> "CSCI 005"
-    #                     elif re.match(course_code + "[0-9]{2}", l):
-    #                         n = len(course_code)
-    #                         l = l[0:n] + " 0" + l[n:]
-    #                         check = False
-    #                         newLis.append(l)
-
-    #                     # eg. "CSCI5" --> "CSCI 005"
-    #                     elif re.match(course_code + "[0-9]{1}", l):
-    #                         n = len(course_code)
-    #                         l = l[0:n] + " 00" + l[n:]
-    #                         check = False
-    #                         newLis.append(l)
-
-    #                     # eg. "CSCI 05" --> "CSCI 005"
-    #                     elif re.match(course_code + "\s[0-9]{2}", l):
-    #                         n = len(course_code)+1
-    #                         l = l[0:n] + "0" + l[n:]
-    #                         check = False
-    #                         newLis.append(l)
-
-    #                     # eg. "CSCI 5" --> "CSCI 005"
-    #                     elif re.match(course_code + "\s[0-9]{1}", l):
-    #                         n = len(course_code)+1
-    #                         l = l[0:n] + "00" + l[n:]
-    #                         check = False
-    #                         newLis.append(l)
-
-    #                 # Makes sure prereq is a specific course
-    #                   ("... MATH60", not "...MATH is recommended" for example)
-    #                 if check:
-    #                     newLis.append(l)
-
-    #             # Adds ["POI"] to list of prereqs for appropriate courses
-    #             if "permission of the instructor" in prereqs or
-    #               "permission of instructor" in prereqs:
-    #                 course_to_prereqs[course] = [[prereqs], newLis, ["POI"]]
-    #             else:
-    #                 course_to_prereqs[course] = [[prereqs], newLis]
-
-    #     return course_to_prereqs
-
-
-    # course_to_prereqs = prereqs()
-
-    # with open(r"preReqs/prereqs.json", "w") as fp:
-    #     json.dump(prereqs(), fp, indent=4)
-
 with open(r"preReqs/prereqs_edited.json", encoding="utf-8") as f:
     prereqs_edited = json.load(f)
 
@@ -344,34 +203,31 @@ def next_sem_possible_courses_due_to_prereqs(curr_previous_courses, possible_cou
 # 5 - Add Courses for Which Permission of Instructor is Obtained
 # (Regardless of Prereqs):
 
-# -TODO:
+# TODO: Possibly add in the future.
 
-def add_poi_courses():
-    pass
+# def add_poi_courses():
+#     pass
 
 #####################
 # 6 - Remove Courses Which Should Never Be Included in the Solution:
 
 def remove_bad_courses(possible_courses, curr_bad_courses):
-    res = []
-    # repeated = []
+    """Removes courses which the user does not want included in the final output. 
     
-    # for course in possible_courses:
-    #     for bad_course in curr_bad_courses:
-    #         if bad_course == course:
-    #             repeated.append(course)
-    remove = set()
+    Returns a list of all possible courses (minus the 'bad courses').
+    """
+    res = []
+    
+    removeCourses = set()
     for course in possible_courses:
         for bad_course in curr_bad_courses:
             if bad_course in course:
-                remove.add(course)
+                removeCourses.add(course)
             
     for course in possible_courses:
-        if course not in remove:
+        if course not in removeCourses:
             res.append(course)     
-        # if course not in curr_bad_courses:
-        #     res.append(course)
-    
+            
     return res
 
 ######################
@@ -480,65 +336,6 @@ def time_conflict_matrix_func(course_code_to_variable_name, course_to_index, raw
 
     return constraint_matrix
 
-# Same as above function except using numpy for speed
-# ("tab below block unless needed"):
-    # import numpy as np
-    # def time_conflict_matrix_np():
-    #     """Same as time_conflict_matrix() except using numpy arrays for speed.
-
-    #     Global Variables Needed:
-    #         course_to_variable_name (dict, optional):
-    #         Defaults to course_to_variable_name.
-    #         course_to_index (dict, optional): Defaults to course_to_index.
-    #         raw_data (dict, optional): Defaults to raw_data.
-    #         possible_courses (list, optional): Defaults to possible_courses.
-
-    #     Returns:
-    #         list of lists: 2-D Matrix where each element of
-    #         each row is a zero or one where 1 correspondings to the
-    #         class occuring during the time corresponding to its row
-    #         and 0 otherwise.
-    #     """
-
-    #     discrete_times = []
-
-    #     # [0700, 0710, 0720, 0730, 0740, 0750, 0800, 0810, ...]
-    #     # Produces a list of all the possible reasonable times
-    #     # in ten minute intervals
-    #     for k in range(7, 10):
-    #         for j in range(0, 6):
-    #             curr_time = "0" + str(k) + str(j) + "0"
-    #             curr_time = int(curr_time)
-    #             discrete_times.append(curr_time)
-
-    #     for k in range(10, 24):
-    #         for j in range(0, 6):
-    #             curr_time = "0" + str(k) + str(j) + "0"
-    #             curr_time = int(curr_time)
-    #             discrete_times.append(curr_time)
-
-    #     constraint_matrix = np.zeros(shape=(len(discrete_times), 2031))
-    #     k = 0
-
-    #     for curr_time in discrete_times:
-    #         for curr_course in possible_courses:
-    #             course = raw_data["data"]["courses"][curr_course]
-    #             start_time = course["courseSchedule"][0]["scheduleStartTime"]
-    #             end_time = course["courseSchedule"][0]["scheduleEndTime"]
-
-    #             # Removing the semicolon from "hh:mm"
-    #             # and then converting it to an int
-    #             start_time = int(start_time[0:2] + start_time[3:])
-    #             end_time = int(end_time[0:2] + end_time[3:])
-
-    #             if curr_time >= start_time and curr_time <= end_time:
-    #                 constraint_matrix[k][course_to_index[curr_course]] = 1
-    #         k += 1
-
-    #     return constraint_matrix
-
-    # time_conflict_matrix_np = time_conflict_matrix_np()
-
 ################################
 # 10 - No Two Same Courses Constraint:
 
@@ -618,7 +415,17 @@ def cs_math_major_reqs_matrix_func(possible_courses,
                            curr_previous_courses, 
                            dict_w_same_codes, 
                            course_to_index):
-    
+    """Creates a constraint matrix for the CS-MATH major.
+
+    Args:
+        possible_courses ([type]): [description]
+        curr_previous_courses ([type]): [description]
+        dict_w_same_codes ([type]): [description]
+        course_to_index ([type]): [description]
+
+    Returns:
+        [type]: [description]
+    """
     num_rows = 6 # 6 requirements for the CS-math major
     
     constraint_matrix = np.zeros(shape=(num_rows, len(possible_courses)), dtype=int)   
@@ -836,19 +643,8 @@ def hsa_reqs_matrix(possible_courses, curr_previous_courses, dict_w_same_codes, 
 def requirements_matrix_func(possible_courses, curr_previous_courses, dict_w_same_codes, course_to_index, hsa_codes, hsa_concentration):
     """Creates matrix that ensures that desired requirements are met.
 
-    1. Requirements (currently only designed for CS-Math majors):
+    1. Requirements (currently only designed for CS-Math, CS, and ENGR majors):
     (This will be based on what the student chooses for the next semester.)
-        1. Four Kernel Courses in Computer Science and Mathematics
-        2. Two Computer Science Courses
-        3. Two Mathematics Courses
-        4. Clinic
-        5. Math Electives
-        6. CS Electives
-        7. HSA Breadth
-        8. HSA Concentration
-        9. HSA Mudd Humms
-        10. HSA General
-
 
     Not adding Colloquia Row :--> because its not really a constraint
     since it doesnt have a fixed time nor does it count towards an overload
@@ -903,7 +699,7 @@ def costs_func(possible_courses, course_to_index, curr_preferences):
         if course in curr_preferences:
             costs_row[course_to_index[course]] = curr_preferences[course]
 
-        # (TODO: Edit this based on survey results.)
+        # (TODO: Possibly this based on survey results in the future.)
         # Default costs for courses
         else:
             # CS Courses = Cost of 5
@@ -940,11 +736,12 @@ def alternates_matrix_func(curr_alternates, possible_courses, course_to_index):
         curr_row = [0]*n
         
         alt_courses = item[0]
-        alt_limit = item[1]
+        alt_limit = item[1] # Unused 
         
         for course in possible_courses:
-            if course in alt_courses:
-                curr_row[course_to_index[course]] = 1
+            for alt in alt_courses:
+                if alt in course:
+                    curr_row[course_to_index[course]] = 1
         
         matrix.append(curr_row)
     

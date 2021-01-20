@@ -29,22 +29,22 @@ import numpy as np
 #                             curr_dat_filename)
 
 # Excel
-from excel.excel_parser import (curr_previous_courses, 
-                            curr_preferences,
-                            curr_bad_courses,
-                            curr_hsa_conc,
-                            curr_desired_reqs,
-                            curr_alternates,
-                            curr_major,
-                            curr_num_reqs,
-                            curr_dat_filename)
+from excel.excel_parser import * # (curr_previous_courses, 
+                            # curr_preferences,
+                            # curr_bad_courses,
+                            # curr_hsa_conc,
+                            # curr_desired_reqs,
+                            # curr_alternates,
+                            # curr_major,
+                            # curr_num_reqs,
+                            # curr_dat_filename)
 
 # All Functions
 from funcs import * 
 
 dat_filename = curr_dat_filename
 
-def main(selected=True, dat_filename="test0", major="CS-Math"):
+def main(selected=False, dat_filename="test0", major="CS-Math"):
     
     if selected:
         possible_courses = list(curr_preferences.keys())

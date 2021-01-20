@@ -1,11 +1,7 @@
 import pandas as pd
+from userInput import *
 
-#TODO: .dat output file name
-curr_dat_filename = "data" # do not end with .dat
 
-#TODO: Excel Sheet Name
-excel_file_name ='Preferences.xlsx' 
-excel_sheet_name = 'CS Major Blank'
 df = pd.read_excel(excel_file_name, sheet_name= excel_sheet_name)
 
 # print(df)
@@ -24,7 +20,7 @@ def clean_list(l):
 courses = df.iloc[:, 0].tolist()
 courses_ranking = df.iloc[:, 1].tolist()
 
-cleaned_courses = [x for x in courses if str(x) != 'nan']
+cleaned_courses = clean_list(courses)
 
 cleaned_course_ranking = [int(x) for x in courses_ranking if str(x) != 'nan' ]
 
@@ -48,6 +44,8 @@ for req in reqs:
     count += 1
     
 # print(curr_desired_reqs)
+
+# -TODO: Add support for other majors
 num_requirements = {
     "CS-MATH": "r1 r2 r3 r4 r5 r6 r7 r8 r9 r10",
     "CS": "r1 r2 r3 r4 r5 r6 r7 r8",
