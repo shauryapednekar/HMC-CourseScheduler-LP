@@ -679,13 +679,14 @@ def requirements_matrix_func(possible_courses, curr_previous_courses, dict_w_sam
 ######################################
 # 12. Costs
 
-def costs_func(possible_courses, course_to_index, curr_preferences):
+def costs_func(possible_courses, course_to_index, curr_preferences, curr_default_preferences):
     """Row of costs corresponding to each possible course.
 
     Global Variables Needed:
         possible_courses (list, optional): Defaults to possible_courses.
         course_to_index (dict, optional): Defaults to course_to_index.
-        preferences (dict, optional): Defaults to myPreferences.
+        curr_preferences (dict, optional): Defaults to myPreferences.
+        default_preferences: 
 
     Returns:
         List: Row of costs corresponding to each possible course.
@@ -699,28 +700,40 @@ def costs_func(possible_courses, course_to_index, curr_preferences):
         if course in curr_preferences:
             costs_row[course_to_index[course]] = curr_preferences[course]
 
-        # (TODO: Possibly this based on survey results in the future.)
         # Default costs for courses
         else:
-            # CS Courses = Cost of 5
-            if course[0:4] == "CSCI":
-                costs_row[course_to_index[course]] = 0
-
-            # ENGR Courses = Cost of 4
-            elif course[0:4] == "ENGR":
-                costs_row[course_to_index[course]] = 7
             
-            # Math Courses = Cost of 4
-            elif course[0:4] == "MATH":
-                costs_row[course_to_index[course]] = 0
+            check = False # Changes to true if course gets a default preference, otherwise the course gets the base ranking
+            for default_course_preference in curr_default_preferences: 
+                # format is: default_course_preference = [course, ranking]
+                if default_course_preference[0] in course:
+                    costs_row[course_to_index[course]] = default_course_preference[1]
+                    check = True
+                    break
+                
+            if not check: # course is not in preferences or default preferences
+                costs_row[course_to_index[course]] = curr_base_ranking
+                
+        # else:
+        #     # CS Courses = Cost of 5
+        #     if course[0:4] == "CSCI":
+        #         costs_row[course_to_index[course]] = 0
 
-            # Philosophy Courses = Cost of 3
-            elif course[0:4] == "PHIL":
-                costs_row[course_to_index[course]] = 0
+        #     # ENGR Courses = Cost of 4
+        #     elif course[0:4] == "ENGR":
+        #         costs_row[course_to_index[course]] = 7
+            
+        #     # Math Courses = Cost of 4
+        #     elif course[0:4] == "MATH":
+        #         costs_row[course_to_index[course]] = 0
 
-            # All other courses = Cost of 2
-            else:
-                costs_row[course_to_index[course]] = 3
+        #     # Philosophy Courses = Cost of 3
+        #     elif course[0:4] == "PHIL":
+        #         costs_row[course_to_index[course]] = 0
+
+        #     # All other courses = Cost of 2
+        #     else:
+        #         costs_row[course_to_index[course]] = 3
 
     return costs_row
 

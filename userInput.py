@@ -2,5 +2,5 @@
 curr_dat_filename = "data" # do not end with .dat
 
 #TODO: Excel Sheet Name
-excel_file_name ='Course Preferences - Alex - 3.xlsx' # ends with .xlsx
-excel_sheet_name = 'CS Major Blank'
+excel_file_name ='Course Schedule User Input - Alex.xlsx' # ends with .xlsx
+excel_sheet_name = 'Inputs'

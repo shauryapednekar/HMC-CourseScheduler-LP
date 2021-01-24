@@ -6,40 +6,7 @@ import re
 import os
 import numpy as np
 
-# # User Inputs Needed
-# from user.previousCourses import curr_previous_courses
-# from user.preferences import curr_preferences
-# from user.badCourses import curr_bad_courses
-# from user.desiredReqs import curr_hsa_conc
-# from user.desiredReqs import curr_desired_reqs
-# from user.alternates import curr_alternates
-# from user.desiredReqs import curr_major
-# from user.desiredReqs import curr_num_reqs
-
-
-# New User Inputs Needed
-#  from user.curr_user import (curr_previous_courses, 
-#                             curr_preferences,
-#                             curr_bad_courses,
-#                             curr_hsa_conc,
-#                             curr_desired_reqs,
-#                             curr_alternates,
-#                             curr_major,
-#                             curr_num_reqs,
-#                             curr_dat_filename)
-
-# Excel
-from excel.excel_parser import * # (curr_previous_courses, 
-                            # curr_preferences,
-                            # curr_bad_courses,
-                            # curr_hsa_conc,
-                            # curr_desired_reqs,
-                            # curr_alternates,
-                            # curr_major,
-                            # curr_num_reqs,
-                            # curr_dat_filename)
-
-# All Functions
+from excel.excel_parser import * 
 from funcs import * 
 
 dat_filename = curr_dat_filename
@@ -96,7 +63,7 @@ def main(selected=False, dat_filename="test0", major="CS-Math"):
 
     costs = costs_func(possible_courses,
                   course_to_index,
-                  curr_preferences)
+                  curr_preferences, curr_default_preferences)
 
     alternates_matrix = alternates_matrix_func(curr_alternates,
                                                possible_courses,
@@ -198,4 +165,4 @@ def main(selected=False, dat_filename="test0", major="CS-Math"):
     
     create_ampl_command(dat_filename)
     
-main(selected=True, dat_filename=dat_filename, major=curr_major)
+main(selected=only_selected, dat_filename=dat_filename, major=curr_major)
