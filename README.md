@@ -10,6 +10,6 @@ Here's how:
    
 3. Run `python main.py`
    
-4. Run `ampl exec.run` (include full filepath for exec.run). [Requires ampl installed on your machine.]
+4. Run `ampl exec.run` (include full filepath for exec.run). [Requires ampl and the cplex solver installed on your machine.]
 
 Voila! You now have the optimal course schedule based on your preferences and requirements.
