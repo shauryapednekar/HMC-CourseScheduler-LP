@@ -4,7 +4,7 @@ Get your individualized optimal course schedule for the upcoming semester!
 
 Here's how:
 
-1. Update the google sheet found here: https://docs.google.com/spreadsheets/d/1SeTpNHbI5gJV2mem-YL_pVhyniszCaz-dS4rmn5y2Vg/edit?usp=sharing.
+1. Update the [google sheet found here] (https://docs.google.com/spreadsheets/d/1SeTpNHbI5gJV2mem-YL_pVhyniszCaz-dS4rmn5y2Vg/edit?usp=sharing)
 
 2. Save the sheet in as an excel file into the top directory of the project folder.
    
