@@ -9,47 +9,53 @@ import numpy as np
 # Excel:
 from excel.excel_parser import *
 
-# SKELETAL:
+"""
+OUTLINE:
 
-    #     1. Get all courses offered next sem.
+         -- Get all courses offered next sem.
+         -- Remove courses taken previously.
+         -- Remove courses that cannot be taken due to prereqs.
+         -- Remove next sem courses that I absolutely do not want to take/
+            won"t get in to.
+         -- Make a dictionary of of course name to variable name
+            (and its index in "all_courses" string).
+            
+        --------
+            
+         --- Constraints ---
+         
+         -- Time conflict constraint matrix.
+             Ax <= 1;     each row of A represents a discrete point in time
+             
+         -- No two same courses constraint matrix:
+             Ax <= 1;     each row of A has a 1 for variables
+                          that are the same course in different sections
+                          
+         -- Requirements constraint matrix.
+            Ax >= r[i];   each row represents a requirement, and the entries 
+                          of the row have 1 for the courses that fulfill that 
+                          requirement
 
-    #     2. Remove courses taken previously.
+         -- Alternates constraint matrix.
+            lower_bound[i] <= Ax <= upper_bound[i];   
+            each row represents a set of alternates, and the entries 
+            of the row have 1 are the courses in that set
 
-    #     3. Remove courses that I cannot take due to prereqs.
+        ------------
+        
+         -- Costs function
 
-    #     4. Possibly add next sem courses that I
-    #        have already permed into that arent already in courses.
+         -- Create .dat file
 
-    #     5. (TODO - easy) Possibly remove next sem courses that
-    #         I absolutely do not want to take/won"t get in to.
-    #         (TODO - easy) Possibly factor in preplacement here.
+         -- Create exec.run file
 
-    #     --- Have all the courses that I am willing and able to take.
+     FINITO!
+     
+"""
 
-    #     6. Make a dictionary of of course name to variable name
-    #        (and its index in "all_courses" string).
-    #         - "all_courses" contains "possible_courses"
-    #             + "curr_previous_courses" + "prereq_courses" (all unique)
-
-    #     --- By this time, we will have:
-    #         - "raw_data" [dict]
-    #         - "possible_courses" [list]
-    #         - "course_to_variable_name" [dict]
-    #         - "course_to_index" [dict]
-
-    #     --- Constraints ---
-
-    #     9.  Time conflict constraint matrix.
-    #         Ax <= 1;     each row of A represents a discrete point in time
-
-    #     10. No two same courses constraint matrix:
-    #         Ax <= 1;     each row of A has a 1 for variables
-    #         that are the same course (but different sections)
-
-    #     11. Electives constraint matrix.
-
+    
 ##################################################
-# 1 - Getting all courses that are going to be offered:
+# Getting all courses that are going to be offered:
 
 with open(r"rawData/course_data.json", encoding="utf-8") as f:
     raw_data = json.load(f)
@@ -63,7 +69,7 @@ def possible_courses_func():
     return list(raw_data["data"]["courses"].keys())
 
 ###############################################
-# 2 - Only Keep 3 Credit Courses:
+# Only Keep 3 Credit Courses:
 
 def only_keep_three_credit_classes(raw_data, possible_courses):
     """Removes all half credit/PE courses.
@@ -84,7 +90,7 @@ def only_keep_three_credit_classes(raw_data, possible_courses):
     return possible
 
 #######################
-# 3 - Remove Previously Taken Courses:
+# Remove Previously Taken Courses:
 
 def remove_prev_courses(curr_previous_courses, possible_courses):
     """Removes previously taken courses.
@@ -116,8 +122,7 @@ def remove_prev_courses(curr_previous_courses, possible_courses):
     return output
 
 ######################
-# 4 - Remove courses that cannot be taken due to prereqs:
-
+# Remove courses that cannot be taken due to prereqs:
 
 def subject_codes_func(possible_courses):
     """Finds all possible subject codes (such as "MATH" and "RLST" etc.).
@@ -199,17 +204,8 @@ def next_sem_possible_courses_due_to_prereqs(curr_previous_courses, possible_cou
 
     return list_of_possible_courses
 
-######################
-# 5 - Add Courses for Which Permission of Instructor is Obtained
-# (Regardless of Prereqs):
-
-# TODO: Possibly add in the future.
-
-# def add_poi_courses():
-#     pass
-
 #####################
-# 6 - Remove Courses Which Should Never Be Included in the Solution:
+# Remove Courses Which Should Never Be Included in the Solution:
 
 def remove_bad_courses(possible_courses, curr_bad_courses):
     """Removes courses which the user does not want included in the final output. 
@@ -231,7 +227,7 @@ def remove_bad_courses(possible_courses, curr_bad_courses):
     return res
 
 ######################
-# 7 - Dictionary of course_name -> var_name and course_name -> var_index
+# Dictionary of course_name -> var_name and course_name -> var_index
 
 def course_code_to_variable_and_index(possible_courses):
     """Dictionary that maps complate course code to a variable of the format
@@ -266,7 +262,9 @@ def course_code_to_variable_and_index(possible_courses):
     return course_to_variable_name_dict, course_to_index_dict
 
 ##########################
-# 8 - Time Conflict Constraint
+#################################### CONSTRAINTS ##################
+##########################
+# Time Conflict Constraint
 
 def time_conflict_matrix_func(course_code_to_variable_name, course_to_index, raw_data, possible_courses):
     """Creates a matrix that where each row represents the classes that are
@@ -337,7 +335,7 @@ def time_conflict_matrix_func(course_code_to_variable_name, course_to_index, raw
     return constraint_matrix
 
 ################################
-# 10 - No Two Same Courses Constraint:
+# No Two Same Courses Constraint:
 
 def dict_w_same_codes_func(possible_courses):
     """Groups courses that are the same (but different
@@ -394,8 +392,9 @@ def no_same_courses_matrix_func(possible_courses, course_to_index, dict_w_same_c
 
     return constraint_matrix
 
-####################################
-# 11. Requirements Constraint Matrix:
+
+
+########## Requirements Constraint Matrix: ###############
 
 hsa_codes = {"DANC", "WRIT", "ORST", "PPA", "DS", "ARBT", "JAPN", "CHNT", "MSL",
             "CASA", "ASIA", "ART", "GWS", "GREK", "GLAS", "LATN", "SPEC",
@@ -676,8 +675,30 @@ def requirements_matrix_func(possible_courses, curr_previous_courses, dict_w_sam
     
     return major_matrix + hsa_matrix
 
+########## Alternates Constraint Matrix: ###############
+
+def alternates_matrix_func(curr_alternates, possible_courses, course_to_index):
+    n=len(possible_courses)
+    
+    matrix = []
+    
+    for item in curr_alternates:
+        curr_row = [0]*n
+        
+        alt_courses = item[0]
+        alt_limit = item[1] # Unused 
+        
+        for course in possible_courses:
+            for alt in alt_courses:
+                if alt in course:
+                    curr_row[course_to_index[course]] = 1
+        
+        matrix.append(curr_row)
+    
+    return matrix
+  
 ######################################
-# 12. Costs
+######################### COSTS: ###############
 
 def costs_func(possible_courses, course_to_index, curr_preferences, curr_default_preferences):
     """Row of costs corresponding to each possible course.
@@ -736,31 +757,9 @@ def costs_func(possible_courses, course_to_index, curr_preferences, curr_default
         #         costs_row[course_to_index[course]] = 3
 
     return costs_row
-
-
+         
 ######################################
-
-def alternates_matrix_func(curr_alternates, possible_courses, course_to_index):
-    n=len(possible_courses)
-    
-    matrix = []
-    
-    for item in curr_alternates:
-        curr_row = [0]*n
-        
-        alt_courses = item[0]
-        alt_limit = item[1] # Unused 
-        
-        for course in possible_courses:
-            for alt in alt_courses:
-                if alt in course:
-                    curr_row[course_to_index[course]] = 1
-        
-        matrix.append(curr_row)
-    
-    return matrix
-            
-######################################
+# Creating .dat file:
 
 def createDat(dir_path, filename, curr_num_reqs):
     res = ""
@@ -878,16 +877,15 @@ def createDat(dir_path, filename, curr_num_reqs):
         fp.write(res)
 
 #####################################
+# Creating exec.run file:
 
 def create_ampl_command(dat_filename):
     
     data_file = '\\' + dat_filename + ".dat"
-    
-    #TODO: Change to variable for filepath where .mod file is stored 
-    ampl_mod_command = r"model 'C:\Users\Shaurya\Desktop\math187_project\amplFiles\model.mod'; "
+        
+    ampl_mod_command = f"{os.getcwd()}\\amplFiles\\model.mod;"
 
-    #TODO: Change to variable for desired filepath of .dat file
-    ampl_dat_command = r"data C:\Users\Shaurya\Desktop\math187_project\amplFiles" + data_file + r";"
+    ampl_dat_command = f"{os.getcwd()}\\amplFiles{data_file};"
 
     ampl_solve_command = r"solve;"
 
