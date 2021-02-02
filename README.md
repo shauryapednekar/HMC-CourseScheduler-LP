@@ -20,5 +20,7 @@ Voila! You now have the optimal course schedule based on your preferences and re
 ## About the Software
 
 This program using mixed integer linear programming in order to create an optimal course schedule for a Harvey Mudd student for their upcoming semester. 
+
 The code written in python (mainly in func.py) creates the data file (.dat file) and the model file (.mod file) --> examples can be found in .\amplFiles. 
+
 The exec.run file (created after running main.py) contains the commands needed for AMPL's cplex solver to run and output the optimal course schedule.
