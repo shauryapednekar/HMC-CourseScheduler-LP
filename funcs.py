@@ -53,12 +53,13 @@ OUTLINE:
      
 """
 
-    
+
 ##################################################
 # Getting all courses that are going to be offered:
 
 with open(r"rawData/course_data.json", encoding="utf-8") as f:
     raw_data = json.load(f)
+
 
 def possible_courses_func():
     """
@@ -68,8 +69,10 @@ def possible_courses_func():
 
     return list(raw_data["data"]["courses"].keys())
 
+
 ###############################################
 # Only Keep 3 Credit Courses:
+
 
 def only_keep_three_credit_classes(raw_data, possible_courses):
     """Removes all half credit/PE courses.
@@ -89,8 +92,10 @@ def only_keep_three_credit_classes(raw_data, possible_courses):
 
     return possible
 
+
 #######################
 # Remove Previously Taken Courses:
+
 
 def remove_prev_courses(curr_previous_courses, possible_courses):
     """Removes previously taken courses.
@@ -121,8 +126,10 @@ def remove_prev_courses(curr_previous_courses, possible_courses):
 
     return output
 
+
 ######################
 # Remove courses that cannot be taken due to prereqs:
+
 
 def subject_codes_func(possible_courses):
     """Finds all possible subject codes (such as "MATH" and "RLST" etc.).
@@ -146,8 +153,10 @@ def subject_codes_func(possible_courses):
 
     return codes
 
+
 with open(r"preReqs/prereqs_edited.json", encoding="utf-8") as f:
     prereqs_edited = json.load(f)
+
 
 def helper_next_sem_possible_courses_due_to_prereqs(lis, curr_previous_courses):
     """Helper function that checks whether the prereqs for a course have been
@@ -168,6 +177,7 @@ def helper_next_sem_possible_courses_due_to_prereqs(lis, curr_previous_courses):
 
     return True
 
+
 def next_sem_possible_courses_due_to_prereqs(curr_previous_courses, possible_courses):
     """Creates list of possible courses according to previously taken courses
     and prereqs.
@@ -180,23 +190,25 @@ def next_sem_possible_courses_due_to_prereqs(curr_previous_courses, possible_cou
     list_of_possible_courses = []
 
     for course in possible_courses:
-    
+
         # If the course has prereqs
         if course in prereqs_edited:
-            
-                curr_prereqs = prereqs_edited[course][1:]
-                if ["POI"] in curr_prereqs:
-                    curr_prereqs.remove(["POI"])
+            curr_prereqs = prereqs_edited[course][1:]
+            if ["POI"] in curr_prereqs:
+                curr_prereqs.remove(["POI"])
 
-                # If prereqs are fulfilled, True will be present in temp
-                # Otherwise, it will be only False values
+            # If prereqs are fulfilled, True will be present in temp
+            # Otherwise, it will be only False values
 
-                temp = ([helper_next_sem_possible_courses_due_to_prereqs (prereq, curr_previous_courses)
-                        for prereq in curr_prereqs])
-                
-                if True in temp:
-                    list_of_possible_courses.append(course)
-                
+            temp = [
+                helper_next_sem_possible_courses_due_to_prereqs(
+                    prereq, curr_previous_courses
+                )
+                for prereq in curr_prereqs
+            ]
+
+            if True in temp:
+                list_of_possible_courses.append(course)
 
         # If the course does not have prereqs
         else:
@@ -204,30 +216,34 @@ def next_sem_possible_courses_due_to_prereqs(curr_previous_courses, possible_cou
 
     return list_of_possible_courses
 
+
 #####################
 # Remove Courses Which Should Never Be Included in the Solution:
 
+
 def remove_bad_courses(possible_courses, curr_bad_courses):
-    """Removes courses which the user does not want included in the final output. 
-    
+    """Removes courses which the user does not want included in the final output.
+
     Returns a list of all possible courses (minus the 'bad courses').
     """
     res = []
-    
+
     removeCourses = set()
     for course in possible_courses:
         for bad_course in curr_bad_courses:
             if bad_course in course:
                 removeCourses.add(course)
-            
+
     for course in possible_courses:
         if course not in removeCourses:
-            res.append(course)     
-            
+            res.append(course)
+
     return res
+
 
 ######################
 # Dictionary of course_name -> var_name and course_name -> var_index
+
 
 def course_code_to_variable_and_index(possible_courses):
     """Dictionary that maps complate course code to a variable of the format
@@ -261,12 +277,16 @@ def course_code_to_variable_and_index(possible_courses):
 
     return course_to_variable_name_dict, course_to_index_dict
 
+
 ##########################
 #################################### CONSTRAINTS ##################
 ##########################
 # Time Conflict Constraint
 
-def time_conflict_matrix_func(course_code_to_variable_name, course_to_index, raw_data, possible_courses):
+
+def time_conflict_matrix_func(
+    course_code_to_variable_name, course_to_index, raw_data, possible_courses
+):
     """Creates a matrix that where each row represents the classes that are
     occuring during the time corresponding to that row.
 
@@ -303,19 +323,13 @@ def time_conflict_matrix_func(course_code_to_variable_name, course_to_index, raw
     days = "MTWRF"
 
     constraint_matrix = []
-    for curr_time in discrete_times:     
-        
+    for curr_time in discrete_times:
         for day in days:
-            
-            curr_row = [0]*len(possible_courses)
-        
+            curr_row = [0] * len(possible_courses)
             for curr_course in possible_courses:
-                
                 course = raw_data["data"]["courses"][curr_course]
                 for item in course["courseSchedule"]:
-                    
                     if day in item["scheduleDays"]:
-                
                         start_time = item["scheduleStartTime"]
                         end_time = item["scheduleEndTime"]
 
@@ -329,13 +343,15 @@ def time_conflict_matrix_func(course_code_to_variable_name, course_to_index, raw
                         before_end_time = curr_time < end_time
                         if after_start_time and before_end_time:
                             curr_row[course_to_index[curr_course]] = 1
-                
+
             constraint_matrix.append(curr_row)
 
     return constraint_matrix
 
+
 ################################
 # No Two Same Courses Constraint:
+
 
 def dict_w_same_codes_func(possible_courses):
     """Groups courses that are the same (but different
@@ -360,6 +376,7 @@ def dict_w_same_codes_func(possible_courses):
 
     return same_codes
 
+
 def no_same_courses_matrix_func(possible_courses, course_to_index, dict_w_same_codes):
     """Creates constraint matrix that ensures that the solution provided
         doesn"t include two courses that are essentially
@@ -383,7 +400,7 @@ def no_same_courses_matrix_func(possible_courses, course_to_index, dict_w_same_c
 
     constraint_matrix = []
     for key in dict_w_same_codes.keys():
-        curr_row = [0]*num_of_courses
+        curr_row = [0] * num_of_courses
         for course in possible_courses:
             if key in course:
                 curr_row[course_to_index[course]] = 1
@@ -393,27 +410,100 @@ def no_same_courses_matrix_func(possible_courses, course_to_index, dict_w_same_c
     return constraint_matrix
 
 
-
 ########## Requirements Constraint Matrix: ###############
 
-hsa_codes = {"DANC", "WRIT", "ORST", "PPA", "DS", "ARBT", "JAPN", "CHNT", "MSL",
-            "CASA", "ASIA", "ART", "GWS", "GREK", "GLAS", "LATN", "SPEC",
-            "GOVT", "RUST", "HMSC", "SPCH", "CHST", "CREA", "PORT", "LEAD",
-            "ARCN", "SPAN", "ITAL", "MLLC", "MES", "MS", "PPE", "RLIT", "LGST",
-            "POST", "LAST", "FREN", "RUSS", "STS", "GEOG", "GRMT", "ARBC",
-            "FHS", "AMST", "POLI", "ARHI", "MUS", "MENA", "LGCS", "CLAS",
-            "KRNT", "LIT", "JPNT", "ENGL", "MCBI", "CGS", "FS", "HIST", "CHLT",
-            "CHIN", "SOC", "MOBI", "FLAN", "ECON", "MCSI", "EA", "ANTH",
-            "FIN", "EDUC", "PHIL", "GEOL", "RLST", "FWS", "THEA", "IR", "GERM",
-            "ID", "ASAM", "HSA", "KORE", "HUM", "AFRI", "PSYC"}
+hsa_codes = {
+    "DANC",
+    "WRIT",
+    "ORST",
+    "PPA",
+    "DS",
+    "ARBT",
+    "JAPN",
+    "CHNT",
+    "MSL",
+    "CASA",
+    "ASIA",
+    "ART",
+    "GWS",
+    "GREK",
+    "GLAS",
+    "LATN",
+    "SPEC",
+    "GOVT",
+    "RUST",
+    "HMSC",
+    "SPCH",
+    "CHST",
+    "CREA",
+    "PORT",
+    "LEAD",
+    "ARCN",
+    "SPAN",
+    "ITAL",
+    "MLLC",
+    "MES",
+    "MS",
+    "PPE",
+    "RLIT",
+    "LGST",
+    "POST",
+    "LAST",
+    "FREN",
+    "RUSS",
+    "STS",
+    "GEOG",
+    "GRMT",
+    "ARBC",
+    "FHS",
+    "AMST",
+    "POLI",
+    "ARHI",
+    "MUS",
+    "MENA",
+    "LGCS",
+    "CLAS",
+    "KRNT",
+    "LIT",
+    "JPNT",
+    "ENGL",
+    "MCBI",
+    "CGS",
+    "FS",
+    "HIST",
+    "CHLT",
+    "CHIN",
+    "SOC",
+    "MOBI",
+    "FLAN",
+    "ECON",
+    "MCSI",
+    "EA",
+    "ANTH",
+    "FIN",
+    "EDUC",
+    "PHIL",
+    "GEOL",
+    "RLST",
+    "FWS",
+    "THEA",
+    "IR",
+    "GERM",
+    "ID",
+    "ASAM",
+    "HSA",
+    "KORE",
+    "HUM",
+    "AFRI",
+    "PSYC",
+}
 
 # Majors:
 
 # CS-MATH Major
-def cs_math_major_reqs_matrix_func(possible_courses,
-                           curr_previous_courses, 
-                           dict_w_same_codes, 
-                           course_to_index):
+def cs_math_major_reqs_matrix_func(
+    possible_courses, curr_previous_courses, dict_w_same_codes, course_to_index
+):
     """Creates a constraint matrix for the CS-MATH major.
 
     Args:
@@ -425,9 +515,9 @@ def cs_math_major_reqs_matrix_func(possible_courses,
     Returns:
         [type]: [description]
     """
-    num_rows = 6 # 6 requirements for the CS-math major
-    
-    constraint_matrix = np.zeros(shape=(num_rows, len(possible_courses)), dtype=int)   
+    num_rows = 6  # 6 requirements for the CS-math major
+
+    constraint_matrix = np.zeros(shape=(num_rows, len(possible_courses)), dtype=int)
 
     for course in possible_courses:
         curr_code = re.search(r"[^\s]+", course)
@@ -435,29 +525,30 @@ def cs_math_major_reqs_matrix_func(possible_courses,
             curr_code = curr_code.group(0)
 
         # First Row: Four Kernel Courses in Computer Science and Mathematics
-        if ((course[0:8] == "MATH 055") or
-            (course[0:8] == "CSCI 060") or
-            (course[0:8] == "CSCI 081") or
-            (course[0:8] == "CSCI 140")):
+        if (
+            (course[0:8] == "MATH 055")
+            or (course[0:8] == "CSCI 060")
+            or (course[0:8] == "CSCI 081")
+            or (course[0:8] == "CSCI 140")
+        ):
 
             contraint_matrix[0][course_to_index[course]] = 1
-        
+
         # Second Row: Two Computer Science Courses
         elif (course[0:8] == "CSCI 070") or (course[0:8] == "CSCI 131"):
             constraint_matrix[1][course_to_index[course]] = 1
 
-        
         # Third Row: Two Mathematics Courses
-        elif (course[0:8]== "MATH 131") or (course[0:8] == "MATH 171"):
+        elif (course[0:8] == "MATH 131") or (course[0:8] == "MATH 171"):
             constraint_matrix[2][course_to_index[course]] = 1
 
         # Fourth Row: Clinic
-        elif (course[0:8]== "CSMT 183") or (course[0:8] == "CSMT 184"):
+        elif (course[0:8] == "CSMT 183") or (course[0:8] == "CSMT 184"):
             constraint_matrix[3][course_to_index[course]] = 1
 
         # Fifth Row: Math courses above 100
         # (TODO: need to remove "strange" courses)
-        elif course[0:6]== "MATH 1":
+        elif course[0:6] == "MATH 1":
             constraint_matrix[4][course_to_index[course]] = 1
 
         # Sixth Row: CS courses above 100
@@ -465,25 +556,23 @@ def cs_math_major_reqs_matrix_func(possible_courses,
         elif course[0:6] == "CSCI 1":
             constraint_matrix[5][course_to_index[course]] = 1
 
-    
     return list(constraint_matrix)
 
 
 # CS Major
-def cs_major_reqs_matrix_func(possible_courses,
-                           curr_previous_courses, 
-                           dict_w_same_codes, 
-                           course_to_index):
-    
-    num_rows = 4 # 4 requirements for the CS major
-    
-    constraint_matrix = np.zeros(shape=(num_rows, len(possible_courses)), dtype=int)   
+def cs_major_reqs_matrix_func(
+    possible_courses, curr_previous_courses, dict_w_same_codes, course_to_index
+):
+
+    num_rows = 4  # 4 requirements for the CS major
+
+    constraint_matrix = np.zeros(shape=(num_rows, len(possible_courses)), dtype=int)
 
     for course in possible_courses:
         curr_code = re.search(r"[^\s]+", course)
         if curr_code:
             curr_code = curr_code.group(0)
- 
+
         cs_foundation_requirement_courses = {
             "CSCI 060",
             "CSCI 042",
@@ -491,14 +580,9 @@ def cs_major_reqs_matrix_func(possible_courses,
             "CSCI 070",
             "CSCI 081",
         }
-     
-        cs_kernel_requirement_courses = {
-            "CSCI 105",
-            "CSCI 121",
-            "CSCI 131",
-            "CSCI 140"
-        }
-   
+
+        cs_kernel_requirement_courses = {"CSCI 105", "CSCI 121", "CSCI 131", "CSCI 140"}
+
         cs_not_elective_requirement_courses = {
             "CSCI 195",
             "CSCI 192",
@@ -507,94 +591,92 @@ def cs_major_reqs_matrix_func(possible_courses,
             "CSCI 189",
             "CSCI 188",
             "CSCI 184",
-            "CSCI 183"
+            "CSCI 183",
         }
-        
+
         # First Row: CS Foundation Requirement
         if course[0:8] in cs_foundation_requirement_courses:
             contraint_matrix[0][course_to_index[course]] = 1
-        
+
         # Second Row: CS Kernel Requirement
         elif course[0:8] in cs_kernel_requirement_courses:
             constraint_matrix[1][course_to_index[course]] = 1
 
         # Third Row: CS Elective Requirement
         # CS courses above 100
-        elif (course[0:6] == "CSCI 1") and (course[0:8] not in cs_not_elective_requirement_courses):
+        elif (course[0:6] == "CSCI 1") and (
+            course[0:8] not in cs_not_elective_requirement_courses
+        ):
             constraint_matrix[2][course_to_index[course]] = 1
-            
+
         # Fourth Row: Clinic
-        elif (course[0:8]== "CSMT 183") or (course[0:8] == "CSMT 184"):
+        elif (course[0:8] == "CSMT 183") or (course[0:8] == "CSMT 184"):
             constraint_matrix[3][course_to_index[course]] = 1
 
     return list(constraint_matrix)
 
+
 # ENGR Major
-def engr_major_reqs_matrix_func(possible_courses,
-                           curr_previous_courses, 
-                           dict_w_same_codes, 
-                           course_to_index):
-    
-    num_rows = 5 # 5 requirements for the Engr major
-    
-    constraint_matrix = np.zeros(shape=(num_rows, len(possible_courses)), dtype=int)   
+def engr_major_reqs_matrix_func(
+    possible_courses, curr_previous_courses, dict_w_same_codes, course_to_index
+):
+
+    num_rows = 5  # 5 requirements for the Engr major
+
+    constraint_matrix = np.zeros(shape=(num_rows, len(possible_courses)), dtype=int)
 
     for course in possible_courses:
         curr_code = re.search(r"[^\s]+", course)
         if curr_code:
             curr_code = curr_code.group(0)
-        
-        
-        engr_design_requirement_courses = {
-            "ENGR 004",
-            "ENGR 080"
-        }
-        
-        engr_systems_requirement_courses = {
-            "ENGR 079",
-            "ENGR 101",
-            "ENGR 102"
-        }
-        
+
+        engr_design_requirement_courses = {"ENGR 004", "ENGR 080"}
+
+        engr_systems_requirement_courses = {"ENGR 079", "ENGR 101", "ENGR 102"}
+
         engr_science_requirement_courses = {
             "ENGR 082",
             "ENGR 083",
             "ENGR 084",
             "ENGR 085",
-            "ENGR 086"
+            "ENGR 086",
         }
-        
-        engr_clinic_courses = {
-            "ENGR 111",
-            "ENGR 112",
-            "ENGR 113"
-        }
-        
+
+        engr_clinic_courses = {"ENGR 111", "ENGR 112", "ENGR 113"}
+
         # First Row: Engineering Design Requirement (w/o clinic)
         if course[0:8] in engr_design_requirement_courses:
             contraint_matrix[0][course_to_index[course]] = 1
-        
+
         # Second Row: Engineering Systems Requirement
         elif course[0:8] in engr_systems_requirement_courses:
             constraint_matrix[1][course_to_index[course]] = 1
-        
+
         # Third Row: Engr Science Requirement (e72 not added since its a half sem course)
         elif course[0:8] in engr_science_requirement_courses:
             constraint_matrix[2][course_to_index[course]] = 1
-            
+
         # Fourth Row: Clinic
         elif course[0:8] in engr_clinic_courses:
-            constraint_matrix[3][course_to_index[course]] = 1        
-        
+            constraint_matrix[3][course_to_index[course]] = 1
+
         # Fifth Row: Electives
         elif course[0:4] == "ENGR":
             constraint_matrix[4][course_to_index[course]] = 1
 
     return list(constraint_matrix)
 
+
 # HSA:
-def hsa_reqs_matrix(possible_courses, curr_previous_courses, dict_w_same_codes, course_to_index, hsa_codes, hsa_concentration):
-    
+def hsa_reqs_matrix(
+    possible_courses,
+    curr_previous_courses,
+    dict_w_same_codes,
+    course_to_index,
+    hsa_codes,
+    hsa_concentration,
+):
+
     # Needed for HSA breadth requirement
     prev_course_codes = set()
     for course in curr_previous_courses:
@@ -604,14 +686,11 @@ def hsa_reqs_matrix(possible_courses, curr_previous_courses, dict_w_same_codes, 
             if curr_code not in prev_course_codes:
                 prev_course_codes.add(curr_code)
 
-
     num_of_courses = len(possible_courses)
-    
     hsa_constraint_matrix = np.zeros(shape=(4, num_of_courses), dtype=int)
 
     for course in possible_courses:
         curr_code = re.search(r"[^\s]+", course)
-        
         if curr_code:
             curr_code = curr_code.group(0)
 
@@ -637,9 +716,18 @@ def hsa_reqs_matrix(possible_courses, curr_previous_courses, dict_w_same_codes, 
 
     return list(hsa_constraint_matrix)
 
+
 # All Reqs:
 
-def requirements_matrix_func(possible_courses, curr_previous_courses, dict_w_same_codes, course_to_index, hsa_codes, hsa_concentration):
+
+def requirements_matrix_func(
+    possible_courses,
+    curr_previous_courses,
+    dict_w_same_codes,
+    course_to_index,
+    hsa_codes,
+    hsa_concentration,
+):
     """Creates matrix that ensures that desired requirements are met.
 
     1. Requirements (currently only designed for CS-Math, CS, and ENGR majors):
@@ -661,148 +749,150 @@ def requirements_matrix_func(possible_courses, curr_previous_courses, dict_w_sam
         specific requirement and each column represents a specific course
     """
     major_matrix = []
-    
     if curr_major == "CS-MATH":
-        major_matrix = cs_math_major_reqs_matrix_func(possible_courses, curr_previous_courses, dict_w_same_codes, course_to_index)
-    
-    if curr_major == "CS":
-        major_matrix = cs_major_reqs_matrix_func(possible_courses, curr_previous_courses, dict_w_same_codes, course_to_index)
-    
-    if curr_major == "ENGR":
-        major_matrix = engr_major_reqs_matrix_func(possible_courses, curr_previous_courses, dict_w_same_codes, course_to_index)
-        
-    hsa_matrix = hsa_reqs_matrix(possible_courses, curr_previous_courses, dict_w_same_codes, course_to_index, hsa_codes, hsa_concentration)
-    
+        major_matrix = cs_math_major_reqs_matrix_func(
+            possible_courses, curr_previous_courses, dict_w_same_codes, course_to_index
+        )
+    elif curr_major == "CS":
+        major_matrix = cs_major_reqs_matrix_func(
+            possible_courses, curr_previous_courses, dict_w_same_codes, course_to_index
+        )
+    elif curr_major == "ENGR":
+        major_matrix = engr_major_reqs_matrix_func(
+            possible_courses, curr_previous_courses, dict_w_same_codes, course_to_index
+        )
+
+    hsa_matrix = hsa_reqs_matrix(
+        possible_courses,
+        curr_previous_courses,
+        dict_w_same_codes,
+        course_to_index,
+        hsa_codes,
+        hsa_concentration,
+    )
+
     return major_matrix + hsa_matrix
+
 
 ########## Alternates Constraint Matrix: ###############
 
+
 def alternates_matrix_func(curr_alternates, possible_courses, course_to_index):
-    n=len(possible_courses)
-    
+    n = len(possible_courses)
     matrix = []
-    
     for item in curr_alternates:
-        curr_row = [0]*n
-        
+        curr_row = [0] * n
         alt_courses = item[0]
-        alt_limit = item[1] # Unused 
-        
+        alt_limit = item[1]  # Unused
         for course in possible_courses:
             for alt in alt_courses:
                 if alt in course:
                     curr_row[course_to_index[course]] = 1
-        
+
         matrix.append(curr_row)
-    
+
     return matrix
-  
+
+
 ######################################
 ######################### COSTS: ###############
 
-def costs_func(possible_courses, course_to_index, curr_preferences, curr_default_preferences):
+
+def costs_func(
+    possible_courses, course_to_index, curr_preferences, curr_default_preferences
+):
     """Row of costs corresponding to each possible course.
 
     Global Variables Needed:
         possible_courses (list, optional): Defaults to possible_courses.
         course_to_index (dict, optional): Defaults to course_to_index.
         curr_preferences (dict, optional): Defaults to myPreferences.
-        default_preferences: 
+        default_preferences:
 
     Returns:
         List: Row of costs corresponding to each possible course.
     """
     num_of_courses = len(possible_courses)
-
-    costs_row = [0]*num_of_courses
-
+    costs_row = [0] * num_of_courses
     for course in possible_courses:
-
         if course in curr_preferences:
             costs_row[course_to_index[course]] = curr_preferences[course]
-
         # Default costs for courses
         else:
-            
-            check = False # Changes to true if course gets a default preference, otherwise the course gets the base ranking
-            for default_course_preference in curr_default_preferences: 
+            check = False  # Changes to true if course gets a default preference, otherwise the course gets the base ranking
+            for default_course_preference in curr_default_preferences:
                 # format is: default_course_preference = [course, ranking]
                 if default_course_preference[0] in course:
                     costs_row[course_to_index[course]] = default_course_preference[1]
                     check = True
                     break
-                
-            if not check: # course is not in preferences or default preferences
+
+            if not check:  # course is not in preferences or default preferences
                 costs_row[course_to_index[course]] = curr_base_ranking
-                
         # else:
         #     # CS Courses = Cost of 5
         #     if course[0:4] == "CSCI":
         #         costs_row[course_to_index[course]] = 0
-
         #     # ENGR Courses = Cost of 4
         #     elif course[0:4] == "ENGR":
         #         costs_row[course_to_index[course]] = 7
-            
         #     # Math Courses = Cost of 4
         #     elif course[0:4] == "MATH":
         #         costs_row[course_to_index[course]] = 0
-
         #     # Philosophy Courses = Cost of 3
         #     elif course[0:4] == "PHIL":
         #         costs_row[course_to_index[course]] = 0
-
         #     # All other courses = Cost of 2
         #     else:
         #         costs_row[course_to_index[course]] = 3
 
     return costs_row
-         
+
+
 ######################################
 # Creating .dat file:
+
 
 def createDat(dir_path, filename, curr_num_reqs):
     res = ""
 
-    with open(dir_path + r"costs_names.txt", 'r') as f:
+    with open(dir_path + r"costs_names.txt", "r") as f:
         costs_names = f.read()
-        
-    with open(dir_path + r"course_names.txt", 'r') as f:
+
+    with open(dir_path + r"course_names.txt", "r") as f:
         course_names = f.read()
 
-    with open(dir_path + r"requirements_matrix.txt", 'r') as f:
+    with open(dir_path + r"requirements_matrix.txt", "r") as f:
         requirements_matrix = f.read()
-        
-    with open(dir_path + r"set_timeSlots.txt", 'r') as f:
+
+    with open(dir_path + r"set_timeSlots.txt", "r") as f:
         set_timeSlots = f.read()
-        
-    with open(dir_path + r"set_uniqueCourses.txt", 'r') as f:
+
+    with open(dir_path + r"set_uniqueCourses.txt", "r") as f:
         set_uniqueCourses = f.read()
 
-    with open(dir_path + r"time_conflict_matrix.txt", 'r') as f:
+    with open(dir_path + r"time_conflict_matrix.txt", "r") as f:
         time_conflict_matrix = f.read()
 
-    with open(dir_path + r"unique_courses_matrix.txt", 'r') as f:
+    with open(dir_path + r"unique_courses_matrix.txt", "r") as f:
         unique_courses_matrix = f.read()
-        
-    with open(dir_path + r"set_alternates.txt", 'r') as f:
+
+    with open(dir_path + r"set_alternates.txt", "r") as f:
         set_alternates = f.read()
-    
-    with open(dir_path + r"alternates_matrix.txt", 'r') as f:
+
+    with open(dir_path + r"alternates_matrix.txt", "r") as f:
         alternates_matrix = f.read()
-        
-    with open(dir_path + r"alternates_lower_limits.txt", 'r') as f:
+
+    with open(dir_path + r"alternates_lower_limits.txt", "r") as f:
         alternates_lower_limits = f.read()
-        
-    with open(dir_path + r"alternates_upper_limits.txt", 'r') as f:
+
+    with open(dir_path + r"alternates_upper_limits.txt", "r") as f:
         alternates_upper_limits = f.read()
-        
-                
-    res += "set courses := " 
+
+    res += "set courses := "
     res += "\n    "
     res += course_names + "\n;"
     res += "\n\n"
-
 
     res += "set requirements := "
     res += "\n    "
@@ -818,7 +908,7 @@ def createDat(dir_path, filename, curr_num_reqs):
     res += "\n    "
     res += set_uniqueCourses + "\n;"
     res += "\n\n"
-    
+
     res += "set alternates := "
     res += "\n    "
     res += set_alternates + "\n;"
@@ -854,12 +944,12 @@ def createDat(dir_path, filename, curr_num_reqs):
     res += "\n    "
     res += unique_courses_matrix + "\n;"
     res += "\n\n"
-    
+
     res += "param alternatesLowerLimits := "
     res += "\n    "
     res += alternates_lower_limits + "\n;"
     res += "\n\n"
-    
+
     res += "param alternatesUpperLimits := "
     res += "\n    "
     res += alternates_upper_limits + "\n;"
@@ -872,17 +962,18 @@ def createDat(dir_path, filename, curr_num_reqs):
     res += alternates_matrix + "\n;"
     res += "\n\n"
 
-
-    with open(r'./amplFiles/' + filename, 'w') as fp:
+    with open(r"./amplFiles/" + filename, "w") as fp:
         fp.write(res)
+
 
 #####################################
 # Creating exec.run file:
 
+
 def create_ampl_command(dat_filename):
-    
-    data_file = '\\' + dat_filename + ".dat"
-        
+
+    data_file = "\\" + dat_filename + ".dat"
+
     ampl_mod_command = f"{os.getcwd()}\\amplFiles\\model.mod;"
 
     ampl_dat_command = f"{os.getcwd()}\\amplFiles{data_file};"
@@ -895,10 +986,22 @@ def create_ampl_command(dat_filename):
 
     ampl_display_command = r"display x;"
 
-    ampl_all_commands = ampl_mod_command + "\n" + ampl_dat_command + "\n" + ampl_solver_command + "\n" + ampl_solve_command + "\n" + ampl_option_command + "\n" + ampl_display_command
+    ampl_all_commands = (
+        ampl_mod_command
+        + "\n"
+        + ampl_dat_command
+        + "\n"
+        + ampl_solver_command
+        + "\n"
+        + ampl_solve_command
+        + "\n"
+        + ampl_option_command
+        + "\n"
+        + ampl_display_command
+    )
 
-    with open('exec.run', 'w') as f:
+    with open("exec.run", "w") as f:
         f.write(ampl_all_commands)
-    
+
 
 #####################################

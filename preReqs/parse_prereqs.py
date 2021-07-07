@@ -7,14 +7,15 @@ import re
 with open(r"../rawData/course_data.json", encoding="utf-8") as f:
     rawData = json.load(f)
 
+
 def possible_courses():
     """Nothing
 
     Returns:
         list: all courses (complete course code) being offered
     """
-
     return list(rawData["data"]["courses"].keys())
+
 
 possible_courses = possible_courses()
 
@@ -22,7 +23,7 @@ possible_courses = possible_courses()
 
 # with open(r"prereqs1_edited_by_hand.json", encoding="utf-8") as f:
 #     prereqs_edited = json.load(f)
-    
+
 
 def subject_codes():
     """Finds all possible subject codes (such as "MATH" and "RLST" etc.).
@@ -33,7 +34,6 @@ def subject_codes():
     Returns:
         set: All unique subject codes
     """
-
     codes = set()
     for course in possible_courses:
         # Gets first word of course (until the first space)
@@ -46,36 +46,37 @@ def subject_codes():
 
     return codes
 
+
 subject_codes = subject_codes()
-    
-    
+
+
 # Prereqs Function that only needs to be run once ("untab" the following block):
 def prereqs():
     """Collects prereqs for each course
 
-    Global Variables Needed:
-        possible_courses (list, optional): Defaults to possible_courses.
-        rawData (dict, optional): Defaults to rawData.
-        subject_codes (set, optional): Defaults to subject_codes.
+        Global Variables Needed:
+            possible_courses (list, optional): Defaults to possible_courses.
+            rawData (dict, optional): Defaults to rawData.
+            subject_codes (set, optional): Defaults to subject_codes.
 
-    Returns:
-        dict: Dictionary where the keys are the courses that contain
-                prerequisites and its values are a list of the
-prerequisites.
+        Returns:
+            dict: Dictionary where the keys are the courses that contain
+                    prerequisites and its values are a list of the
+    prerequisites.
     """
-
     # Contains only the courses that have prereqs
     course_to_prereqs = {}
 
     for course in possible_courses:
-        
+
         # if course not in prereqs_edited:
-        description = (rawData["data"]["courses"][course]
-["courseDescription"])
-        
+        description = rawData["data"]["courses"][course]["courseDescription"]
+
         if not description:
             prereqs = ""
-        elif ("Prerequisite: " not in description) and ("Prerequisites: " not in description):
+        elif ("Prerequisite: " not in description) and (
+            "Prerequisites: " not in description
+        ):
             prereqs = ""
 
         # Only finding prereqs for courses that have "Prerequisite:" in
@@ -85,7 +86,6 @@ prerequisites.
                 prereqs = description.partition("Prerequisite: ")[2]
             elif "Prerequisites:" in description:
                 prereqs = description.partition("Prerequisites: ")[2]
-
 
             replacement_dict = {
                 "Arabic": "ARBC",
@@ -104,7 +104,7 @@ prerequisites.
                 "French": "FREN",
                 "Government": "GOVT",
                 "Psychology": "PSYC",
-                "Spanish": "SPAN"
+                "Spanish": "SPAN",
             }
             # Replaces subject names to corresponding subject codes
             for key in replacement_dict:
@@ -151,14 +151,14 @@ prerequisites.
 
                     # eg. "CSCI 05" --> "CSCI 005"
                     elif re.match(course_code + "\s[0-9]{2}", l):
-                        n = len(course_code)+1
+                        n = len(course_code) + 1
                         l = l[0:n] + "0" + l[n:]
                         check = False
                         newLis.append(l)
 
                     # eg. "CSCI 5" --> "CSCI 005"
                     elif re.match(course_code + "\s[0-9]{1}", l):
-                        n = len(course_code)+1
+                        n = len(course_code) + 1
                         l = l[0:n] + "00" + l[n:]
                         check = False
                         newLis.append(l)
@@ -169,8 +169,10 @@ prerequisites.
                     newLis.append(l)
 
             # Adds ["POI"] to list of prereqs for appropriate courses
-            if ("permission of the instructor" in prereqs or 
-                "permission of instructor" in prereqs):
+            if (
+                "permission of the instructor" in prereqs
+                or "permission of instructor" in prereqs
+            ):
                 course_to_prereqs[course] = [[prereqs], newLis, ["POI"]]
             else:
                 course_to_prereqs[course] = [[prereqs], newLis]
